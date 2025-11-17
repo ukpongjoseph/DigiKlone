@@ -45,26 +45,80 @@ class _SignupState extends State<Signup> {
                 child: Column(
                   children: [
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Enter your Firstname"),
+                      decoration: InputDecoration(
+                        labelText: "Enter your Firstname",
+                        hintText: "first name",
+                        border: OutlineInputBorder()
+                      ),
+                      validator: (value){
+                        if(value == null){
+                          return "Firstname cannot be empty";
+                        }else if(value.length < 6){
+                          return "Firstname should more than 6 characters";
+                        }else{
+                          return null;
+                        }
+                      },
                     ),
                     SizedBox(height: 10.0,),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Enter your Last name"),
+                      decoration: InputDecoration(
+                        labelText: "Enter your Last name",
+                        hintText: "last name",
+                        border: OutlineInputBorder()
+                      ),
+                        validator: (value){
+                        if(value == null){
+                          return "Lastname cannot be empty";
+                        }else if(value.length < 6){
+                          return "Lastname should more than 6 characters";
+                        }else{
+                          return null;
+                        }
+                      },
                     ),
                     SizedBox(height: 10.0,),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Enter your email address"),
+                      decoration: InputDecoration(
+                        labelText: "Enter your email address",
+                        hintText: "email address",
+                        border: OutlineInputBorder()
+                      ),
+                      validator: (value){
+                        if(value == null){
+                          return "E-mail cannot be empty";
+                        }else if(!value.contains("@")){
+                          return "Invalid Email address";
+                        }else{
+                          return null;
+                        }
+                      },
                     ),
                     SizedBox(height: 10.0,),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Enter your password"),
+                      decoration: InputDecoration(
+                        labelText: "Enter your password",
+                        hintText: "password",
+                        border: OutlineInputBorder()
+                      ),
+                        validator: (value){
+                        if(value == null){
+                          return "Password cannot be empty";
+                        }else if(value.length < 6){
+                          return "Password should more than 6 characters";
+                        }else{
+                          return null;
+                        }
+                      },
                       obscureText: true,
                     ),
                     SizedBox(height: 10.0,),
                      FilledButton(
                       onPressed: (){
-
-                        
+                        if(_formKey.currentState!.validate()){
+                          print("Valid form");
+                          _formKey.currentState!.reset();
+                        }
                       }, 
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
