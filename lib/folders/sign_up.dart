@@ -58,10 +58,12 @@ class _SignupState extends State<Signup> {
                     SizedBox(height: 10.0,),
                     TextFormField(
                       decoration: InputDecoration(labelText: "Enter your password"),
+                      obscureText: true,
                     ),
                     SizedBox(height: 10.0,),
                      FilledButton(
                       onPressed: (){
+
                         
                       }, 
                       style: ElevatedButton.styleFrom(
