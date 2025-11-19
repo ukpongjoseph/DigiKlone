@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:second_flutter/folders/home_page.dart';
-import 'package:second_flutter/folders/sign_in.dart';
-import 'package:second_flutter/folders/sign_up.dart';
+import 'package:second_flutter/pages/home_page.dart';
+import 'package:second_flutter/pages/landing_page.dart';
+import 'package:second_flutter/pages/sign_in.dart';
+import 'package:second_flutter/pages/sign_up.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(),
       routes: {
         "/signUp": (context)=>const Signup(),
-        "/signIn" : (context)=>const SignIn()
+        "/signIn" : (context)=>const SignIn(),
+        "/landing" : (context)=> const LandingPage()
       },
     );
   }

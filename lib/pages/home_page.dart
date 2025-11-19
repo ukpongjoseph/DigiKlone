@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:second_flutter/folders/sign_in.dart';
-import 'package:second_flutter/folders/sign_up.dart';
+import 'package:second_flutter/pages/sign_in.dart';
+import 'package:second_flutter/pages/sign_up.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
