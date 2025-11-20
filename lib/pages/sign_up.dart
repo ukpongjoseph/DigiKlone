@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:second_flutter/authServices/register.dart';
+import 'package:second_flutter/pages/landing_page.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -16,10 +18,21 @@ class _SignupState extends State<Signup> {
   final _lastName = TextEditingController();
   final _password = TextEditingController();
   final _confirmPassword = TextEditingController();
-  var data;
-  void handleLogin(){
+  late String data;
+  static const snackDemo = SnackBar(
+    content: Text(
+      "Error Signing Up",
+      style: TextStyle(
+        color: Colors.white
+      ),
+    ),
+    backgroundColor: Color.fromARGB(255, 1, 8, 80),
+    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
+    behavior: SnackBarBehavior.floating,
+    duration: Duration(seconds: 2),
+  );
+  void handleLogin()async{
     if(_formKey.currentState!.validate()){
-      print("Valid form");
       // print("The values sent to the backend are ${_email.text.trim()}, ${_firstName.text.trim()}, ${_lastName.text.trim()}, ${_password.text.trim()}, ${_confirmPassword.text.trim()},");
       data = jsonEncode({
         "email" : _email.text.trim(),
@@ -27,8 +40,15 @@ class _SignupState extends State<Signup> {
         "lastName" : _lastName.text.trim(),
         "password" : _password.text.trim()
       });
-      print(data);
-       _formKey.currentState!.reset();
+      // print(data);
+      final authResult = await AuthServices().register(data);
+      if(authResult == 200){
+        _formKey.currentState!.reset();
+        // print("Valid form");
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LandingPage()));
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(snackDemo);
+      }
     }
   }
   @override
