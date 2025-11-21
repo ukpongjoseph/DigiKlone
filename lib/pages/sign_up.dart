@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:second_flutter/authServices/register.dart';
 import 'package:second_flutter/pages/landing_page.dart';
+import 'package:second_flutter/providers/auth_Provider.dart';
+import 'package:provider/provider.dart';
+
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -12,13 +15,17 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  // Creating a unique key for the form
   final _formKey = GlobalKey<FormState>();
+  // storing all the values of the textfields in a controller variable
   final _email = TextEditingController();
   final _firstName = TextEditingController();
   final _lastName = TextEditingController();
   final _password = TextEditingController();
   final _confirmPassword = TextEditingController();
+  // initializing a data to hold a json string that will hold are all form values
   late String data;
+  // creating a snackBar
   static const snackDemo = SnackBar(
     content: Text(
       "Error Signing Up",
@@ -29,31 +36,37 @@ class _SignupState extends State<Signup> {
     backgroundColor: Color.fromARGB(255, 1, 8, 80),
     padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
     behavior: SnackBarBehavior.floating,
+    // setting a timer for the snackBar
     duration: Duration(seconds: 2),
   );
-  void handleLogin()async{
+  // This function calls the register function that makes an api call to the register endpoint
+  void handleRegister()async{
+    // if all form fields are validated parse all form field values into a json string
     if(_formKey.currentState!.validate()){
-      // print("The values sent to the backend are ${_email.text.trim()}, ${_firstName.text.trim()}, ${_lastName.text.trim()}, ${_password.text.trim()}, ${_confirmPassword.text.trim()},");
       data = jsonEncode({
         "email" : _email.text.trim(),
         "firstName" : _firstName.text.trim(),
         "lastName" : _lastName.text.trim(),
         "password" : _password.text.trim()
       });
-      // print(data);
+      // making an api call and storing the values in a variable called authResult
       final authResult = await AuthServices().register(data);
-      if(authResult == 200){
+      // Future or async await functions or methods do not go well with build context (after the function call, the widget may not exist in the wwidget tree. so we check if the widget is mounted before using the build context. if the widget is not mounted on the widget tree, we return or stop the flow else if mounted we use thebuild context). To combat this problem, i use the mounted getter to handle it
+      if(!mounted)return;
+      // if success message/status is true we reset the form, access the global state and update it with the registerd user details and then navigate to the landing page
+       if(authResult["success"] == true){
         _formKey.currentState!.reset();
-        // print("Valid form");
+        Provider.of<AuthProvider>(context, listen:false).updateUserDetails(authResult["user"]);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LandingPage()));
       }else{
+        // if we don't get a success message, we display a snack bar showing the error
         ScaffoldMessenger.of(context).showSnackBar(snackDemo);
       }
     }
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+        return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlueAccent,
         // Here we take the value from the MyHomePage object that was created by
@@ -184,7 +197,8 @@ class _SignupState extends State<Signup> {
                     SizedBox(height: 10.0,),
                      FilledButton(
                       onPressed: (){
-                        handleLogin();
+                        // this function is called when the submit button is clicked
+                        handleRegister();
                       }, 
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(

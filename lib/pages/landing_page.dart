@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/providers/auth_Provider.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -8,8 +10,11 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  
   @override
   Widget build(BuildContext context) {
+    
+
     return Scaffold(
       appBar: AppBar(
         title: Text("DigiKolne"),
@@ -26,7 +31,8 @@ class _LandingPageState extends State<LandingPage> {
         color: const Color.fromARGB(255, 14, 52, 1),
         padding: EdgeInsets.all(40.0),
         child: Text(
-          "Welcome to DigiKlone",
+          // Provider.of<AuthProvider>(context, listen:false).getFName() allows us to access a global state called firstName via its getter function (getFName)
+          "Welcome ${Provider.of<AuthProvider>(context, listen:false).getFName()}",
           style: TextStyle(
             color: const Color.fromARGB(255, 3, 9, 85),
             fontWeight: FontWeight.w900,
