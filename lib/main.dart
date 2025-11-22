@@ -4,7 +4,7 @@ import 'package:second_flutter/pages/home_page.dart';
 import 'package:second_flutter/pages/landing_page.dart';
 import 'package:second_flutter/pages/sign_in.dart';
 import 'package:second_flutter/pages/sign_up.dart';
-import 'package:second_flutter/providers/auth_Provider.dart';
+import 'package:second_flutter/providers/auth_provider.dart';
 
 // This the root of the application. The main method is the entry point ofthe flutter application
 void main() {

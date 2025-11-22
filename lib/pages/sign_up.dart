@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:second_flutter/authServices/register.dart';
 import 'package:second_flutter/pages/landing_page.dart';
-import 'package:second_flutter/providers/auth_Provider.dart';
+import 'package:second_flutter/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 

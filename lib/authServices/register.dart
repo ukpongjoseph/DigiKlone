@@ -19,9 +19,6 @@ class AuthServices{
       );
       // if response status is sucessful, we perform a certain action else we throw an error and display the error to the user
       if(response.statusCode == 200){
-        print(response.body);
-        print(response.body.toString());
-        print(response.statusCode);
         // when making api calls in flutter, the response is usually a json string. so we use jsonDecode to convert this json string to an object like data structure and store this result in a variable called authResponse
         Map<String, dynamic> authResponse = jsonDecode(response.body);
         // returning response
