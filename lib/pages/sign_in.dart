@@ -39,7 +39,7 @@ class _SignInState extends State<SignIn> {
     if(_formKey.currentState!.validate()){
       final loginResponse = await LoginService().login(data);
       if(!mounted)return;
-      if(loginResponse["success"] == true){
+      if(loginResponse.statusCode == 200){
         Provider.of<AuthloginProvider>(context, listen: false).updateLoggenInUserDetails(loginResponse["body"]);
         _formKey.currentState!.reset();
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LandingPage()));
