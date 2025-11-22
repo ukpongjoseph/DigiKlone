@@ -33,8 +33,8 @@ class _SignInState extends State<SignIn> {
   void handleLogin()async{
     late String data;
     data = jsonEncode({
-      "email" : _email,
-      "password" : _password
+      "email" : _email.text.trim(),
+      "password" : _password.text.trim()
     });
     if(_formKey.currentState!.validate()){
       final loginResponse = await LoginService().login(data);
@@ -110,11 +110,11 @@ class _SignInState extends State<SignIn> {
                     obscureText: true,
                     controller: _password,
                     decoration: InputDecoration(
-                      hintText: "Email",
+                      hintText: "password",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5.0))
                       ),
-                      labelText: "Enter your email address"
+                      labelText: "Enter your password"
                     ),
                     validator: (value){
                       if(value == null || value.isEmpty){
@@ -129,6 +129,7 @@ class _SignInState extends State<SignIn> {
                   SizedBox(height: 40.0),
                   FilledButton(
                     onPressed: (){
+                      print("sent");
                       handleLogin();
                     },
                     style: ElevatedButton.styleFrom(

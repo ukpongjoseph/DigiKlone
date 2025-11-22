@@ -23,7 +23,10 @@ class LoginService{
         throw "error";
       }
     } catch (e) {
-      return ("Network error : $e");
+      return {
+        "success" : false,
+        "message" : "Network error : $e"
+      };
     }
   }
 
