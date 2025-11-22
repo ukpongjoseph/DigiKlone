@@ -1,6 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/authServices/login.dart';
+import 'package:second_flutter/pages/landing_page.dart';
+import 'package:second_flutter/providers/auth_login_provider.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -13,15 +17,35 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
-  dynamic handleLogin()async{
+  static const snackDemo = SnackBar(
+    content: Text(
+      "Error Signing Up",
+      style: TextStyle(
+        color: Colors.white
+      ),
+    ),
+    backgroundColor: Color.fromARGB(255, 1, 8, 80),
+    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
+    behavior: SnackBarBehavior.floating,
+    // setting a timer for the snackBar
+    duration: Duration(seconds: 2),
+  );
+  void handleLogin()async{
     late String data;
     data = jsonEncode({
       "email" : _email,
       "password" : _password
     });
     if(_formKey.currentState!.validate()){
-
-      
+      final loginResponse = await LoginService().login(data);
+      if(!mounted)return;
+      if(loginResponse["success"] == true){
+        Provider.of<AuthloginProvider>(context, listen: false).updateLoggenInUserDetails(loginResponse["body"]);
+        _formKey.currentState!.reset();
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LandingPage()));
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(snackDemo);
+      }
     }
   }
   @override
@@ -42,72 +66,96 @@ class _SignInState extends State<SignIn> {
           ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Text("LogIn Page"),
-          SizedBox(height: 60.0),
-          Form(
-            key: _formKey,
-            child:Column(
-              children: [
-                TextFormField(
-                  controller: _email,
-                  decoration: InputDecoration(
-                    hintText: "Email",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0))
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsetsGeometry.fromLTRB(30.0, 10.0, 30.0, 10.0)
+            ),
+            Text(
+              "LogIn Page",
+              style: TextStyle(
+                color: const Color.fromARGB(255, 0, 6, 70),
+                fontWeight: FontWeight.bold,
+                fontSize: 30.0
+              ),
+            ),
+            SizedBox(height: 60.0),
+            Form(
+              key: _formKey,
+              child:Column(
+                children: [
+                  TextFormField(
+                    controller: _email,
+                    decoration: InputDecoration(
+                      hintText: "Email",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0))
+                      ),
+                      labelText: "Enter your email address"
                     ),
-                    labelText: "Enter your email address"
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return "Invalid email address";
+                      }else if(!value.contains("@")){
+                        return "Invalid email address";
+                      }else{
+                        return null;
+                      }
+                    },
                   ),
-                  validator: (value){
-                    if(value == null || value.isEmpty){
-                      return "Invalid email address";
-                    }else if(!value.contains("@")){
-                      return "Invalid email address";
-                    }else{
-                      return null;
-                    }
-                  },
-                ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  controller: _password,
-                  decoration: InputDecoration(
-                    hintText: "Email",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0))
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    obscureText: true,
+                    controller: _password,
+                    decoration: InputDecoration(
+                      hintText: "Email",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0))
+                      ),
+                      labelText: "Enter your email address"
                     ),
-                    labelText: "Enter your email address"
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return "Password field cannot be empty";
+                      }else if(value.length<6){
+                        return "Password should be a minimum of 6 characters";
+                      }else{
+                        return null;
+                      }
+                    },
                   ),
-                  validator: (value){
-                    if(value == null || value.isEmpty){
-                      return "Password field cannot be empty";
-                    }else if(value.length<6){
-                      return "Password should be a minimum of 6 characters";
-                    }else{
-                      return null;
-                    }
-                  },
-                ),
-                SizedBox(height: 40.0),
-                FilledButton(
-                  onPressed: (){},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 0, 6, 70),
-                    padding: EdgeInsets.symmetric(
-                      vertical: 40.0,
-                      horizontal: 20.0
+                  SizedBox(height: 40.0),
+                  FilledButton(
+                    onPressed: (){
+                      handleLogin();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 0, 6, 70),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 20.0,
+                        horizontal: 20.0
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0)
+                      )
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        letterSpacing: 3.0
+        
+                      ),
+        
                     )
-                  ),
-                  child: Text("Login")
-                )
-              ],
+                  )
+                ],
+              )
             )
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
