@@ -26,7 +26,7 @@ class _SignupState extends State<Signup> {
   // initializing a data to hold a json string that will hold are all form values
   late String data;
   // creating a snackBar
-  static const snackDemo = SnackBar(
+  final snackDemo = SnackBar(
     content: Text(
       "Error Signing Up",
       style: TextStyle(
@@ -51,6 +51,7 @@ class _SignupState extends State<Signup> {
       });
       // making an api call and storing the values in a variable called authResult
       final authResult = await AuthServices().register(data);
+      print(authResult);
       // Future or async await functions or methods do not go well with build context (after the function call, the widget may not exist in the wwidget tree. so we check if the widget is mounted before using the build context. if the widget is not mounted on the widget tree, we return or stop the flow else if mounted we use thebuild context). To combat this problem, i use the mounted getter to handle it
       if(!mounted)return;
       // if success message/status is true we reset the form, access the global state and update it with the registerd user details and then navigate to the landing page
@@ -59,6 +60,7 @@ class _SignupState extends State<Signup> {
         Provider.of<AuthProvider>(context, listen:false).updateUserDetails(authResult["user"]);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LandingPage()));
       }else{
+        print("Failed");
         // if we don't get a success message, we display a snack bar showing the error
         ScaffoldMessenger.of(context).showSnackBar(snackDemo);
       }
