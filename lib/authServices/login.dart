@@ -18,10 +18,7 @@ class LoginService{
       );
       if(loginResponse.statusCode == 200){
         Map<String, dynamic> authResponse = jsonDecode(loginResponse.body);
-        print(loginResponse);
         return authResponse;
-      }else{
-        throw "error";
       }
     } catch (e) {
       return {

@@ -9,7 +9,7 @@ class AuthloginProvider extends ChangeNotifier {
   late String _token;
   late String _profilePic;
   late String _bio;
-  late String _phoneNumber;
+  String? _phoneNumber;
   late String _userId;
 
 // getter functions to fetch or get these variables in any widget needed
@@ -19,7 +19,7 @@ class AuthloginProvider extends ChangeNotifier {
   String getRole()=>_role;
   String getToken()=>_token;
   String getBio()=>_bio;
-  String getPhoneNumber()=>_phoneNumber;
+  String? getPhoneNumber()=>_phoneNumber;
   String getProfilePic()=>_profilePic;
   String getUserId()=>_userId;
 
@@ -30,9 +30,11 @@ class AuthloginProvider extends ChangeNotifier {
     _role = (userData["role"]);
     _token = (userData["token"]);
     _bio = (userData["bio"]);
-    _phoneNumber = (userData["phoneNumber"]);
     _profilePic = (userData["profilePic"]);
     _userId = (userData["userId"]);
+    if(userData["phoneNumber"] != null){
+      _phoneNumber = (userData["phoneNumber"]);
+    }
     notifyListeners();
   }
 }

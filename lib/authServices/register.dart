@@ -23,8 +23,6 @@ class AuthServices{
         Map<String, dynamic> authResponse = jsonDecode(response.body);
         // returning response
         return authResponse;
-      }else{
-        throw "error";
       }
     } catch (e) {
       return {

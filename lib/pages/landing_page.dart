@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:second_flutter/providers/auth_provider.dart';
+import 'package:second_flutter/providers/auth_login_provider.dart';
+// import 'package:second_flutter/providers/auth_provider.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -32,7 +33,8 @@ class _LandingPageState extends State<LandingPage> {
         padding: EdgeInsets.all(40.0),
         child: Text(
           // Provider.of<AuthProvider>(context, listen:false).getFName() allows us to access a global state called firstName via its getter function (getFName)
-          "Welcome ${Provider.of<AuthProvider>(context, listen:false).getFName()}",
+          // "Welcome ${Provider.of<AuthProvider>(context, listen:false).getFName()}",
+          "Welcome ${Provider.of<AuthloginProvider>(context, listen: false).getFName()}",
           style: TextStyle(
             color: const Color.fromARGB(255, 3, 9, 85),
             fontWeight: FontWeight.w900,

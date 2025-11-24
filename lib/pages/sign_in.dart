@@ -31,15 +31,14 @@ class _SignInState extends State<SignIn> {
     duration: Duration(seconds: 2),
   );
   void handleLogin()async{
-    late String data;
-    data = jsonEncode({
+    String data = jsonEncode({
       "email" : _email.text.trim(),
       "password" : _password.text.trim()
     });
     if(_formKey.currentState!.validate()){
       final loginResponse = await LoginService().login(data);
       if(!mounted)return;
-      if(loginResponse["statusCode"] == 200){
+      if(loginResponse["success"] == true){
         Provider.of<AuthloginProvider>(context, listen: false).updateLoggenInUserDetails(loginResponse["body"]);
         _formKey.currentState!.reset();
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LandingPage()));
@@ -129,7 +128,6 @@ class _SignInState extends State<SignIn> {
                   SizedBox(height: 40.0),
                   FilledButton(
                     onPressed: (){
-                      print("sent");
                       handleLogin();
                     },
                     style: ElevatedButton.styleFrom(
