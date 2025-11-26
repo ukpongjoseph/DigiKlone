@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:second_flutter/providers/auth_login_provider.dart';
+import 'package:second_flutter/Authproviders/auth_login_provider.dart';
 // import 'package:second_flutter/providers/auth_provider.dart';
 
 class LandingPage extends StatefulWidget {

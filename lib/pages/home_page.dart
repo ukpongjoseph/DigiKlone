@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_flutter/pages/sign_in.dart';
-import 'package:second_flutter/pages/sign_up.dart';
+import 'package:second_flutter/pages/signup/firstname.dart';
+// import 'package:second_flutter/pages/sign_up.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -97,7 +98,7 @@ class MyHomePage extends StatelessWidget {
                     SizedBox(width: 30.0),
                      FilledButton(
                       onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Firstname()));
                         // Navigator.pushNamed(context, "/signUp");
                       }, 
                       style: ElevatedButton.styleFrom(

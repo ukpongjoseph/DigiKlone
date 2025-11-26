@@ -3,9 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:second_flutter/pages/home_page.dart';
 import 'package:second_flutter/pages/landing_page.dart';
 import 'package:second_flutter/pages/sign_in.dart';
-import 'package:second_flutter/pages/sign_up.dart';
-import 'package:second_flutter/providers/auth_login_provider.dart';
-import 'package:second_flutter/providers/auth_provider.dart';
+import 'package:second_flutter/pages/signup/confirm_password.dart';
+import 'package:second_flutter/pages/signup/email.dart';
+import 'package:second_flutter/pages/signup/firstname.dart';
+import 'package:second_flutter/pages/signup/lastname.dart';
+import 'package:second_flutter/pages/signup/password.dart';
+import 'package:second_flutter/Authproviders/auth_login_provider.dart';
+import 'package:second_flutter/Authproviders/auth_register.dart';
 
 // This the root of the application. The main method is the entry point ofthe flutter application
 void main() {
@@ -37,9 +41,13 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(),
       // We are creating routes for different screen for the purpose of routing and Navigation between screens
       routes: {
-        "/signUp": (context)=>const Signup(),
         "/signIn" : (context)=>const SignIn(),
-        "/landing" : (context)=> const LandingPage()
+        "/landing" : (context)=> const LandingPage(),
+        "/firstname" : (context)=> const Firstname(),
+        "/lastname" : (context)=> const Lastname(),
+        "/email" : (context)=> const Email(),
+        "/password" : (context)=> Password(),
+        "/confirm-password" : (context)=> const ConfirmPassword()
       },
     );
   }
