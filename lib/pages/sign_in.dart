@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/authServices/login.dart';
 import 'package:second_flutter/pages/landing_page.dart';
-import 'package:second_flutter/Authproviders/auth_login_provider.dart';
+import 'package:second_flutter/a_List_providers/auth_login_provider.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -36,6 +36,7 @@ class _SignInState extends State<SignIn> {
       "password" : _password.text.trim()
     });
     if(_formKey.currentState!.validate()){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LandingPage()));
       final loginResponse = await LoginService().login(data);
       if(!mounted)return;
       if(loginResponse["success"] == true){

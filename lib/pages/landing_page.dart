@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:provider/provider.dart';
-import 'package:second_flutter/Authproviders/auth_login_provider.dart';
-// import 'package:second_flutter/providers/auth_provider.dart';
+import 'package:second_flutter/Navigation/bottom_nav.dart';
+// ignore: unused_import
+import 'package:second_flutter/a_List_providers/auth_login_provider.dart';
+import 'package:second_flutter/a_List_providers/nav_provider.dart';
+
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -11,14 +15,22 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  
+  // final _pages = Provider.of<NavProvider>(context, listen: false).getPages();
+  // int currentPageIndex = Provider.of<NavProvider>(context, listen: true).getCurrentPage();
+  late List _pages;
+  late int currentPageIndex;
+  @override
+  void didChangeDependencies(){
+    super.didChangeDependencies();
+    _pages = context.read<NavProvider>().getPages();
+    
+  }
   @override
   Widget build(BuildContext context) {
-    
-
+    currentPageIndex = context.watch<NavProvider>().getCurrentPage();
     return Scaffold(
       appBar: AppBar(
-        title: Text("DigiKolne"),
+        title: Text("DigiKlone"),
         actions: [
           Icon(
             Icons.person_pin
@@ -28,21 +40,8 @@ class _LandingPageState extends State<LandingPage> {
           )
         ],
       ),
-      body: Container(
-        color: const Color.fromARGB(255, 14, 52, 1),
-        padding: EdgeInsets.all(40.0),
-        child: Text(
-          // Provider.of<AuthProvider>(context, listen:false).getFName() allows us to access a global state called firstName via its getter function (getFName)
-          // "Welcome ${Provider.of<AuthProvider>(context, listen:false).getFName()}",
-          "Welcome ${Provider.of<AuthloginProvider>(context, listen: false).getFName()}",
-          style: TextStyle(
-            color: const Color.fromARGB(255, 3, 9, 85),
-            fontWeight: FontWeight.w900,
-            fontSize: 50.0,
-            fontStyle: FontStyle.italic
-          ),
-        ),
-      ),
+      body: _pages[currentPageIndex],
+      bottomNavigationBar: BottomNav(),
     );
   }
 }

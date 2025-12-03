@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/nav_provider.dart';
 import 'package:second_flutter/pages/home_page.dart';
 import 'package:second_flutter/pages/landing_page.dart';
 import 'package:second_flutter/pages/sign_in.dart';
@@ -8,8 +9,8 @@ import 'package:second_flutter/pages/signup/email.dart';
 import 'package:second_flutter/pages/signup/firstname.dart';
 import 'package:second_flutter/pages/signup/lastname.dart';
 import 'package:second_flutter/pages/signup/password.dart';
-import 'package:second_flutter/Authproviders/auth_login_provider.dart';
-import 'package:second_flutter/Authproviders/auth_register.dart';
+import 'package:second_flutter/a_List_providers/auth_login_provider.dart';
+import 'package:second_flutter/a_List_providers/auth_register.dart';
 
 // This the root of the application. The main method is the entry point ofthe flutter application
 void main() {
@@ -19,7 +20,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context)=>AuthProvider()),
-        ChangeNotifierProvider(create: (context)=>AuthloginProvider())
+        ChangeNotifierProvider(create: (context)=>AuthloginProvider()),
+        ChangeNotifierProvider(create: (context)=>NavProvider())
       ],
       child: MyApp(),
     )

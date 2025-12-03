@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/pages/signup/confirm_password.dart';
-import 'package:second_flutter/Authproviders/auth_register.dart';
+import 'package:second_flutter/a_List_providers/auth_register.dart';
 
 class Password extends StatefulWidget {
   const Password({super.key});
