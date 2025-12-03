@@ -14,6 +14,7 @@ class ConfirmPassword extends StatefulWidget {
 }
 
 class _ConfirmPasswordState extends State<ConfirmPassword> {
+  bool submitting = false;
   final _formKey = GlobalKey<FormState>();
   final _confirmPassword = TextEditingController();
   late String data;
@@ -26,6 +27,9 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
         "password" : Provider.of<AuthProvider>(context, listen: false).getPassword(),
       });
     }
+    setState(() {
+      submitting = true;
+    });
     final registerResponse = await AuthServices().register(data);
     if(!mounted)return;
     if(registerResponse["success"] == true){
@@ -86,13 +90,19 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                       ),
                       backgroundColor: const Color.fromARGB(255, 0, 6, 70)
                     ), 
-                    child: Text(
+                    child:submitting?Text(
+                      "submitting...",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ):Text(
                       "Submit",
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold
                       ),
-                    ),
+                    )
                   )
                 ],
               )

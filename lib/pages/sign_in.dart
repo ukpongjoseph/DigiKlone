@@ -17,6 +17,7 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  bool submitting = false;
   final snackDemo = SnackBar(
     content: Text(
       "Error Signing In",
@@ -36,6 +37,9 @@ class _SignInState extends State<SignIn> {
       "password" : _password.text.trim()
     });
     if(_formKey.currentState!.validate()){
+      setState(() {
+        submitting = true;
+      });
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LandingPage()));
       final loginResponse = await LoginService().login(data);
       if(!mounted)return;
@@ -141,14 +145,18 @@ class _SignInState extends State<SignIn> {
                         borderRadius: BorderRadius.circular(12.0)
                       )
                     ),
-                    child: Text(
+                    child: submitting?Text(
+                      "Logging in...",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        letterSpacing: 1.0
+                      ),
+                    ):Text(
                       "Login",
                       style: TextStyle(
                         fontSize: 20.0,
                         letterSpacing: 3.0
-        
                       ),
-        
                     )
                   )
                 ],

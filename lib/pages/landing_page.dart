@@ -30,15 +30,40 @@ class _LandingPageState extends State<LandingPage> {
     currentPageIndex = context.watch<NavProvider>().getCurrentPage();
     return Scaffold(
       appBar: AppBar(
-        title: Text("DigiKlone"),
+        backgroundColor: Colors.grey,
+        title: Row(
+          children: [
+            CircleAvatar(
+              child: Image.asset("assets/images/avatar.png"),
+            ),
+            SizedBox(
+              width: 10.0,
+            ),
+            Text(
+              "Welcome User",
+              style: TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          ],
+        ),
         actions: [
-          Icon(
-            Icons.person_pin
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(80.0),
+                color: const Color.fromARGB(255, 223, 227, 233)
+              ),
+              child: IconButton(
+                icon: Icon(Icons.notifications_sharp),
+                onPressed: (){},
+              ),
+            ),
           ),
-          Icon(
-            Icons.logout_sharp
-          )
         ],
+        automaticallyImplyLeading: false,
       ),
       body: _pages[currentPageIndex],
       bottomNavigationBar: BottomNav(),
