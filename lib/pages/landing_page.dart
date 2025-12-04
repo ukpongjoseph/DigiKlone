@@ -6,7 +6,6 @@ import 'package:second_flutter/Navigation/bottom_nav.dart';
 import 'package:second_flutter/a_List_providers/auth_login_provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
 
-
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 
@@ -20,51 +19,58 @@ class _LandingPageState extends State<LandingPage> {
   late List _pages;
   late int currentPageIndex;
   @override
-  void didChangeDependencies(){
+  void didChangeDependencies() {
     super.didChangeDependencies();
     _pages = context.read<NavProvider>().getPages();
-    
   }
+
   @override
   Widget build(BuildContext context) {
     currentPageIndex = context.watch<NavProvider>().getCurrentPage();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: Row(
-          children: [
-            CircleAvatar(
-              child: Image.asset("assets/images/avatar.png"),
-            ),
-            SizedBox(
-              width: 10.0,
-            ),
-            Text(
-              "Welcome User",
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold
+      appBar: currentPageIndex == 4
+          ? null
+          : AppBar(
+              backgroundColor: Colors.grey,
+              title: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      context.read<NavProvider>().setCurrentPage(4);
+                    },
+                    child: CircleAvatar(
+                      child: Image.asset("assets/images/avatar.png"),
+                    ),
+                  ),
+                  SizedBox(width: 10.0),
+                  Text(
+                    "Welcome User",
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(width: 10.0),
+                  Icon(Icons.emoji_emotions_rounded, color: Colors.amber[600]),
+                ],
               ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(80.0),
+                      color: const Color.fromARGB(255, 223, 227, 233),
+                    ),
+                    child: IconButton(
+                      icon: Icon(Icons.notifications_sharp),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+              ],
+              automaticallyImplyLeading: false,
             ),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(80.0),
-                color: const Color.fromARGB(255, 223, 227, 233)
-              ),
-              child: IconButton(
-                icon: Icon(Icons.notifications_sharp),
-                onPressed: (){},
-              ),
-            ),
-          ),
-        ],
-        automaticallyImplyLeading: false,
-      ),
       body: _pages[currentPageIndex],
       bottomNavigationBar: BottomNav(),
     );

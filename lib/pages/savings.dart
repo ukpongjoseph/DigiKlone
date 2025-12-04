@@ -10,8 +10,11 @@ class Savings extends StatefulWidget {
 class _SavingsState extends State<Savings> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text("Savings Page"),
+    return Column(
+      children: [
+        Text("Savings Page"),
+        // Text("data")
+      ],
     );
   }
 }

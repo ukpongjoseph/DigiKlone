@@ -10,8 +10,10 @@ class Wallet extends StatefulWidget {
 class _WalletState extends State<Wallet> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text("Wallet Page"),
+    return Column(
+      children: [
+        Text("Wallet Page")
+      ],
     );
   }
 }
