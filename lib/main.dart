@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
+import 'package:second_flutter/pages/add_card.dart';
+import 'package:second_flutter/pages/digi_target_savings.dart';
+import 'package:second_flutter/pages/faq.dart';
 import 'package:second_flutter/pages/home_page.dart';
 import 'package:second_flutter/pages/landing_page.dart';
+import 'package:second_flutter/pages/lock_funds.dart';
+import 'package:second_flutter/pages/refer_friends.dart';
+import 'package:second_flutter/pages/security.dart';
 import 'package:second_flutter/pages/sign_in.dart';
 import 'package:second_flutter/pages/signup/confirm_password.dart';
 import 'package:second_flutter/pages/signup/email.dart';
@@ -11,6 +17,7 @@ import 'package:second_flutter/pages/signup/lastname.dart';
 import 'package:second_flutter/pages/signup/password.dart';
 import 'package:second_flutter/a_List_providers/auth_login_provider.dart';
 import 'package:second_flutter/a_List_providers/auth_register.dart';
+import 'package:second_flutter/pages/support.dart';
 
 // This the root of the application. The main method is the entry point ofthe flutter application
 void main() {
@@ -19,12 +26,12 @@ void main() {
     // The ChangeNotifierProvider is used to wrap the entire app so that the global state is accessible through out the widget tree. It takes a create method and a child, this child is the root of the entire application which is the MyApp Widget. The create method is used to create an instance of the Provider Class which holds the global state
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context)=>AuthProvider()),
-        ChangeNotifierProvider(create: (context)=>AuthloginProvider()),
-        ChangeNotifierProvider(create: (context)=>NavProvider())
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+        ChangeNotifierProvider(create: (context) => AuthloginProvider()),
+        ChangeNotifierProvider(create: (context) => NavProvider()),
       ],
       child: MyApp(),
-    )
+    ),
   );
 }
 
@@ -43,13 +50,20 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(),
       // We are creating routes for different screen for the purpose of routing and Navigation between screens
       routes: {
-        "/signIn" : (context)=>const SignIn(),
-        "/landing" : (context)=> const LandingPage(),
-        "/firstname" : (context)=> const Firstname(),
-        "/lastname" : (context)=> const Lastname(),
-        "/email" : (context)=> const Email(),
-        "/password" : (context)=> Password(),
-        "/confirm-password" : (context)=> const ConfirmPassword()
+        "/signIn": (context) => const SignIn(),
+        "/landing": (context) => const LandingPage(),
+        "/firstname": (context) => const Firstname(),
+        "/lastname": (context) => const Lastname(),
+        "/email": (context) => const Email(),
+        "/password": (context) => Password(),
+        "/confirm-password": (context) => const ConfirmPassword(),
+        "/digiTargetSavings": (context) => const DigiTargetSavings(),
+        "/lockFunds": (context) => const LockFunds(),
+        "/referFriends": (context) => const ReferFriends(),
+        "/security": (context) => const Security(),
+        "/addCard": (context) => const AddCard(),
+        "/support": (context) => const Support(),
+        "/faq": (context) => const Faq(),
       },
     );
   }
