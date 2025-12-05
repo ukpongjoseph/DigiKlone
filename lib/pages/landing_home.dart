@@ -12,6 +12,8 @@ class LandingHome extends StatefulWidget {
 class _LandingHomeState extends State<LandingHome> {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [BalanceComponent(), QuickActions()]);
+    return SingleChildScrollView(
+      child: Column(children: [BalanceComponent(), QuickActions()]),
+    );
   }
 }
