@@ -14,6 +14,7 @@ class _BalanceComponentState extends State<BalanceComponent> {
   bool digitVisibility = true;
   dynamic savings = 220500.00;
   dynamic wallet = 47350.00;
+  late final DateTime now;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +24,7 @@ class _BalanceComponentState extends State<BalanceComponent> {
           Card(
             color: Colors.blue[700],
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(20.0),
               child: DefaultTextStyle(
                 style: TextStyle(color: Colors.white),
                 child: Column(
@@ -76,6 +77,8 @@ class _BalanceComponentState extends State<BalanceComponent> {
                                     digitVisibility = false;
                                     wallet = "********";
                                     savings = "********";
+                                    now = DateTime.now();
+                                    print(now);
                                   });
                                 },
                                 icon: Icon(Icons.visibility_outlined),

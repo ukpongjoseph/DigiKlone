@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_flutter/components/balance_component.dart';
+import 'package:second_flutter/components/digi_savings.dart';
 import 'package:second_flutter/components/quick_actions.dart';
 
 class LandingHome extends StatefulWidget {
@@ -13,7 +14,10 @@ class _LandingHomeState extends State<LandingHome> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(children: [BalanceComponent(), QuickActions()]),
+      child: Container(
+        color: const Color.fromARGB(255, 201, 224, 235),
+        child: Column(children: [BalanceComponent(), QuickActions(), DigiSavings()]),
+      ),
     );
   }
 }

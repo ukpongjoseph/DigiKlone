@@ -10,6 +10,9 @@ class Activity extends StatefulWidget {
 class _ActivityState extends State<Activity> {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [Text("Activity page")]);
+    return Scaffold(
+      appBar: AppBar(automaticallyImplyLeading: false),
+      body: Column(children: [Text("Activity page")]),
+    );
   }
 }

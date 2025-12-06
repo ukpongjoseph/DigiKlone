@@ -10,10 +10,9 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text("Profile Page")
-      ],
+    return Scaffold(
+      appBar: AppBar(automaticallyImplyLeading: false),
+      body: Column(children: [Text("Profile Page")]),
     );
   }
 }

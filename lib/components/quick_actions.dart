@@ -18,18 +18,86 @@ class QuickActions extends StatefulWidget {
 }
 
 class _QuickActionsState extends State<QuickActions> {
-  final List<Map<String, dynamic>> carouselItems = [
-    {"title": "Set a Target", "icon": Icon(Icons.track_changes)},
-    {"title": "Lock Funds", "icon": Icon(Icons.lock_outlined)},
-    {"title": "Refer Friends", "icon": Icon(Icons.card_giftcard_sharp)},
-    {"title": "Security", "icon": Icon(Icons.shield_outlined)},
-    {"title": "Add Card", "icon": Icon(Icons.credit_card)},
-    {"title": "Support", "icon": Icon(Icons.chat_bubble_outline_outlined)},
-    {"title": "FAQ", "icon": Icon(Icons.question_answer_outlined)},
-    {"title": "Add Funds", "icon": Icon(Icons.add)},
-  ];
+  late List<Map<String, dynamic>> carouselItems;
+
+  @override
+  void initState() {
+    super.initState();
+    carouselItems = [
+      {
+        "title": "Set a Target",
+        "icon": Icon(Icons.track_changes),
+        "action": () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DigiTargetSavings()),
+        ),
+      },
+      {
+        "title": "Lock Funds",
+        "icon": Icon(Icons.lock_outlined),
+        "action": () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LockFunds()),
+        ),
+      },
+      {
+        "title": "Refer Friends",
+        "icon": Icon(Icons.card_giftcard_sharp),
+        "action": () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ReferFriends()),
+        ),
+      },
+      {
+        "title": "Security",
+        "icon": Icon(Icons.shield_outlined),
+        "action": () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Security()),
+        ),
+      },
+      {
+        "title": "Add Card",
+        "icon": Icon(Icons.credit_card),
+        "action": () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AddCard()),
+        ),
+      },
+      {
+        "title": "Support",
+        "icon": Icon(Icons.chat_bubble_outline_outlined),
+        "action": () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Support()),
+        ),
+      },
+      {
+        "title": "FAQ",
+        "icon": Icon(Icons.question_answer_outlined),
+        "action": () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Faq()),
+        ),
+      },
+      {
+        "title": "Add Funds",
+        "icon": Icon(Icons.add),
+        "action": () => context.read<NavProvider>().setCurrentPage(2),
+      },
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double viewport;
+    if (screenWidth > 600) {
+      viewport = 0.25;
+    } else {
+      viewport = 0.3;
+    }
     return PopScope(
       canPop: false,
       child: Container(
@@ -38,205 +106,36 @@ class _QuickActionsState extends State<QuickActions> {
           children: [
             Container(
               alignment: Alignment.topLeft,
-              child: Text("Quick Actions"),
+              child: Text(
+                "Quick Actions",
+                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
+              ),
             ),
             CarouselSlider(
-              items: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DigiTargetSavings(),
-                      ),
-                    );
-                  },
+              items: carouselItems.map((e) {
+                return GestureDetector(
+                  onTap: e["action"],
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.all(5.0),
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     padding: EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        carouselItems[0]["icon"],
+                        e["icon"],
                         SizedBox(height: 5.0),
-                        Text(carouselItems[0]["title"]),
+                        Text(e["title"]),
                       ],
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LockFunds()),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        carouselItems[1]["icon"],
-                        SizedBox(height: 5.0),
-                        Text(carouselItems[1]["title"]),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ReferFriends()),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        carouselItems[2]["icon"],
-                        SizedBox(height: 5.0),
-                        Text(carouselItems[2]["title"]),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Security()),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        carouselItems[3]["icon"],
-                        SizedBox(height: 5.0),
-                        Text(carouselItems[3]["title"]),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddCard()),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        carouselItems[4]["icon"],
-                        SizedBox(height: 5.0),
-                        Text(carouselItems[4]["title"]),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Support()),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        carouselItems[5]["icon"],
-                        SizedBox(height: 5.0),
-                        Text(carouselItems[5]["title"]),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Faq()),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        carouselItems[6]["icon"],
-                        SizedBox(height: 5.0),
-                        Text(carouselItems[6]["title"]),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    context.read<NavProvider>().setCurrentPage(2);
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        carouselItems[7]["icon"],
-                        SizedBox(height: 5.0),
-                        Text(carouselItems[7]["title"]),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                );
+              }).toList(),
               options: CarouselOptions(
-                height: 80.0,
-                viewportFraction: 0.25,
+                height: screenHeight * 0.18,
+                viewportFraction: viewport,
                 enlargeCenterPage: false,
                 padEnds: false,
                 enableInfiniteScroll: false,

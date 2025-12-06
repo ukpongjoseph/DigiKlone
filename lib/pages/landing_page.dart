@@ -28,10 +28,10 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     currentPageIndex = context.watch<NavProvider>().getCurrentPage();
     return Scaffold(
-      appBar: currentPageIndex == 4
+      appBar: currentPageIndex != 0
           ? null
           : AppBar(
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.white,
               title: Row(
                 children: [
                   GestureDetector(
@@ -60,10 +60,10 @@ class _LandingPageState extends State<LandingPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(80.0),
-                      color: const Color.fromARGB(255, 223, 227, 233),
+                      color: const Color.fromARGB(255, 201, 224, 235),
                     ),
                     child: IconButton(
-                      icon: Icon(Icons.notifications_sharp),
+                      icon: Icon(Icons.notifications_none),
                       onPressed: () {},
                     ),
                   ),
