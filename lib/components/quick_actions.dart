@@ -26,7 +26,7 @@ class _QuickActionsState extends State<QuickActions> {
     carouselItems = [
       {
         "title": "Set a Target",
-        "icon": Icon(Icons.track_changes),
+        "icon": Icons.track_changes,
         "action": () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => DigiTargetSavings()),
@@ -34,7 +34,7 @@ class _QuickActionsState extends State<QuickActions> {
       },
       {
         "title": "Lock Funds",
-        "icon": Icon(Icons.lock_outlined),
+        "icon": Icons.lock_outlined,
         "action": () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => LockFunds()),
@@ -42,7 +42,7 @@ class _QuickActionsState extends State<QuickActions> {
       },
       {
         "title": "Refer Friends",
-        "icon": Icon(Icons.card_giftcard_sharp),
+        "icon": Icons.card_giftcard_sharp,
         "action": () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => ReferFriends()),
@@ -50,7 +50,7 @@ class _QuickActionsState extends State<QuickActions> {
       },
       {
         "title": "Security",
-        "icon": Icon(Icons.shield_outlined),
+        "icon": Icons.shield_outlined,
         "action": () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Security()),
@@ -58,7 +58,7 @@ class _QuickActionsState extends State<QuickActions> {
       },
       {
         "title": "Add Card",
-        "icon": Icon(Icons.credit_card),
+        "icon": Icons.credit_card,
         "action": () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => AddCard()),
@@ -66,7 +66,7 @@ class _QuickActionsState extends State<QuickActions> {
       },
       {
         "title": "Support",
-        "icon": Icon(Icons.chat_bubble_outline_outlined),
+        "icon": Icons.chat_bubble_outline_outlined,
         "action": () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Support()),
@@ -74,7 +74,7 @@ class _QuickActionsState extends State<QuickActions> {
       },
       {
         "title": "FAQ",
-        "icon": Icon(Icons.question_answer_outlined),
+        "icon": Icons.question_answer_outlined,
         "action": () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Faq()),
@@ -82,7 +82,7 @@ class _QuickActionsState extends State<QuickActions> {
       },
       {
         "title": "Add Funds",
-        "icon": Icon(Icons.add),
+        "icon": Icons.add,
         "action": () => context.read<NavProvider>().setCurrentPage(2),
       },
     ];
@@ -125,7 +125,7 @@ class _QuickActionsState extends State<QuickActions> {
                     padding: EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        e["icon"],
+                        Icon(e["icon"]),
                         SizedBox(height: 5.0),
                         Text(e["title"]),
                       ],
