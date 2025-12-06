@@ -31,6 +31,7 @@ class _QuickActionsState extends State<QuickActions> {
           context,
           MaterialPageRoute(builder: (context) => DigiTargetSavings()),
         ),
+        "color": Colors.blue,
       },
       {
         "title": "Lock Funds",
@@ -39,6 +40,7 @@ class _QuickActionsState extends State<QuickActions> {
           context,
           MaterialPageRoute(builder: (context) => LockFunds()),
         ),
+        "color": Colors.pink,
       },
       {
         "title": "Refer Friends",
@@ -47,6 +49,7 @@ class _QuickActionsState extends State<QuickActions> {
           context,
           MaterialPageRoute(builder: (context) => ReferFriends()),
         ),
+        "color": Colors.green,
       },
       {
         "title": "Security",
@@ -55,6 +58,7 @@ class _QuickActionsState extends State<QuickActions> {
           context,
           MaterialPageRoute(builder: (context) => Security()),
         ),
+        "color": Colors.pink,
       },
       {
         "title": "Add Card",
@@ -63,6 +67,7 @@ class _QuickActionsState extends State<QuickActions> {
           context,
           MaterialPageRoute(builder: (context) => AddCard()),
         ),
+        "color": Colors.purple,
       },
       {
         "title": "Support",
@@ -71,6 +76,7 @@ class _QuickActionsState extends State<QuickActions> {
           context,
           MaterialPageRoute(builder: (context) => Support()),
         ),
+        "color": Colors.green,
       },
       {
         "title": "FAQ",
@@ -79,11 +85,13 @@ class _QuickActionsState extends State<QuickActions> {
           context,
           MaterialPageRoute(builder: (context) => Faq()),
         ),
+        "color": Colors.lime,
       },
       {
         "title": "Add Funds",
         "icon": Icons.add,
         "action": () => context.read<NavProvider>().setCurrentPage(2),
+        "color": Colors.purpleAccent,
       },
     ];
   }
@@ -92,6 +100,8 @@ class _QuickActionsState extends State<QuickActions> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    bool isMobile = screenWidth < 600;
+    double spacing = isMobile ? 3 : 5;
     double viewport;
     if (screenWidth > 600) {
       viewport = 0.25;
@@ -117,24 +127,47 @@ class _QuickActionsState extends State<QuickActions> {
                   onTap: e["action"],
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.all(5.0),
+                    margin: isMobile
+                        ? EdgeInsets.all(3.0)
+                        : EdgeInsets.all(5.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    padding: EdgeInsets.all(10.0),
+                    padding: isMobile
+                        ? EdgeInsets.all(7.0)
+                        : EdgeInsets.all(10.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Icon(e["icon"]),
-                        SizedBox(height: 5.0),
-                        Text(e["title"]),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: e["color"],
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          padding: EdgeInsets.all(5.0),
+                          child: Icon(
+                            e["icon"],
+                            size: screenWidth > 600 ? 35 : 25,
+                          ),
+                        ),
+                        SizedBox(height: spacing),
+                        Text(
+                          e["title"],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: screenWidth > 600 ? 14.0 : 12.0,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 );
               }).toList(),
               options: CarouselOptions(
-                height: screenHeight * 0.18,
+                height: screenWidth > 600
+                    ? screenHeight * 0.18
+                    : screenHeight * 0.16,
                 viewportFraction: viewport,
                 enlargeCenterPage: false,
                 padEnds: false,
