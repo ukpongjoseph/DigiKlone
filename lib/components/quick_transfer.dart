@@ -80,7 +80,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                     onPressed: () {
                       showQuickTransferInfo();
                     },
-                    style: TextButton.styleFrom(backgroundColor: Colors.white),
+                    style: TextButton.styleFrom(backgroundColor: const Color.fromARGB(255, 246, 248, 248),),
                     child: Container(
                       padding: EdgeInsets.all(4.0),
                       decoration: BoxDecoration(
