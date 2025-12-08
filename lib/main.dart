@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/beneficiaries_provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
 import 'package:second_flutter/pages/add_card.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
@@ -21,6 +22,7 @@ import 'package:second_flutter/pages/signup/password.dart';
 import 'package:second_flutter/a_List_providers/auth_login_provider.dart';
 import 'package:second_flutter/a_List_providers/auth_register.dart';
 import 'package:second_flutter/pages/support.dart';
+import 'package:second_flutter/pages/transfer_money.dart';
 
 // This the root of the application. The main method is the entry point ofthe flutter application
 void main() {
@@ -32,6 +34,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => AuthloginProvider()),
         ChangeNotifierProvider(create: (context) => NavProvider()),
+        ChangeNotifierProvider(create: (context) => BeneficiariesProvider())
       ],
       child: MyApp(),
     ),
@@ -70,6 +73,7 @@ class MyApp extends StatelessWidget {
         "/digiSaveBalance": (context) => const DigiSaveBalance(),
         "/digiTargetPage": (context) => const DigiTarget(),
         "/digiLockPage": (context) => const DigiLock(),
+        "/transerMoneyPage": (context) => const TransferMoney(),
       },
     );
   }

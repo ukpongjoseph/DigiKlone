@@ -68,7 +68,7 @@ class _BalanceComponentState extends State<BalanceComponent> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        walletDefault ? Text("₦$savings") : Text("₦$wallet"),
+                        walletDefault ? Text("₦$savings", style: TextStyle(fontWeight: FontWeight.bold),) : Text("₦$wallet"),
                         SizedBox(width: 20.0),
                         digitVisibility
                             ? IconButton(

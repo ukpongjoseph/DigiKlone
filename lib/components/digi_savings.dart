@@ -11,17 +11,20 @@ class DigiSavings extends StatefulWidget {
 }
 
 class _DigiSavingsState extends State<DigiSavings> {
-  void showDigiTribeDialogueBox() {
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isMobile = screenWidth < 600;
+    double spacing = isMobile ? 3.0 : 8.0;
+      void showDigiTribeDialogueBox() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Container(
-            padding: EdgeInsets.all(7.0),
-            margin: EdgeInsets.all(10.0),
-            height: 200.0,
-            width: 130.0,
-            decoration: BoxDecoration(color: Colors.white),
+          contentPadding: EdgeInsets.all(12.0),
+          content: SizedBox(
+            height: 150.0,
+            width: 180.0,
             child: Column(
               children: [
                 Row(
@@ -30,35 +33,50 @@ class _DigiSavingsState extends State<DigiSavings> {
                     Text(
                       "Coming Soon",
                       style: TextStyle(
-                        // color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 14.0,
+                        fontSize: isMobile ? 14 : 16,
                       ),
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Icon(Icons.close, color: Colors.white),
+                      child: Icon(Icons.close),
                     ),
                   ],
                 ),
-                SizedBox(height: 3.0),
+                SizedBox(height: 5.0),
                 CircleAvatar(
                   backgroundColor: const Color.fromARGB(255, 218, 79, 246),
                   child: Icon(Icons.people_alt_outlined, color: Colors.white),
                 ),
-                SizedBox(height: 3.0),
+                SizedBox(height: 5.0),
                 Text(
                   "We are working hard to bring you this amazing feature. Stay tuned for updates!",
-                  style: TextStyle(fontWeight: FontWeight.w700),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: isMobile ? 10 : 12),
                 ),
-                SizedBox(height: 3.0),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Got it"),
+                SizedBox(height: 5.0),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 218, 79, 246),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                      )
+                    ),
+                    child: Text(
+                      "Got it",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight:  FontWeight.w600
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -67,12 +85,6 @@ class _DigiSavingsState extends State<DigiSavings> {
       },
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    bool isMobile = screenWidth < 600;
-    double spacing = isMobile ? 3.0 : 8.0;
     return Container(
       margin: EdgeInsets.all(10.0),
       child: Column(

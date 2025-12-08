@@ -16,8 +16,7 @@ class MyHomePage extends StatelessWidget {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return SingleChildScrollView(
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: const Color.fromARGB(255, 194, 212, 221),
         appBar: AppBar(
           // TRY THIS: Try changing the color here to a specific color (to
@@ -179,7 +178,6 @@ class MyHomePage extends StatelessWidget {
         //   ]
         // )
         // This trailing comma makes auto-formatting nicer for build methods.
-      ),
-    );
+      );
   }
 }
