@@ -14,6 +14,14 @@ class _BalanceComponentState extends State<BalanceComponent> {
   bool digitVisibility = true;
   dynamic savings = 220500.00;
   dynamic wallet = 47350.00;
+  
+  @override
+  void initState(){
+    super.initState();
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isMobile = screenWidth < 600;
+  }
+
   late final DateTime now;
   @override
   Widget build(BuildContext context) {
@@ -111,7 +119,10 @@ class _BalanceComponentState extends State<BalanceComponent> {
                                   },
                                   child: Text(
                                     "View All Savings",
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                      color: Colors.white,
+
+                                    ),
                                   ),
                                 ),
                                 Icon(
