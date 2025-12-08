@@ -15,8 +15,10 @@ class _LandingHomeState extends State<LandingHome> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: const Color.fromARGB(255, 201, 224, 235),
-        child: Column(children: [BalanceComponent(), QuickActions(), DigiSavings()]),
+        color: const Color.fromARGB(255, 246, 248, 248),
+        child: Column(
+          children: [BalanceComponent(), QuickActions(), DigiSavings()],
+        ),
       ),
     );
   }

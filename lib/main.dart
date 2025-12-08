@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
 import 'package:second_flutter/pages/add_card.dart';
+import 'package:second_flutter/pages/digi_lock.dart';
+import 'package:second_flutter/pages/digi_save_balance.dart';
+import 'package:second_flutter/pages/digi_target.dart';
 import 'package:second_flutter/pages/digi_target_savings.dart';
 import 'package:second_flutter/pages/faq.dart';
 import 'package:second_flutter/pages/home_page.dart';
@@ -64,6 +67,9 @@ class MyApp extends StatelessWidget {
         "/addCard": (context) => const AddCard(),
         "/support": (context) => const Support(),
         "/faq": (context) => const Faq(),
+        "/digiSaveBalance": (context) => const DigiSaveBalance(),
+        "/digiTargetPage": (context) => const DigiTarget(),
+        "/digiLockPage": (context) => const DigiLock(),
       },
     );
   }

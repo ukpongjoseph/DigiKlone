@@ -149,6 +149,7 @@ class _QuickActionsState extends State<QuickActions> {
                           child: Icon(
                             e["icon"],
                             size: screenWidth > 600 ? 35 : 25,
+                            color: Colors.white,
                           ),
                         ),
                         SizedBox(height: spacing),
@@ -157,6 +158,7 @@ class _QuickActionsState extends State<QuickActions> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: screenWidth > 600 ? 14.0 : 12.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
