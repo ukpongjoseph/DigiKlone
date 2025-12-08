@@ -80,7 +80,9 @@ class _QuickTransferState extends State<QuickTransfer> {
                     onPressed: () {
                       showQuickTransferInfo();
                     },
-                    style: TextButton.styleFrom(backgroundColor: const Color.fromARGB(255, 246, 248, 248),),
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 248, 248),
+                    ),
                     child: Container(
                       padding: EdgeInsets.all(4.0),
                       decoration: BoxDecoration(
@@ -188,68 +190,102 @@ class _QuickTransferState extends State<QuickTransfer> {
             ),
           ),
           SizedBox(height: 10.0),
-          beneficiaries.isEmpty 
-          ? 
-          Container(
-            color: Colors.white54,
-            child: Column(
-              children: [
-                Icon(Icons.people_alt_outlined),
-                SizedBox(height: spacing,),
-                Text("No Recent Transers"),
-                SizedBox(height: spacing,),
-                Text("Start by sending money to someone"),
-                SizedBox(height: spacing + 3,),
-                Row(
-                  children: [
-                    Text("Send Money"),
-                    SizedBox(width: spacing-2,),
-                    Icon(Icons.arrow_forward)
-                  ],
-                )
-              ],
-            ),
-          ) 
-          : 
-          Container(
-            color: Colors.white60,
-            child: Column(
-              children: [
-                Text("Recent Contacts"),
-                SizedBox(height: spacing + 2,),
-                ...beneficiaries.map((items){
-                  return Container(
-                    color: Colors.white,
-                    child: Row(
-                      children: [
-                        Row(
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.person_2_outlined)
-                              ],
-                            ),
-                            SizedBox(width: spacing,),
-                            Column(
-                              children: [
-                                Text(items["names"]),
-                                Text(items["number"])
-                              ],
-                            )
-                          ],
+          beneficiaries.isEmpty
+              ? Container(
+                  padding: EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.people_alt_outlined,
+                        size: isMobile ? 25 : 35,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(height: spacing + 10),
+                      Text(
+                        "No Recent Transers",
+                        style: TextStyle(
+                          fontSize: isMobile ? 15 : 18,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Row(
-                          children: [
-                            Icon(Icons.swap_vert_circle_outlined)
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                }).toList(),
-              ],
-            ),
-          ),
+                      ),
+                      SizedBox(height: spacing),
+                      Text(
+                        "Start by sending money to someone",
+                        style: TextStyle(fontSize: isMobile ? 12 : 14),
+                      ),
+                      SizedBox(height: spacing + 10),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>TransferMoney()));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(7.0),
+                          width: isMobile ? 120.0 : 180.0,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 63, 138, 184),
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Send Money",
+                                style: TextStyle(
+                                  fontSize: isMobile ? 12 : 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              SizedBox(width: spacing - 2),
+                              Icon(
+                                Icons.arrow_forward,
+                                size: isMobile ? 15 : 25,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(
+                  color: Colors.white60,
+                  child: Column(
+                    children: [
+                      Text("Recent Contacts"),
+                      SizedBox(height: spacing + 2),
+                      ...beneficiaries.map((items) {
+                        return Container(
+                          color: Colors.white,
+                          child: Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Row(
+                                    children: [Icon(Icons.person_2_outlined)],
+                                  ),
+                                  SizedBox(width: spacing),
+                                  Column(
+                                    children: [
+                                      Text(items["names"]),
+                                      Text(items["number"]),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.swap_vert_circle_outlined),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ],
+                  ),
+                ),
         ],
       ),
     );
