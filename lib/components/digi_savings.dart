@@ -23,7 +23,7 @@ class _DigiSavingsState extends State<DigiSavings> {
         return AlertDialog(
           contentPadding: EdgeInsets.all(12.0),
           content: SizedBox(
-            height: 150.0,
+            height: 180.0,
             width: 180.0,
             child: Column(
               children: [
@@ -56,7 +56,7 @@ class _DigiSavingsState extends State<DigiSavings> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: isMobile ? 10 : 12),
                 ),
-                SizedBox(height: 5.0),
+                SizedBox(height: 20.0),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

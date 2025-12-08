@@ -122,7 +122,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                       Icon(
                         Icons.arrow_forward_outlined,
                         color: Colors.purple,
-                        size: isMobile ? 25 : 35,
+                        size: isMobile ? 15 : 25,
                       ),
                     ],
                   ),
@@ -158,7 +158,11 @@ class _QuickTransferState extends State<QuickTransfer> {
                               138,
                               184,
                             ),
-                            child: Icon(Icons.add, color: Colors.white),
+                            child: Icon(
+                              Icons.add, 
+                              color: Colors.white,
+                              size: isMobile ? 18 : 25,
+                            ),
                           ),
                           SizedBox(width: spacing * 2),
                           Column(
@@ -167,12 +171,19 @@ class _QuickTransferState extends State<QuickTransfer> {
                               Text(
                                 "Send to New Contact",
                                 textAlign: TextAlign.start,
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: isMobile ? 14 : 18,
+                                  fontWeight: FontWeight.bold
+                                ),
                               ),
                               Text(
                                 "Transfer money to anyone",
                                 textAlign: TextAlign.start,
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: isMobile ? 12 : 14
+                                ),
                               ),
                             ],
                           ),
@@ -182,7 +193,11 @@ class _QuickTransferState extends State<QuickTransfer> {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.arrow_right_alt, color: Colors.white),
+                      Icon(
+                        Icons.arrow_forward, 
+                        color: Colors.white,
+                        size: isMobile ? 18 : 25,
+                      ),
                     ],
                   ),
                 ],
