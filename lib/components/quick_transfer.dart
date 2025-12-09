@@ -159,7 +159,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                               184,
                             ),
                             child: Icon(
-                              Icons.add, 
+                              Icons.add,
                               color: Colors.white,
                               size: isMobile ? 18 : 25,
                             ),
@@ -174,7 +174,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: isMobile ? 14 : 18,
-                                  fontWeight: FontWeight.bold
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
@@ -182,7 +182,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: isMobile ? 12 : 14
+                                  fontSize: isMobile ? 12 : 14,
                                 ),
                               ),
                             ],
@@ -194,7 +194,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                   Row(
                     children: [
                       Icon(
-                        Icons.arrow_forward, 
+                        Icons.arrow_forward,
                         color: Colors.white,
                         size: isMobile ? 18 : 25,
                       ),
@@ -230,15 +230,20 @@ class _QuickTransferState extends State<QuickTransfer> {
                       ),
                       SizedBox(height: spacing + 10),
                       GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>TransferMoney()));
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TransferMoney(),
+                            ),
+                          );
                         },
                         child: Container(
                           padding: EdgeInsets.all(7.0),
                           width: isMobile ? 120.0 : 180.0,
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 63, 138, 184),
-                            borderRadius: BorderRadius.circular(10)
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -248,7 +253,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                                 style: TextStyle(
                                   fontSize: isMobile ? 12 : 14,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                               SizedBox(width: spacing - 2),
@@ -264,35 +269,70 @@ class _QuickTransferState extends State<QuickTransfer> {
                     ],
                   ),
                 )
-              : Container(
-                  color: Colors.white60,
+              : SizedBox(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Recent Contacts"),
+                      Text(
+                        "Recent Contacts",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: isMobile ? 14 : 64,
+                        ),
+                      ),
                       SizedBox(height: spacing + 2),
                       ...beneficiaries.map((items) {
                         return Container(
-                          color: Colors.white,
+                          padding: isMobile
+                              ? EdgeInsets.all(9)
+                              : EdgeInsets.all(15.0),
+                          margin: isMobile
+                              ? EdgeInsets.symmetric(vertical: 5.0)
+                              : EdgeInsets.symmetric(vertical: 10.0),
+                          decoration: BoxDecoration(color: Colors.white70, borderRadius: BorderRadius.circular(10.0)),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
-                                  Row(
-                                    children: [Icon(Icons.person_2_outlined)],
+                                  CircleAvatar(
+                                    backgroundColor: Colors.blue[300],
+                                    child: Icon(
+                                      Icons.person_2_outlined,
+                                      color: Colors.white,
+                                      size: isMobile ? 25 : 35,
+                                    ),
                                   ),
-                                  SizedBox(width: spacing),
+                                  SizedBox(width: spacing * 3),
                                   Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(items["names"]),
-                                      Text(items["number"]),
+                                      Text(
+                                        items["name"],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: isMobile ? 15 : 18,
+                                        ),
+                                      ),
+                                      Text(
+                                        items["type"],
+                                        style: TextStyle(
+                                          fontSize: isMobile ? 12 : 14,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ],
                               ),
-                              Row(
-                                children: [
-                                  Icon(Icons.swap_vert_circle_outlined),
-                                ],
+                              CircleAvatar(
+                                backgroundColor: Colors.blue[700],
+                                radius: isMobile ? 15 : 24,
+                                child: Icon(
+                                  Icons.swap_vert_circle_outlined,
+                                  color: Colors.white,
+                                  size: isMobile ? 20 : 30,
+                                ),
                               ),
                             ],
                           ),

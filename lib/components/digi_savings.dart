@@ -14,6 +14,7 @@ class _DigiSavingsState extends State<DigiSavings> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    // double screenHeight = MediaQuery.of(context).size.height;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile ? 3.0 : 8.0;
       void showDigiTribeDialogueBox() {
@@ -23,9 +24,9 @@ class _DigiSavingsState extends State<DigiSavings> {
         return AlertDialog(
           contentPadding: EdgeInsets.all(12.0),
           content: SizedBox(
-            height: 180.0,
-            width: 180.0,
             child: Column(
+              // making the dialog box responsive
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -191,6 +192,7 @@ class _DigiSavingsState extends State<DigiSavings> {
           ),
           SizedBox(height: 10.0),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
                 onTap: () {

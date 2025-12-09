@@ -14,17 +14,14 @@ class _BalanceComponentState extends State<BalanceComponent> {
   bool digitVisibility = true;
   dynamic savings = 220500.00;
   dynamic wallet = 47350.00;
-  
-  @override
-  void initState(){
-    super.initState();
-    double screenWidth = MediaQuery.of(context).size.width;
-    bool isMobile = screenWidth < 600;
-  }
-
   late final DateTime now;
+  int activeButton = 1;
+
   @override
   Widget build(BuildContext context) {
+    double scrennWidth = MediaQuery.of(context).size.width;
+    bool isMobile = scrennWidth < 600;
+    double spacing = isMobile ? 7.0 : 9.0;
     return Container(
       margin: EdgeInsets.all(10.0),
       child: Column(
@@ -32,51 +29,97 @@ class _BalanceComponentState extends State<BalanceComponent> {
           Card(
             color: Colors.blue[700],
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: isMobile ? EdgeInsetsGeometry.all(12.0) : EdgeInsetsGeometry.all(17.0),
               child: DefaultTextStyle(
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: const Color.fromRGBO(255, 255, 255, 1)),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              walletDefault = true;
-                            });
-                          },
-                          child: Text(
-                            "Total savings",
-                            style: TextStyle(color: Colors.white),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.blue[400],
+                        borderRadius: BorderRadius.circular(9.0)
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  walletDefault = true;
+                                  activeButton = 1;
+                                });
+                              },
+                              style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(9.0)
+                                ),
+                                backgroundColor: activeButton == 1 ? Colors.blue[200] : Colors.blue[400]
+                              ),
+                              child: Text(
+                                "Total savings",
+                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 20.0),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              walletDefault = false;
-                            });
-                          },
-                          child: Text(
-                            "DigiWallet",
-                            style: TextStyle(color: Colors.white),
+                          Expanded(
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  walletDefault = false;
+                                  activeButton = 2;
+                                });
+                              },
+                              style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(9.0)
+                                ),
+                                backgroundColor: activeButton == 2 ? Colors.blue[200] : Colors.blue[400]
+                              ),
+                              child: Text(
+                                "DigiWallet",
+                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: spacing * 2.5,),
                     Container(
                       alignment: Alignment.topLeft,
                       child: walletDefault
-                          ? Text("Total Savings")
-                          : Text("Wallet balance"),
+                          ? Text(
+                            "Total Savings",
+                            style: TextStyle(
+                              fontSize: isMobile ? 13 : 17
+                            ),
+                          )
+                          : Text(
+                            "Wallet balance",
+                            style: TextStyle(
+                              fontSize: isMobile ? 13 : 17
+                            ),
+                          ),
                     ),
-                    SizedBox(height: 20.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        walletDefault ? Text("₦$savings", style: TextStyle(fontWeight: FontWeight.bold),) : Text("₦$wallet"),
+                        walletDefault ? Text(
+                          "₦$savings", 
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                            fontSize: scrennWidth * 0.095
+                          ),
+                        ) : Text(
+                          "₦$wallet",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                            fontSize: scrennWidth * 0.095
+                          ),
+                        ),
                         SizedBox(width: 20.0),
                         digitVisibility
                             ? IconButton(
@@ -85,8 +128,6 @@ class _BalanceComponentState extends State<BalanceComponent> {
                                     digitVisibility = false;
                                     wallet = "********";
                                     savings = "********";
-                                    now = DateTime.now();
-                                    print(now);
                                   });
                                 },
                                 icon: Icon(Icons.visibility_outlined),
@@ -105,7 +146,6 @@ class _BalanceComponentState extends State<BalanceComponent> {
                               ),
                       ],
                     ),
-                    SizedBox(height: 20.0),
                     Container(
                       child: walletDefault
                           ? Row(
@@ -121,13 +161,14 @@ class _BalanceComponentState extends State<BalanceComponent> {
                                     "View All Savings",
                                     style: TextStyle(
                                       color: Colors.white,
-
+                                      fontSize: isMobile ? 12 : 14
                                     ),
                                   ),
                                 ),
                                 Icon(
                                   Icons.chevron_right_outlined,
                                   color: Colors.white,
+                                  size: isMobile ? 15 : 25,
                                 ),
                               ],
                             )
@@ -142,12 +183,16 @@ class _BalanceComponentState extends State<BalanceComponent> {
                                   },
                                   child: Text(
                                     "Go To Wallet",
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: isMobile ? 12 : 14
+                                    ),
                                   ),
                                 ),
                                 Icon(
                                   Icons.chevron_right_outlined,
                                   color: Colors.white,
+                                  size: isMobile ? 15 : 25,
                                 ),
                               ],
                             ),

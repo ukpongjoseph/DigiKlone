@@ -7,7 +7,7 @@ import 'package:second_flutter/pages/savings.dart';
 import 'package:second_flutter/pages/wallet.dart';
 
 class NavProvider extends ChangeNotifier {
-  int _currentPageIndex = 1;
+  int _currentPageIndex = 0;
   final  List _pages = [
     LandingHome(),
     Savings(),
