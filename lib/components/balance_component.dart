@@ -12,8 +12,8 @@ class BalanceComponent extends StatefulWidget {
 class _BalanceComponentState extends State<BalanceComponent> {
   bool walletDefault = true;
   bool digitVisibility = true;
-  dynamic savings = 220500.00;
-  dynamic wallet = 47350.00;
+  dynamic savings = "220,500.00";
+  dynamic wallet = "47,350.00";
   late final DateTime now;
   int activeButton = 1;
 
@@ -35,6 +35,7 @@ class _BalanceComponentState extends State<BalanceComponent> {
                 child: Column(
                   children: [
                     Container(
+                      padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.5),
                       decoration: BoxDecoration(
                         color: Colors.blue[400],
                         borderRadius: BorderRadius.circular(9.0)
@@ -122,28 +123,34 @@ class _BalanceComponentState extends State<BalanceComponent> {
                         ),
                         SizedBox(width: 20.0),
                         digitVisibility
-                            ? IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    digitVisibility = false;
-                                    wallet = "********";
-                                    savings = "********";
-                                  });
-                                },
-                                icon: Icon(Icons.visibility_outlined),
-                                color: Colors.white,
-                              )
-                            : IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    digitVisibility = true;
-                                    savings = 220500.00;
-                                    wallet = 47350.00;
-                                  });
-                                },
-                                icon: Icon(Icons.visibility_off_outlined),
-                                color: Colors.white,
-                              ),
+                            ? CircleAvatar(
+                              backgroundColor: Colors.blue[300],
+                              child: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      digitVisibility = false;
+                                      wallet = "********";
+                                      savings = "********";
+                                    });
+                                  },
+                                  icon: Icon(Icons.visibility_outlined),
+                                  color: Colors.white,
+                                ),
+                            )
+                            : CircleAvatar(
+                              backgroundColor: Colors.blue[300],
+                              child: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      digitVisibility = true;
+                                      savings = "220,500.00";
+                                      wallet = "47,350.00";
+                                    });
+                                  },
+                                  icon: Icon(Icons.visibility_off_outlined),
+                                  color: Colors.white,
+                                ),
+                            ),
                       ],
                     ),
                     Container(

@@ -19,6 +19,10 @@ class _BottomNavState extends State<BottomNav> {
     ).getCurrentPage();
     return NavigationBar(
       indicatorColor: Colors.transparent,
+      onDestinationSelected: (int value) {
+        Provider.of<NavProvider>(context, listen: false).setCurrentPage(value);
+      },
+      selectedIndex: currentPageIndex,
       destinations: [
         NavigationDestination(icon: Icon(Icons.home), label: "Home"),
         NavigationDestination(icon: Icon(Icons.savings), label: "Savings"),
@@ -26,10 +30,6 @@ class _BottomNavState extends State<BottomNav> {
         NavigationDestination(icon: Icon(Icons.bar_chart_sharp), label: "Activity"),
         NavigationDestination(icon: Icon(Icons.person), label: "Me"),
       ],
-      onDestinationSelected: (int value) {
-        Provider.of<NavProvider>(context, listen: false).setCurrentPage(value);
-      },
-      selectedIndex: currentPageIndex,
     );
   }
 }

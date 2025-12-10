@@ -277,7 +277,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                         "Recent Contacts",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: isMobile ? 14 : 64,
+                          fontSize: isMobile ? 14 : 24,
                         ),
                       ),
                       SizedBox(height: spacing + 2),
