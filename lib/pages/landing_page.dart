@@ -28,49 +28,6 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     currentPageIndex = context.watch<NavProvider>().getCurrentPage();
     return Scaffold(
-      appBar: currentPageIndex != 0
-          ? null
-          : AppBar(
-              backgroundColor: Colors.white,
-              title: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      context.read<NavProvider>().setCurrentPage(4);
-                    },
-                    child: CircleAvatar(
-                      child: Image.asset("assets/images/avatar.png"),
-                    ),
-                  ),
-                  SizedBox(width: 10.0),
-                  Text(
-                    "Welcome User",
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(width: 10.0),
-                  Icon(Icons.emoji_emotions_rounded, color: Colors.amber[600]),
-                ],
-              ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(80.0),
-                      color: const Color.fromARGB(255, 201, 224, 235),
-                    ),
-                    child: IconButton(
-                      icon: Icon(Icons.notifications_none),
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-              ],
-              automaticallyImplyLeading: false,
-            ),
       body: _pages[currentPageIndex],
       bottomNavigationBar: BottomNav(),
     );

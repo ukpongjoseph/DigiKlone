@@ -289,7 +289,10 @@ class _QuickTransferState extends State<QuickTransfer> {
                           margin: isMobile
                               ? EdgeInsets.symmetric(vertical: 5.0)
                               : EdgeInsets.symmetric(vertical: 10.0),
-                          decoration: BoxDecoration(color: Colors.white70, borderRadius: BorderRadius.circular(10.0)),
+                          decoration: BoxDecoration(
+                            color: Colors.white70,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -337,7 +340,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                             ],
                           ),
                         );
-                      }).toList(),
+                      }),
                     ],
                   ),
                 ),

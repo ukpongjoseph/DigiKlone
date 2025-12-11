@@ -36,7 +36,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => AuthloginProvider()),
         ChangeNotifierProvider(create: (context) => NavProvider()),
         ChangeNotifierProvider(create: (context) => BeneficiariesProvider()),
-        ChangeNotifierProvider(create: (context) => DigiSavingsPlans())
+        ChangeNotifierProvider(create: (context) => DigiSavingsPlans()),
       ],
       child: MyApp(),
     ),
