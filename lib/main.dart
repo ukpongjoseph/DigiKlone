@@ -23,6 +23,7 @@ import 'package:second_flutter/pages/signup/password.dart';
 import 'package:second_flutter/a_List_providers/auth_login_provider.dart';
 import 'package:second_flutter/a_List_providers/auth_register.dart';
 import 'package:second_flutter/pages/support.dart';
+import 'package:second_flutter/pages/total_progress.dart';
 import 'package:second_flutter/pages/transfer_money.dart';
 
 // This the root of the application. The main method is the entry point ofthe flutter application
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
         "/digiTargetPage": (context) => const DigiTarget(),
         "/digiLockPage": (context) => const DigiLock(),
         "/transerMoneyPage": (context) => const TransferMoney(),
+        "/totalProgress": (context) => const TotalProgress(),
       },
     );
   }

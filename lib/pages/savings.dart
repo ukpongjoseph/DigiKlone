@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_flutter/components/recent_activity.dart';
 import 'package:second_flutter/components/savings_card.dart';
 import 'package:second_flutter/components/total_savings.dart';
 
@@ -29,7 +30,9 @@ class _SavingsState extends State<Savings> {
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-          child: Column(children: [TotalSavings(), SavingsCard()]),
+          child: Column(
+            children: [TotalSavings(), SavingsCard(), RecentActivity()],
+          ),
         ),
       ),
     );

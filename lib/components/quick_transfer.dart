@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/beneficiaries_provider.dart';
-import 'package:second_flutter/pages/digi_target_savings.dart';
 import 'package:second_flutter/pages/transfer_money.dart';
 
 class QuickTransfer extends StatefulWidget {
@@ -135,7 +134,7 @@ class _QuickTransferState extends State<QuickTransfer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DigiTargetSavings()),
+                MaterialPageRoute(builder: (context) => TransferMoney()),
               );
             },
             child: Container(
@@ -282,62 +281,72 @@ class _QuickTransferState extends State<QuickTransfer> {
                       ),
                       SizedBox(height: spacing + 2),
                       ...beneficiaries.map((items) {
-                        return Container(
-                          padding: isMobile
-                              ? EdgeInsets.all(9)
-                              : EdgeInsets.all(15.0),
-                          margin: isMobile
-                              ? EdgeInsets.symmetric(vertical: 5.0)
-                              : EdgeInsets.symmetric(vertical: 10.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white70,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: Colors.blue[300],
-                                    child: Icon(
-                                      Icons.person_2_outlined,
-                                      color: Colors.white,
-                                      size: isMobile ? 25 : 35,
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TransferMoney(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: isMobile
+                                ? EdgeInsets.all(9)
+                                : EdgeInsets.all(15.0),
+                            margin: isMobile
+                                ? EdgeInsets.symmetric(vertical: 5.0)
+                                : EdgeInsets.symmetric(vertical: 10.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white70,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundColor: Colors.blue[300],
+                                      child: Icon(
+                                        Icons.person_2_outlined,
+                                        color: Colors.white,
+                                        size: isMobile ? 25 : 35,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: spacing * 3),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        items["name"],
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: isMobile ? 15 : 18,
+                                    SizedBox(width: spacing * 3),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          items["name"],
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: isMobile ? 15 : 18,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        items["type"],
-                                        style: TextStyle(
-                                          fontSize: isMobile ? 12 : 14,
+                                        Text(
+                                          items["type"],
+                                          style: TextStyle(
+                                            fontSize: isMobile ? 12 : 14,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              CircleAvatar(
-                                backgroundColor: Colors.blue[700],
-                                radius: isMobile ? 15 : 24,
-                                child: Icon(
-                                  Icons.swap_vert_circle_outlined,
-                                  color: Colors.white,
-                                  size: isMobile ? 20 : 30,
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                                CircleAvatar(
+                                  backgroundColor: Colors.blue[700],
+                                  radius: isMobile ? 15 : 24,
+                                  child: Icon(
+                                    Icons.swap_vert_circle_outlined,
+                                    color: Colors.white,
+                                    size: isMobile ? 20 : 30,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       }),

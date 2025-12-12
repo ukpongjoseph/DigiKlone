@@ -15,6 +15,85 @@ class _SavingsCardState extends State<SavingsCard> {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile ? 5 : 9;
+    void showDigiTribeDialog() {
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: SizedBox(
+              child: Column(
+                // making the dialog box responsive
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text("Coming Soon!"),
+                          Icon(Icons.rocket_launch_sharp),
+                        ],
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(Icons.close, size: isMobile ? 20 : 30),
+                      ),
+                    ],
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.purple[100],
+                    child: Icon(Icons.people_alt_outlined),
+                  ),
+                  Text(
+                    "DigiTribe is coming soon! Save together with friends and family in group challenges with exciting rewards",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: isMobile ? 10 : 13),
+                  ),
+                  Text(
+                    "Expected launch: Q2 2025",
+                    style: TextStyle(
+                      color: Colors.purple[500],
+                      fontWeight: FontWeight.w700,
+                      fontSize: isMobile ? 11 : 14,
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(
+                          255,
+                          139,
+                          64,
+                          251,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(10.0),
+                        ),
+                      ),
+                      child: Text(
+                        "Got it!",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
     List<Map<String, dynamic>> savingsPlans = context
         .read<DigiSavingsPlans>()
         .fetchPlans();
@@ -25,53 +104,96 @@ class _SavingsCardState extends State<SavingsCard> {
       child: Column(
         children: [
           ...savingsPlans.map((plan) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: screenWidth * 0.4,
-                  padding: isMobile ? EdgeInsets.all(8) : EdgeInsets.all(12),
-                  margin: isMobile
-                      ? EdgeInsets.fromLTRB(0, 0, 0, 8)
-                      : EdgeInsets.fromLTRB(0, 0, 0, 15),
-                  decoration: BoxDecoration(
-                    color: plan["color"],
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: plan["avatar_color"],
-                            child: plan["icon"],
-                          ),
-                          Container(
-                            padding: isMobile
-                                ? EdgeInsets.all(3)
-                                : EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              color: plan["container-color"],
-                              borderRadius: BorderRadius.circular(20),
+            return GestureDetector(
+              onTap: () {
+                plan["page_exists"]
+                    ? Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => plan["page"]),
+                      )
+                    : showDigiTribeDialog();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: screenWidth * 0.4,
+                    padding: isMobile ? EdgeInsets.all(10) : EdgeInsets.all(12),
+                    margin: isMobile
+                        ? EdgeInsets.fromLTRB(0, 0, 0, 10)
+                        : EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    decoration: BoxDecoration(
+                      color: plan["color"],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: plan["avatar_color"],
+                              child: Icon(
+                                plan["icon"],
+                                size: isMobile ? 25 : 35,
+                              ),
                             ),
-                            child: Text(plan["rate"]),
+                            Container(
+                              padding: isMobile
+                                  ? EdgeInsets.symmetric(
+                                      vertical: 3.0,
+                                      horizontal: 6.0,
+                                    )
+                                  : EdgeInsets.symmetric(
+                                      vertical: 6.0,
+                                      horizontal: 10.0,
+                                    ),
+                              decoration: BoxDecoration(
+                                color: plan["container-color"],
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                plan["rate"],
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: isMobile ? 10 : 13,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: spacing * 2.5),
+                        Text(
+                          plan["type"],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: isMobile ? 16 : 20,
                           ),
-                        ],
-                      ),
-                      SizedBox(height: spacing),
-                      Text(plan["type"]),
-                      SizedBox(height: spacing),
-                      Text(plan["description"]),
-                      SizedBox(height: spacing),
-                      Text(plan["field"]),
-                      SizedBox(height: spacing),
-                      Text(plan["balance"]),
-                    ],
+                        ),
+                        SizedBox(height: spacing * 1.5),
+                        Text(
+                          plan["description"],
+                          style: TextStyle(fontSize: isMobile ? 12 : 15),
+                        ),
+                        SizedBox(height: spacing * 2.5),
+                        Text(
+                          plan["field"],
+                          style: TextStyle(fontSize: isMobile ? 11 : 14),
+                        ),
+                        SizedBox(height: spacing - 1),
+                        Text(
+                          plan["balance"],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: isMobile ? 15 : 19,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           }),
         ],

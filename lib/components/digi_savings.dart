@@ -17,75 +17,84 @@ class _DigiSavingsState extends State<DigiSavings> {
     // double screenHeight = MediaQuery.of(context).size.height;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile ? 3.0 : 8.0;
-      void showDigiTribeDialogueBox() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          contentPadding: EdgeInsets.all(12.0),
-          content: SizedBox(
-            child: Column(
-              // making the dialog box responsive
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Coming Soon",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: isMobile ? 14 : 16,
+    void showDigiTribeDialogueBox() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.all(12.0),
+            content: SizedBox(
+              child: Column(
+                // making the dialog box responsive
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: isMobile ? 14 : 16,
+                        ),
                       ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Icon(Icons.close),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5.0),
+                  CircleAvatar(
+                    backgroundColor: const Color.fromARGB(255, 218, 79, 246),
+                    child: Icon(Icons.people_alt_outlined, color: Colors.white),
+                  ),
+                  SizedBox(height: 5.0),
+                  Text(
+                    "We are working hard to bring you this amazing feature. Stay tuned for updates!",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: isMobile ? 10 : 12,
                     ),
-                    TextButton(
+                  ),
+                  SizedBox(height: 20.0),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Icon(Icons.close),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5.0),
-                CircleAvatar(
-                  backgroundColor: const Color.fromARGB(255, 218, 79, 246),
-                  child: Icon(Icons.people_alt_outlined, color: Colors.white),
-                ),
-                SizedBox(height: 5.0),
-                Text(
-                  "We are working hard to bring you this amazing feature. Stay tuned for updates!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: isMobile ? 10 : 12),
-                ),
-                SizedBox(height: 20.0),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 218, 79, 246),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                      )
-                    ),
-                    child: Text(
-                      "Got it",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight:  FontWeight.w600
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(
+                          255,
+                          218,
+                          79,
+                          246,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      child: Text(
+                        "Got it",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-      },
-    );
-  }
+          );
+        },
+      );
+    }
+
     return Container(
       margin: EdgeInsets.all(10.0),
       child: Column(
@@ -135,6 +144,7 @@ class _DigiSavingsState extends State<DigiSavings> {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     children: [

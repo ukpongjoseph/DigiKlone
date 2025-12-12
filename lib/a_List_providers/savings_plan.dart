@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:second_flutter/pages/digi_lock.dart';
+import 'package:second_flutter/pages/digi_save_balance.dart';
+import 'package:second_flutter/pages/total_progress.dart';
 
 class DigiSavingsPlans extends ChangeNotifier {
+  DateTime time = DateTime.now();
   final List<Map<String, dynamic>> _savingPlans = [
     {
-      "icon": Icon(Icons.savings_outlined),
+      "icon": Icons.savings_outlined,
       "rate": "18.5%",
       "type": "DigiSave",
       "description": "Regular Savings",
@@ -12,9 +16,11 @@ class DigiSavingsPlans extends ChangeNotifier {
       "color": const Color.fromARGB(255, 117, 188, 246),
       "avatar_color": const Color.fromARGB(255, 148, 200, 243),
       "container-color": const Color.fromARGB(255, 3, 60, 110),
+      "page_exists": true,
+      "page": DigiSaveBalance(),
     },
     {
-      "icon": Icon(Icons.track_changes_outlined),
+      "icon": Icons.track_changes_outlined,
       "rate": "18.5%",
       "type": "DigiTarget",
       "description": "Goal-Based Savings",
@@ -23,9 +29,11 @@ class DigiSavingsPlans extends ChangeNotifier {
       "color": const Color.fromARGB(255, 109, 238, 114),
       "avatar-color": const Color.fromARGB(255, 156, 243, 159),
       "container-color": const Color.fromARGB(255, 4, 122, 6),
+      "page_exists": true,
+      "page": TotalProgress(),
     },
     {
-      "icon": Icon(Icons.shield_outlined),
+      "icon": Icons.shield_outlined,
       "rate": "21.0%",
       "type": "DigiLock",
       "description": "Fixed Deposit",
@@ -34,9 +42,11 @@ class DigiSavingsPlans extends ChangeNotifier {
       "color": const Color.fromARGB(255, 242, 133, 125),
       "avatar_color": const Color.fromARGB(255, 237, 162, 157),
       "container-color": const Color.fromARGB(255, 116, 3, 40),
+      "page_exists": true,
+      "page": DigiLock(),
     },
     {
-      "icon": Icon(Icons.people_alt_outlined),
+      "icon": Icons.people_alt_outlined,
       "rate": "18.5%",
       "type": "DigiTribe",
       "description": "Group Savings",
@@ -45,6 +55,8 @@ class DigiSavingsPlans extends ChangeNotifier {
       "color": const Color.fromARGB(255, 217, 110, 235),
       "avatar_color": const Color.fromARGB(255, 232, 163, 244),
       "container-color": const Color.fromARGB(255, 108, 4, 126),
+      "page_exists": false,
+      "page": null,
     },
   ];
 
@@ -62,22 +74,31 @@ class DigiSavingsPlans extends ChangeNotifier {
       "amount": "₦5000",
       "activity": "DigiSave Deposit",
       "source": "Auto-save from main wallet",
-      "timeStamp": DateTime.now(),
+      "timeStamp": "2025-11-03 14:22:57.183",
       "status": null,
+      "transaction_type": "credit",
+      "type": "savings",
+      "color1": Colors.blue[200],
     },
     {
       "amount": "₦1250",
       "activity": "Interest Earned",
       "source": "DigiLock fixed deposit",
-      "timeStamp": DateTime.now(),
+      "timeStamp": "2024-07-19 08:41:12.905",
       "status": null,
+      "transaction_type": "credit",
+      "type": "lock",
+      "color": Colors.green[200],
     },
     {
       "amount": "₦10000",
       "activity": "Goal Milestone",
       "source": "Vacation fund",
-      "timeStamp": DateTime.now(),
+      "timeStamp": "2026-03-28 21:05:49.327",
       "status": "75% complete",
+      "transaction_type": "credit",
+      "type": "target",
+      "color": Colors.green[200],
     },
   ];
 

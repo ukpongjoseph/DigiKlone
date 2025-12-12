@@ -64,7 +64,7 @@ class _TotalSavingsState extends State<TotalSavings> {
                         "+$percentage",
                         style: TextStyle(
                           color: Colors.green[400],
-                          fontSize: isMobile ? 16 : 18,
+                          fontSize: isMobile ? 12.5 : 18,
                         ),
                       )
                     : Text(
