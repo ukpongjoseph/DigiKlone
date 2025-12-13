@@ -169,7 +169,7 @@ class _QuickActionsState extends State<QuickActions> {
               options: CarouselOptions(
                 height: screenWidth > 600
                     ? screenHeight * 0.20
-                    : screenHeight * 0.18,
+                    : screenHeight * 0.15,
                 viewportFraction: viewport,
                 enlargeCenterPage: false,
                 padEnds: false,
