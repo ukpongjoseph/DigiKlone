@@ -191,7 +191,7 @@ class _DigiSavingsState extends State<DigiSavings> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    icon: Icon(Icons.auto_graph, color: Colors.white),
+                    icon: Icon(Icons.trending_up_sharp, color: Colors.white),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueAccent,
                     ),

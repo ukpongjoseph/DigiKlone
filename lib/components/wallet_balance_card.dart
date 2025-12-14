@@ -108,7 +108,11 @@ class _WalletBalanceCardState extends State<WalletBalanceCard> {
                         color: Colors.white,
                         size: isMobile ? 18 : 28,
                       )
-                    : Icon(Icons.visibility_off_outlined, color: Colors.white),
+                    : Icon(
+                        Icons.visibility_off_outlined,
+                        color: Colors.white,
+                        size: isMobile ? 18 : 28,
+                      ),
               ),
             ],
           ),

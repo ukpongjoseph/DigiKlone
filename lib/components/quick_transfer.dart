@@ -340,7 +340,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                                   backgroundColor: Colors.blue[700],
                                   radius: isMobile ? 15 : 24,
                                   child: Icon(
-                                    Icons.swap_vert_circle_outlined,
+                                    Icons.send_and_archive_outlined,
                                     color: Colors.white,
                                     size: isMobile ? 20 : 30,
                                   ),

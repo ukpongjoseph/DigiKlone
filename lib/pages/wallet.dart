@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:second_flutter/components/payment_method.dart';
+import 'package:second_flutter/components/quick_wallet_transfer.dart';
+import 'package:second_flutter/components/recent_transactions.dart';
+import 'package:second_flutter/components/virtual_account.dart';
 import 'package:second_flutter/components/wallet_balance_card.dart';
 
 class Wallet extends StatefulWidget {
@@ -32,7 +36,20 @@ class _WalletState extends State<Wallet> {
             margin: isMobile ? EdgeInsets.all(8) : EdgeInsets.all(12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [WalletBalanceCard(), Text('Virtual Account')],
+              children: [
+                WalletBalanceCard(),
+                Text(
+                  'Virtual Account',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: isMobile ? 15 : 18,
+                  ),
+                ),
+                VirtualAccount(),
+                QuickWalletTransfer(),
+                PaymentMethod(),
+                RecentTransactions(),
+              ],
             ),
           ),
         ),
