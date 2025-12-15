@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/beneficiaries_provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
 import 'package:second_flutter/a_List_providers/savings_plan.dart';
+import 'package:second_flutter/a_List_providers/transaction_activity.dart';
 import 'package:second_flutter/pages/add_card.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
@@ -38,6 +39,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => NavProvider()),
         ChangeNotifierProvider(create: (context) => BeneficiariesProvider()),
         ChangeNotifierProvider(create: (context) => DigiSavingsPlans()),
+        ChangeNotifierProvider(create: (context) => TransactionActivity()),
       ],
       child: MyApp(),
     ),

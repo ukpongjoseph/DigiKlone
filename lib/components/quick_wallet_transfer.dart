@@ -180,7 +180,7 @@ class _QuickWalletTransferState extends State<QuickWalletTransfer> {
               }),
             ],
             options: CarouselOptions(
-              height: isMobile ? screenHeight * 0.25 : screenHeight * 0.30,
+              height: isMobile ? screenHeight * 0.22 : screenHeight * 0.30,
               viewportFraction: isMobile ? 0.4 : 0.25,
               enableInfiniteScroll: false,
               padEnds: false,
