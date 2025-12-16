@@ -11,8 +11,9 @@ class TransactionActivity extends ChangeNotifier {
     "date": "Today",
     "time": "2:30 PM",
     "status": "completed",
-    "icon": Icons.arrow_downward,
+    "icon": Icons.south_west_outlined,
     "color": Colors.green,
+    "avatar_color" : const Color.fromARGB(255, 203, 245, 204),
   },
   {
     "id": 2,
@@ -25,6 +26,7 @@ class TransactionActivity extends ChangeNotifier {
     "status": "completed",
     "icon": Icons.savings,
     "color": Colors.blue,
+    "avatar_color" : const Color.fromARGB(255, 206, 228, 247)
   },
   {
     "id": 3,
@@ -37,6 +39,7 @@ class TransactionActivity extends ChangeNotifier {
     "status": "completed",
     "icon": Icons.group,
     "color": Colors.orange,
+    "avatar_color" : const Color.fromARGB(255, 247, 228, 200)
   },
   {
     "id": 4,
@@ -47,8 +50,9 @@ class TransactionActivity extends ChangeNotifier {
     "date": "Yesterday",
     "time": "10:15 AM",
     "status": "completed",
-    "icon": Icons.arrow_upward,
+    "icon": Icons.north_east_outlined,
     "color": Colors.red,
+    "avatar_color" : const Color.fromARGB(255, 253, 217, 214)
   },
   {
     "id": 5,
@@ -60,6 +64,8 @@ class TransactionActivity extends ChangeNotifier {
     "time": "3:45 PM",
     "status": "completed",
     "icon": Icons.savings,
+    "color" : Colors.blue,
+    "avatar_color" : const Color.fromARGB(255, 206, 228, 247)
   },
   {
       "id": 6,
@@ -70,8 +76,9 @@ class TransactionActivity extends ChangeNotifier {
       "date": "Aug 7",
       "time": "2:10 PM",
       "status": "completed",
-      "icon": Icons.arrow_downward,
+      "icon": Icons.south_west_outlined,
       "color": Colors.green,
+      "avatar_color" : const Color.fromARGB(255, 203, 245, 204),
     },
     {
       "id": 7,
@@ -83,12 +90,14 @@ class TransactionActivity extends ChangeNotifier {
       "time": "11:30 AM",
       "status": "completed",
       "icon": Icons.savings,
-      "color": Colors.green,
+      "color": Colors.blue,
+      "avatar_color" : const Color.fromARGB(255, 206, 228, 247)
     },
 ];
 
 List<Map<String, dynamic>> fetchTransactionActivities(){
   // Dates are already sorted, so no need for any extra sorting of the data
+  
   return _transactionsActivities;
 }
 
