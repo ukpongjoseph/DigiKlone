@@ -90,30 +90,34 @@ class _ActivityState extends State<Activity>
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
-    double spacing = isMobile ? 5 : 8;
-        void displayDownloadStatementDialog(){
+    void displayDownloadStatementDialog() {
       showDialog(
         barrierDismissible: false,
-        context: context, builder: (BuildContext context){
-        return AlertDialog(
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Downlaod Statement"),
-                  IconButton(onPressed: (){
-                    Navigator.of(context).pop();
-                  }, icon: Icon(Icons.close))
-                ],
-              )
-              
-            ],
-          ),
-        );
-      });
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Downlaod Statement"),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: Icon(Icons.close),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      );
     }
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -127,15 +131,14 @@ class _ActivityState extends State<Activity>
         actions: [
           GestureDetector(
             onTap: displayDownloadStatementDialog,
-            child: CircleAvatar(child: Icon(Icons.file_download_outlined))),
+            child: CircleAvatar(child: Icon(Icons.file_download_outlined)),
+          ),
           SizedBox(width: 3.0),
           CircleAvatar(child: Icon(Icons.filter_alt)),
         ],
         bottom: TabBar(
           tabAlignment: TabAlignment.start,
-          indicator: BoxDecoration(
-            // color: Colors.blueGrey
-          ),
+          indicator: BoxDecoration(),
           padding: EdgeInsets.zero,
           isScrollable: true,
           controller: _tabController,
@@ -162,13 +165,9 @@ class _ActivityState extends State<Activity>
     final List<Map<String, dynamic>> allTransactionActivities = context
         .read<TransactionActivity>()
         .fetchTransactionActivities();
-    // now we need to group data by date, thought they are already sorted. We will be creating a map. This map will hold a key which is the date and the value which is the List of maps(map of string to dynamic)
-    // what we plan on doing is take each date, make it a key...then make a list containing maps of that date, thus forming our key - value pair.
     Map<String, List<Map<String, dynamic>>> sortedTransactionActivities = {};
     for (var activity in allTransactionActivities) {
-      // Create a date which is the key
       String date = activity["date"];
-      // checking the new Map if it has the key(from the date above). if not create a List for that key for it to be able to hold new elements....else if the key exist, we will just add the new element to the list that the key holds
       if (!sortedTransactionActivities.containsKey(date)) {
         sortedTransactionActivities[date] = [];
       }
@@ -214,10 +213,15 @@ class _ActivityState extends State<Activity>
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(height: spacing * 3),
                               Text(
                                 activity.key,
-                                style: TextStyle(fontSize: 35),
+                                style: TextStyle(
+                                  fontSize: isMobile ? 15 : 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
+                              SizedBox(height: spacing),
                               Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
@@ -226,23 +230,131 @@ class _ActivityState extends State<Activity>
                                   ),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
+                                padding: isMobile
+                                    ? EdgeInsets.all(5)
+                                    : EdgeInsets.all(8),
                                 child: Column(
                                   children: [
-                                    ...transactions.map((transaction) {
+                                    ...transactions.asMap().entries.map((
+                                      entry,
+                                    ) {
+                                      int index = entry.key;
+                                      var transaction = entry.value;
+                                      bool isLast =
+                                          index == transactions.length - 1;
+
                                       return Column(
                                         children: [
-                                          ListTile(
-                                            leading: Icon(transaction["icon"]),
-                                            title: Text(transaction["title"]),
-                                            subtitle: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(transaction["subtitle"]),
-                                                Text(transaction["time"]),
-                                              ],
-                                            ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      CircleAvatar(
+                                                        backgroundColor:
+                                                            transaction["avatar_color"],
+                                                        child: Icon(
+                                                          transaction["icon"],
+                                                          color:
+                                                              transaction["color"],
+                                                          size: isMobile
+                                                              ? 20
+                                                              : 14,
+                                                        ),
+                                                      ),
+                                                      SizedBox(width: spacing),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            transaction["title"],
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: isMobile
+                                                                  ? 12.5
+                                                                  : 14.5,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            transaction["subtitle"],
+                                                            style: TextStyle(
+                                                              fontSize: isMobile
+                                                                  ? 11
+                                                                  : 13,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            transaction["time"],
+                                                            style: TextStyle(
+                                                              fontSize: isMobile
+                                                                  ? 11
+                                                                  : 13,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    transaction["type"] ==
+                                                            "withdrawal"
+                                                        ? "-${transaction["amount"]}"
+                                                        : "+${transaction["amount"]}",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: isMobile
+                                                          ? 13
+                                                          : 15,
+                                                      color:
+                                                          transaction["type"] ==
+                                                              "withdrawal"
+                                                          ? Colors.red
+                                                          : Colors.green,
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons
+                                                            .fiber_manual_record,
+                                                        color:
+                                                            transaction["color"],
+                                                        size: isMobile
+                                                            ? 10
+                                                            : 12,
+                                                      ),
+                                                      Text(
+                                                        transaction["status"],
+                                                        style: TextStyle(
+                                                          fontSize: isMobile
+                                                              ? 10
+                                                              : 12,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
+                                          if (!isLast) ...[
+                                            SizedBox(height: spacing * 2),
+                                            Divider(),
+                                          ],
                                         ],
                                       );
                                     }),
