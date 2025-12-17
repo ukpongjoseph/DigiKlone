@@ -89,6 +89,7 @@ class _ActivityState extends State<Activity>
           overlayColor: WidgetStateProperty.all(Colors.transparent),
           labelPadding: EdgeInsets.symmetric(horizontal: 3),
           tabAlignment: TabAlignment.start,
+          // Setting indicator to null to prevent interference with custom tab styling
           indicator: BoxDecoration(),
           padding: EdgeInsets.zero,
           isScrollable: true,
@@ -331,8 +332,9 @@ class _ActivityState extends State<Activity>
     );
   }
 
-  Widget customTab(String label, int Index) {
-    bool isSelected = Index == currentIndex;
+  // A custom Tab widget that will allow us to style each tab in the TabBar without using the indicator Property
+  Widget customTab(String label, int index) {
+    bool isSelected = index == currentIndex;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
       decoration: BoxDecoration(
