@@ -16,63 +16,11 @@ class Activity extends StatefulWidget {
 class _ActivityState extends State<Activity>
     with SingleTickerProviderStateMixin {
   int currentIndex = 0;
-  static List<Tab> myTabs = <Tab>[
-    Tab(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-        decoration: BoxDecoration(
-          border: Border.all(width: 1.5),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text("All"),
-      ),
-    ),
-    Tab(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-        decoration: BoxDecoration(
-          border: Border.all(width: 1.5),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text("Deposits"),
-      ),
-    ),
-    Tab(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-        decoration: BoxDecoration(
-          border: Border.all(width: 1.5),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text("Withdrawals"),
-      ),
-    ),
-    Tab(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-        decoration: BoxDecoration(
-          border: Border.all(width: 1.5),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text("Savings"),
-      ),
-    ),
-    Tab(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-        decoration: BoxDecoration(
-          border: Border.all(width: 1.5),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text("Referrals"),
-      ),
-    ),
-  ];
   late TabController _tabController;
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: myTabs.length, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
     _tabController.addListener(() {
       setState(() {
         currentIndex = _tabController.index;
@@ -137,12 +85,22 @@ class _ActivityState extends State<Activity>
           CircleAvatar(child: Icon(Icons.filter_alt)),
         ],
         bottom: TabBar(
+          // This property removes any styling effect when i hover on any tab in the tab Bar
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
+          labelPadding: EdgeInsets.symmetric(horizontal: 3),
           tabAlignment: TabAlignment.start,
           indicator: BoxDecoration(),
           padding: EdgeInsets.zero,
           isScrollable: true,
+          labelColor: Colors.white,
           controller: _tabController,
-          tabs: myTabs,
+          tabs: [
+            customTab("All", 0),
+            customTab("Deposits", 1),
+            customTab("Withdrawal", 2),
+            customTab("savings", 3),
+            customTab("Referrals", 4),
+          ],
         ),
       ),
       body: TabBarView(
@@ -370,6 +328,22 @@ class _ActivityState extends State<Activity>
           ],
         ),
       ),
+    );
+  }
+
+  Widget customTab(String label, int Index) {
+    bool isSelected = Index == currentIndex;
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+      decoration: BoxDecoration(
+        color: isSelected ? Colors.blue[900] : Colors.transparent,
+        border: Border.all(
+          width: 1.5,
+          color: isSelected ? Colors.transparent : Colors.grey,
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(label),
     );
   }
 }
