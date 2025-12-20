@@ -90,7 +90,7 @@ class _ActivityState extends State<Activity>
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
-    double spacing = isMobile ? 5 : 8;
+    // double spacing = isMobile ? 5 : 8;
     void displayDownloadStatementDialog() {
       showDialog(
         barrierDismissible: false,

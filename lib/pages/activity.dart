@@ -17,6 +17,10 @@ class _ActivityState extends State<Activity>
     with SingleTickerProviderStateMixin {
   int currentIndex = 0;
   late TabController _tabController;
+  int activeDateRange = 0;
+  String accountType = "savings";
+  String statementFormat = "Pdf";
+  late String selectedDate;
   @override
   void initState() {
     super.initState();
@@ -38,29 +42,441 @@ class _ActivityState extends State<Activity>
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
+    void fetchdate() {
+      showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2021),
+        lastDate: DateTime(2100),
+      ).then((onValue) => {selectedDate = onValue.toString()});
+    }
+
     void displayDownloadStatementDialog() {
       showDialog(
         barrierDismissible: false,
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          return StatefulBuilder(
+            builder: (context, setDialogState) {
+              return AlertDialog(
+                backgroundColor: Colors.white,
+                contentPadding: EdgeInsets.all(12.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.all(Radius.circular(10)),
+                ),
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("Downlaod Statement"),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(Icons.close),
+                    // Downlaod and close
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Download Statement Text
+                        Text(
+                          "Download Statement",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: isMobile ? 15 : 18,
+                          ),
+                        ),
+                        // Cancel icon
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: Icon(Icons.close),
+                        ),
+                      ],
+                    ),
+                    // Date range
+                    Text(
+                      "Date range",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: isMobile ? 12 : 14,
+                      ),
+                    ),
+                    // Date buttons
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: activeDateRange == 0
+                                ? Colors.blue[600]
+                                : Colors.grey[100],
+                            padding: EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 6,
+                            ),
+                            minimumSize: Size.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(6),
+                            ),
+                          ),
+                          onPressed: () {
+                            setDialogState(() {
+                              activeDateRange = 0;
+                            });
+                          },
+                          child: Text(
+                            "Last month",
+                            style: TextStyle(
+                              fontSize: isMobile ? 8 : 10,
+                              fontWeight: FontWeight.bold,
+                              color: activeDateRange == 0
+                                  ? Colors.white
+                                  : Colors.grey[700],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: activeDateRange == 1
+                                ? Colors.blue[600]
+                                : Colors.grey[100],
+                            padding: EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 6,
+                            ),
+                            minimumSize: Size.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(6),
+                            ),
+                          ),
+                          onPressed: () {
+                            setDialogState(() {
+                              activeDateRange = 1;
+                            });
+                          },
+                          child: Text(
+                            "Custom range",
+                            style: TextStyle(
+                              fontSize: isMobile ? 8 : 10,
+                              fontWeight: FontWeight.bold,
+                              color: activeDateRange == 1
+                                  ? Colors.white
+                                  : Colors.grey[700],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Start and End date
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            fetchdate();
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Start Date",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: isMobile ? 10 : 12,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[100],
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                padding: EdgeInsets.all(6),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.calendar_today_outlined,
+                                          size: 12,
+                                          color: Colors.grey[700],
+                                        ),
+                                        Text(
+                                          "Select date",
+                                          style: TextStyle(
+                                            fontSize: isMobile ? 10 : 12,
+                                            color: Colors.grey[700],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Icon(
+                                      Icons.chevron_right,
+                                      size: 12,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        GestureDetector(
+                          onTap: () {
+                            fetchdate();
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "End Date",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: isMobile ? 10 : 12,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[100],
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                padding: EdgeInsets.all(6),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.calendar_today_outlined,
+                                          size: 12,
+                                          color: Colors.grey[700],
+                                        ),
+                                        Text(
+                                          "Select date",
+                                          style: TextStyle(
+                                            fontSize: isMobile ? 10 : 12,
+                                            color: Colors.grey[700],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Icon(
+                                      Icons.chevron_right,
+                                      size: 12,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Account Type
+                    Text(
+                      "Account Type",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: isMobile ? 13 : 15,
+                      ),
+                    ),
+                    // Account type Row
+                    Row(
+                      children: [
+                        // All Account button
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: accountType == "All"
+                                ? Colors.blue[600]
+                                : Colors.grey[100],
+                            padding: EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 10,
+                            ),
+                            minimumSize: Size.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(6),
+                            ),
+                          ),
+                          onPressed: () {
+                            setDialogState(() {
+                              accountType = "All";
+                            });
+                          },
+                          child: Text(
+                            "All Accounts",
+                            style: TextStyle(
+                              fontSize: isMobile ? 8 : 10,
+                              fontWeight: FontWeight.bold,
+                              color: accountType == "All"
+                                  ? Colors.white
+                                  : Colors.grey[700],
+                            ),
+                          ),
+                        ),
+                        // Wallet Button
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: accountType == "wallet"
+                                ? Colors.blue[600]
+                                : Colors.grey[100],
+                            padding: EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 10,
+                            ),
+                            minimumSize: Size.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(6),
+                            ),
+                          ),
+                          onPressed: () {
+                            setDialogState(() {
+                              accountType = "wallet";
+                            });
+                          },
+                          child: Text(
+                            "Wallet",
+                            style: TextStyle(
+                              fontSize: isMobile ? 8 : 10,
+                              fontWeight: FontWeight.bold,
+                              color: accountType == "wallet"
+                                  ? Colors.white
+                                  : Colors.grey[700],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        // Savings Button
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: accountType == "savings"
+                                ? Colors.blue[600]
+                                : Colors.grey[100],
+                            padding: EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 10,
+                            ),
+                            minimumSize: Size.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(6),
+                            ),
+                          ),
+                          onPressed: () {
+                            setDialogState(() {
+                              accountType = "savings";
+                            });
+                          },
+                          child: Text(
+                            "Savings",
+                            style: TextStyle(
+                              fontSize: isMobile ? 8 : 10,
+                              fontWeight: FontWeight.bold,
+                              color: accountType == "savings"
+                                  ? Colors.white
+                                  : Colors.grey[700],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Format Level
+                    Text(
+                      "Format",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: isMobile ? 13 : 15,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: statementFormat == "Pdf"
+                                ? Colors.blue[600]
+                                : Colors.grey[100],
+                            padding: EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 12,
+                            ),
+                            minimumSize: Size.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(6),
+                            ),
+                          ),
+                          onPressed: () {
+                            setDialogState(() {
+                              statementFormat = "Pdf";
+                            });
+                          },
+                          child: Text(
+                            "PDF",
+                            style: TextStyle(
+                              fontSize: isMobile ? 8 : 10,
+                              fontWeight: FontWeight.bold,
+                              color: statementFormat == "Pdf"
+                                  ? Colors.white
+                                  : Colors.grey[700],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 3),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: statementFormat == "Excel"
+                                ? Colors.blue[600]
+                                : Colors.grey[100],
+                            padding: EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 12,
+                            ),
+                            minimumSize: Size.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(6),
+                            ),
+                          ),
+                          onPressed: () {
+                            setDialogState(() {
+                              statementFormat = "Excel";
+                            });
+                          },
+                          child: Text(
+                            "Excel",
+                            style: TextStyle(
+                              fontSize: isMobile ? 8 : 10,
+                              fontWeight: FontWeight.bold,
+                              color: statementFormat == "Excel"
+                                  ? Colors.white
+                                  : Colors.grey[700],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue[600],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          print(selectedDate);
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Download statement",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              );
+            },
           );
         },
       );
@@ -201,7 +617,6 @@ class _ActivityState extends State<Activity>
                                       var transaction = entry.value;
                                       bool isLast =
                                           index == transactions.length - 1;
-
                                       return Column(
                                         children: [
                                           Row(
@@ -336,6 +751,7 @@ class _ActivityState extends State<Activity>
   Widget customTab(String label, int index) {
     bool isSelected = index == currentIndex;
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 5.0),
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
       decoration: BoxDecoration(
         color: isSelected ? Colors.blue[900] : Colors.transparent,
