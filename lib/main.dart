@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/beneficiaries_provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
 import 'package:second_flutter/a_List_providers/savings_plan.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/a_List_providers/transaction_activity.dart';
 import 'package:second_flutter/pages/add_card.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
@@ -27,6 +28,7 @@ import 'package:second_flutter/pages/support.dart';
 import 'package:second_flutter/pages/total_progress.dart';
 import 'package:second_flutter/pages/transfer_money.dart';
 
+
 // This the root of the application. The main method is the entry point ofthe flutter application
 void main() {
   // We call the runApp method to run the application but we wrap it around a changeNotifier to ensure state management which will ensure data is accessible across the entire app
@@ -40,6 +42,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => BeneficiariesProvider()),
         ChangeNotifierProvider(create: (context) => DigiSavingsPlans()),
         ChangeNotifierProvider(create: (context) => TransactionActivity()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider())
       ],
       child: MyApp(),
     ),
@@ -54,9 +57,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: Provider.of<ThemeProvider>(context).getTheme(),
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
       // We are creating routes for different screen for the purpose of routing and Navigation between screens
