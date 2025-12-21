@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
 
-
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
 
@@ -24,12 +23,26 @@ class _BottomNavState extends State<BottomNav> {
       },
       selectedIndex: currentPageIndex,
       destinations: [
-        NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-        NavigationDestination(icon: Icon(Icons.savings), label: "Savings"),
-        NavigationDestination(icon: Icon(Icons.wallet), label: "Wallet"),
-        NavigationDestination(icon: Icon(Icons.bar_chart_sharp), label: "Activity"),
-        NavigationDestination(icon: Icon(Icons.person), label: "Me"),
+        customNav(0, "Home", Icons.home),
+        customNav(1, "Savings", Icons.savings),
+        customNav(2, "Wallet", Icons.wallet),
+        customNav(3, "Activity", Icons.bar_chart_sharp),
+        customNav(4, "Me", Icons.person),
       ],
+    );
+  }
+
+  Widget customNav(int index, String navLabel, IconData navIcon) {
+    int currentPageIndex = Provider.of<NavProvider>(
+      context,
+      listen: true,
+    ).getCurrentPage();
+    return NavigationDestination(
+      icon: Icon(
+        navIcon,
+        color: index == currentPageIndex ? Colors.blue[400] : Colors.grey[400],
+      ),
+      label: navLabel,
     );
   }
 }
