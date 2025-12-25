@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
 import 'package:second_flutter/pages/digi_target.dart';
@@ -17,6 +19,7 @@ class _DigiSavingsState extends State<DigiSavings> {
     // double screenHeight = MediaQuery.of(context).size.height;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile ? 3.0 : 8.0;
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     void showDigiTribeDialogueBox() {
       showDialog(
         context: context,
@@ -108,21 +111,31 @@ class _DigiSavingsState extends State<DigiSavings> {
                   "Your Savings",
                   style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17.0),
                 ),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 181, 219, 249),
+                Container(
+                  padding: isMobile
+                      ? EdgeInsets.symmetric(vertical: 2, horizontal: 7)
+                      : EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  label: Text(
-                    "View all",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: isMobile ? 12 : 14,
-                    ),
-                  ),
-                  icon: Icon(
-                    Icons.visibility_outlined,
-                    size: isMobile ? 15 : 20,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.visibility_outlined,
+                        size: isMobile ? 15 : 20,
+                        color: theme.colorScheme.primary,
+                      ),
+                      SizedBox(width: spacing),
+                      Text(
+                        "View all",
+                        style: TextStyle(
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.w900,
+                          fontSize: isMobile ? 12 : 14,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -174,26 +187,27 @@ class _DigiSavingsState extends State<DigiSavings> {
                       ),
                     ],
                   ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DigiSaveBalance(),
-                        ),
-                      );
-                    },
-                    label: Text(
-                      "18.5% p.a.",
-                      style: TextStyle(
-                        fontSize: isMobile ? 10 : 14,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Container(
+                    padding: isMobile
+                        ? EdgeInsets.symmetric(vertical: 2, horizontal: 7)
+                        : EdgeInsets.symmetric(vertical: 4, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent,
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    icon: Icon(Icons.trending_up_sharp, color: Colors.white),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
+                    child: Row(
+                      children: [
+                        Icon(Icons.trending_up_sharp, color: Colors.white),
+                        SizedBox(width: spacing),
+                        Text(
+                          "18.5% p.a.",
+                          style: TextStyle(
+                            fontSize: isMobile ? 10 : 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

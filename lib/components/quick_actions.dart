@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/add_card.dart';
 import 'package:second_flutter/pages/digi_target_savings.dart';
 import 'package:second_flutter/pages/faq.dart';
@@ -108,6 +109,7 @@ class _QuickActionsState extends State<QuickActions> {
     } else {
       viewport = 0.3;
     }
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     return PopScope(
       canPop: false,
       child: Container(
@@ -131,7 +133,7 @@ class _QuickActionsState extends State<QuickActions> {
                         ? EdgeInsets.all(3.0)
                         : EdgeInsets.all(5.0),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: theme.colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     padding: isMobile

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/components/balance_component.dart';
 import 'package:second_flutter/components/digi_savings.dart';
 import 'package:second_flutter/components/quick_actions.dart';
@@ -16,10 +17,11 @@ class LandingHome extends StatefulWidget {
 class _LandingHomeState extends State<LandingHome> {
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     DateTime date = DateTime.now();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: theme.colorScheme.surface,
         title: Row(
           children: [
             GestureDetector(
@@ -68,7 +70,7 @@ class _LandingHomeState extends State<LandingHome> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(80.0),
-                color: const Color.fromARGB(255, 201, 224, 235),
+                color: theme.colorScheme.surface,
               ),
               child: IconButton(
                 icon: Icon(Icons.notifications_none),
@@ -81,7 +83,7 @@ class _LandingHomeState extends State<LandingHome> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: const Color.fromARGB(255, 246, 248, 248),
+          color: theme.colorScheme.surfaceContainerHigh,
           child: Column(
             children: [
               BalanceComponent(),

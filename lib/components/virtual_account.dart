@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // This package allows us to use the Clipboard class to copy data to our system Clipboard
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 
 class VirtualAccount extends StatefulWidget {
   const VirtualAccount({super.key});
@@ -13,6 +15,7 @@ class VirtualAccount extends StatefulWidget {
 class _VirtualAccountState extends State<VirtualAccount> {
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile ? 5 : 8;
@@ -51,8 +54,9 @@ class _VirtualAccountState extends State<VirtualAccount> {
     return Container(
       padding: isMobile ? EdgeInsets.all(8) : EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(7),
+        border: Border.all(color: Colors.grey, width: 1.5),
       ),
       child: Column(
         children: [
@@ -76,7 +80,7 @@ class _VirtualAccountState extends State<VirtualAccount> {
                 ],
               ),
               CircleAvatar(
-                backgroundColor: Colors.blue[100],
+                backgroundColor: theme.colorScheme.primaryContainer,
                 child: Icon(Icons.apartment_outlined, size: isMobile ? 18 : 23),
               ),
             ],
@@ -102,7 +106,7 @@ class _VirtualAccountState extends State<VirtualAccount> {
                 ],
               ),
               CircleAvatar(
-                backgroundColor: Colors.blue[100],
+                backgroundColor: theme.colorScheme.primaryContainer,
                 child: IconButton(
                   onPressed: () {
                     callCopyAndDialogFunction();

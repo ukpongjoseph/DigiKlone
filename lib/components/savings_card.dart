@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/savings_plan.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
+import 'package:second_flutter/theme/app_theme.dart';
 
 class SavingsCard extends StatefulWidget {
   const SavingsCard({super.key});
@@ -44,7 +46,7 @@ class _SavingsCardState extends State<SavingsCard> {
                     ],
                   ),
                   CircleAvatar(
-                    backgroundColor: Colors.purple[100],
+                    backgroundColor: const Color.fromARGB(255, 120, 75, 128),
                     child: Icon(Icons.people_alt_outlined),
                   ),
                   Text(
@@ -97,6 +99,7 @@ class _SavingsCardState extends State<SavingsCard> {
     List<Map<String, dynamic>> savingsPlans = context
         .read<DigiSavingsPlans>()
         .fetchPlans();
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     return Container(
       margin: isMobile
           ? EdgeInsets.symmetric(vertical: 10, horizontal: 8)
@@ -123,7 +126,9 @@ class _SavingsCardState extends State<SavingsCard> {
                         ? EdgeInsets.fromLTRB(0, 0, 0, 10)
                         : EdgeInsets.fromLTRB(0, 0, 0, 15),
                     decoration: BoxDecoration(
-                      color: plan["color"],
+                      color: theme == lightTheme
+                          ? plan["light_color"]
+                          : plan["color"],
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(

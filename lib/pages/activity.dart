@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/a_List_providers/transaction_activity.dart';
 import 'package:second_flutter/components/deposit_activity.dart';
 import 'package:second_flutter/components/referral_activity.dart';
@@ -16,6 +17,7 @@ class Activity extends StatefulWidget {
 class _ActivityState extends State<Activity>
     with SingleTickerProviderStateMixin {
   int currentIndex = 0;
+  late ThemeData theme;
   late TabController _tabController;
   int activeDateRange = 0;
   String accountType = "savings";
@@ -461,7 +463,7 @@ class _ActivityState extends State<Activity>
                           ),
                         ),
                         onPressed: () {
-                          print(selectedDate);
+                          // print(selectedDate);
                           Navigator.of(context).pop();
                         },
                         child: Text(
@@ -482,8 +484,10 @@ class _ActivityState extends State<Activity>
       );
     }
 
+    theme = context.read<ThemeProvider>().getTheme();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: theme.colorScheme.surfaceContainer,
         automaticallyImplyLeading: false,
         title: Text(
           "Activity",
@@ -495,10 +499,16 @@ class _ActivityState extends State<Activity>
         actions: [
           GestureDetector(
             onTap: displayDownloadStatementDialog,
-            child: CircleAvatar(child: Icon(Icons.file_download_outlined)),
+            child: CircleAvatar(
+              backgroundColor: theme.colorScheme.surfaceContainerHighest,
+              child: Icon(Icons.file_download_outlined),
+            ),
           ),
           SizedBox(width: 3.0),
-          CircleAvatar(child: Icon(Icons.filter_alt)),
+          CircleAvatar(
+            backgroundColor: theme.colorScheme.surfaceContainerHighest,
+            child: Icon(Icons.filter_alt),
+          ),
         ],
         bottom: TabBar(
           // This property removes any styling effect when i hover on any tab in the tab Bar
@@ -520,15 +530,18 @@ class _ActivityState extends State<Activity>
           ],
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _allActivities(),
-          DepositActivity(),
-          WithdrawalActivity(),
-          SavingsActivity(),
-          ReferralActivity(),
-        ],
+      body: Container(
+        color: theme.colorScheme.surfaceContainerHigh,
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            _allActivities(),
+            DepositActivity(),
+            WithdrawalActivity(),
+            SavingsActivity(),
+            ReferralActivity(),
+          ],
+        ),
       ),
     );
   }
@@ -727,7 +740,10 @@ class _ActivityState extends State<Activity>
                                           ),
                                           if (!isLast) ...[
                                             SizedBox(height: spacing * 2),
-                                            Divider(),
+                                            Divider(
+                                              thickness: 1.0,
+                                              color: Colors.grey,
+                                            ),
                                           ],
                                         ],
                                       );
@@ -749,12 +765,15 @@ class _ActivityState extends State<Activity>
 
   // A custom Tab widget that will allow us to style each tab in the TabBar without using the indicator Property
   Widget customTab(String label, int index) {
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     bool isSelected = index == currentIndex;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5.0),
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
       decoration: BoxDecoration(
-        color: isSelected ? Colors.blue[900] : Colors.transparent,
+        color: isSelected
+            ? Colors.blue[900]
+            : theme.colorScheme.surfaceContainerHighest,
         border: Border.all(
           width: 1.5,
           color: isSelected ? Colors.transparent : Colors.grey,

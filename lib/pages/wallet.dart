@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/components/payment_method.dart';
 import 'package:second_flutter/components/quick_wallet_transfer.dart';
 import 'package:second_flutter/components/recent_transactions.dart';
@@ -17,6 +19,7 @@ class _WalletState extends State<Wallet> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -24,14 +27,14 @@ class _WalletState extends State<Wallet> {
         title: Text(
           "Wallet",
           style: TextStyle(
-            fontSize: isMobile ? 30 : 40,
+            fontSize: isMobile ? 22 : 32,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: const Color.fromARGB(255, 194, 202, 227),
+          color: theme.colorScheme.surfaceContainerHighest,
           child: Container(
             margin: isMobile ? EdgeInsets.all(8) : EdgeInsets.all(12),
             child: Column(

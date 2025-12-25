@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/components/recent_activity.dart';
 import 'package:second_flutter/components/savings_card.dart';
 import 'package:second_flutter/components/total_savings.dart';
@@ -15,9 +17,10 @@ class _SavingsState extends State<Savings> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
-
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: theme.colorScheme.surfaceContainerHigh,
         forceMaterialTransparency: true,
         automaticallyImplyLeading: false,
         title: Text(
@@ -29,7 +32,8 @@ class _SavingsState extends State<Savings> {
         ),
       ),
       body: SingleChildScrollView(
-        child: SizedBox(
+        child: Container(
+          color: theme.colorScheme.surfaceContainerHigh,
           child: Column(
             children: [TotalSavings(), SavingsCard(), RecentActivity()],
           ),

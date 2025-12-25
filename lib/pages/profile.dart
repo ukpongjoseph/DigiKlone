@@ -11,11 +11,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  @override
-  void initState() {
-    super.initState();
-    ThemeData theme = context.read<ThemeProvider>().getTheme();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/transfer_money.dart';
 
 class QuickWalletTransfer extends StatefulWidget {
@@ -12,6 +14,7 @@ class QuickWalletTransfer extends StatefulWidget {
 class _QuickWalletTransferState extends State<QuickWalletTransfer> {
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     bool isMobile = screenWidth < 600;
@@ -126,8 +129,9 @@ class _QuickWalletTransferState extends State<QuickWalletTransfer> {
                         ? EdgeInsets.symmetric(vertical: 7.0, horizontal: 12.0)
                         : EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: theme.colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: Colors.grey, width: 1.5),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

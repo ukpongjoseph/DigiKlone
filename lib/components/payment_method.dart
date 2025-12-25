@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 
 class PaymentMethod extends StatefulWidget {
   const PaymentMethod({super.key});
@@ -26,6 +28,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
   ];
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile ? 5 : 8;
@@ -66,7 +69,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   : EdgeInsets.symmetric(vertical: 6.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(7),
-                color: Colors.white,
+                color: theme.colorScheme.surfaceContainerHighest,
+                border: Border.all(color: Colors.grey, width: 1.5),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

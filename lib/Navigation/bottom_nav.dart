@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -16,7 +17,9 @@ class _BottomNavState extends State<BottomNav> {
       context,
       listen: true,
     ).getCurrentPage();
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     return NavigationBar(
+      backgroundColor: theme.colorScheme.surfaceContainerHighest,
       indicatorColor: Colors.transparent,
       onDestinationSelected: (int value) {
         Provider.of<NavProvider>(context, listen: false).setCurrentPage(value);

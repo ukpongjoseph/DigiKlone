@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/beneficiaries_provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/transfer_money.dart';
 
 class QuickTransfer extends StatefulWidget {
@@ -17,7 +18,7 @@ class _QuickTransferState extends State<QuickTransfer> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     final List<Map<String, dynamic>> beneficiaries = context
         .read<BeneficiariesProvider>()
         .fetchBeneficiaries();
@@ -75,18 +76,15 @@ class _QuickTransferState extends State<QuickTransfer> {
                       fontSize: 17.0,
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      showQuickTransferInfo();
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 248, 248),
-                    ),
+                  SizedBox(width: spacing),
+                  GestureDetector(
+                    onTap: showQuickTransferInfo,
                     child: Container(
-                      padding: EdgeInsets.all(4.0),
+                      padding: EdgeInsets.all(4),
                       decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white),
+                        color: theme.colorScheme.surfaceContainerHighest,
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.black, width: 1.0),
                       ),
                       child: Text("i"),
                     ),
@@ -102,8 +100,8 @@ class _QuickTransferState extends State<QuickTransfer> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 234, 183, 242),
-                    borderRadius: BorderRadius.circular(20.0),
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   padding: isMobile
                       ? EdgeInsets.fromLTRB(6.0, 3, 6.0, 3)
@@ -113,14 +111,14 @@ class _QuickTransferState extends State<QuickTransfer> {
                       Text(
                         "View All",
                         style: TextStyle(
-                          color: Colors.purple,
+                          color: theme.colorScheme.primary,
                           fontSize: isMobile ? 12 : 14,
                         ),
                       ),
                       SizedBox(width: spacing - 3),
                       Icon(
                         Icons.arrow_forward_outlined,
-                        color: Colors.purple,
+                        color: theme.colorScheme.primary,
                         size: isMobile ? 15 : 25,
                       ),
                     ],
@@ -298,7 +296,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                                 ? EdgeInsets.symmetric(vertical: 5.0)
                                 : EdgeInsets.symmetric(vertical: 10.0),
                             decoration: BoxDecoration(
-                              color: Colors.white70,
+                              color: theme.colorScheme.surfaceContainerHighest,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Row(
@@ -307,10 +305,12 @@ class _QuickTransferState extends State<QuickTransfer> {
                                 Row(
                                   children: [
                                     CircleAvatar(
-                                      backgroundColor: Colors.blue[300],
+                                      backgroundColor: theme
+                                          .colorScheme
+                                          .surfaceContainerHigh,
                                       child: Icon(
                                         Icons.person_2_outlined,
-                                        color: Colors.white,
+                                        color: theme.colorScheme.primary,
                                         size: isMobile ? 25 : 35,
                                       ),
                                     ),
@@ -337,7 +337,7 @@ class _QuickTransferState extends State<QuickTransfer> {
                                   ],
                                 ),
                                 CircleAvatar(
-                                  backgroundColor: Colors.blue[700],
+                                  backgroundColor: theme.colorScheme.primary,
                                   radius: isMobile ? 15 : 24,
                                   child: Icon(
                                     Icons.send_and_archive_outlined,

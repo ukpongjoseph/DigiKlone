@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/savings_plan.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 
 class TotalSavings extends StatefulWidget {
   const TotalSavings({super.key});
@@ -22,21 +23,23 @@ class _TotalSavingsState extends State<TotalSavings> {
     int plans = totalSavings["plans"];
     String interest = totalSavings["interest"];
     String saved = totalSavings["saved"];
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     return Container(
       padding: isMobile ? EdgeInsets.all(10.0) : EdgeInsets.all(15.0),
       margin: isMobile
           ? EdgeInsets.symmetric(vertical: 20, horizontal: 8)
           : EdgeInsets.symmetric(vertical: 20, horizontal: 12),
       decoration: BoxDecoration(
+        color: theme.colorScheme.surfaceContainerHighest,
         boxShadow: [
           BoxShadow(
-            color: Colors.white70,
-            blurRadius: 10.0,
-            spreadRadius: 3.0,
-            offset: Offset(3.0, 3.0),
+            blurRadius: 1.0,
+            spreadRadius: 1.0,
+            offset: Offset(1.0, 1.0),
           ),
         ],
         borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(color: Colors.grey, width: 1.5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

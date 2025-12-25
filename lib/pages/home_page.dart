@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/sign_in.dart';
 import 'package:second_flutter/pages/signup/firstname.dart';
 // import 'package:second_flutter/pages/sign_up.dart';
@@ -8,6 +10,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
     // This method is rerun every time setState is called, for instance as done
@@ -17,18 +20,18 @@ class MyHomePage extends StatelessWidget {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 194, 212, 221),
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: theme.colorScheme.primary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(
           "My flutter app",
           style: TextStyle(
-            color: Colors.white,
+            color: theme.colorScheme.surface,
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
@@ -46,7 +49,7 @@ class MyHomePage extends StatelessWidget {
                 Text(
                   "D",
                   style: TextStyle(
-                    color: const Color.fromARGB(255, 3, 63, 132),
+                    color: theme.colorScheme.primary,
                     fontSize: 150.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -56,7 +59,6 @@ class MyHomePage extends StatelessWidget {
                   "Save Smarter with",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
                     fontSize: isMobile ? 25 : 35.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -64,7 +66,7 @@ class MyHomePage extends StatelessWidget {
                 Text(
                   "Digikolo",
                   style: TextStyle(
-                    color: const Color.fromARGB(255, 3, 30, 112),
+                    color: theme.colorScheme.primary,
                     fontSize: isMobile ? 25 : 35.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -75,7 +77,6 @@ class MyHomePage extends StatelessWidget {
                     Text(
                       "Your digital",
                       style: TextStyle(
-                        color: Colors.white,
                         fontSize: isMobile ? 25 : 35.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -84,7 +85,7 @@ class MyHomePage extends StatelessWidget {
                     Text(
                       "savings",
                       style: TextStyle(
-                        color: const Color.fromARGB(255, 3, 30, 112),
+                        color: theme.colorScheme.primary,
                         fontSize: isMobile ? 25 : 35.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -94,7 +95,7 @@ class MyHomePage extends StatelessWidget {
                 Text(
                   "partner",
                   style: TextStyle(
-                    color: const Color.fromARGB(255, 3, 30, 112),
+                    color: theme.colorScheme.primary,
                     fontSize: isMobile ? 25 : 35.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -116,7 +117,7 @@ class MyHomePage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         side: BorderSide(
-                          color: const Color.fromARGB(255, 1, 10, 55),
+                          color: theme.colorScheme.primary,
                           width: 1.5,
                         ),
                         shape: RoundedRectangleBorder(
@@ -130,7 +131,7 @@ class MyHomePage extends StatelessWidget {
                       child: Text(
                         'Sign In',
                         style: TextStyle(
-                          color: const Color.fromARGB(255, 4, 1, 80),
+                          color: theme.colorScheme.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -151,7 +152,7 @@ class MyHomePage extends StatelessWidget {
                           horizontal: isMobile ? 25 : 40.0,
                           vertical: isMobile ? 15 : 20,
                         ),
-                        backgroundColor: const Color.fromARGB(255, 0, 6, 70),
+                        backgroundColor: theme.colorScheme.primary,
                       ),
                       child: Text('Sign Up'),
                     ),
@@ -162,20 +163,6 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ),
-      // bottomNavigationBar: NavigationBar(
-      //   backgroundColor: const Color.fromARGB(255, 194, 212, 221),
-      //   destinations: [
-      //     NavigationDestination(
-      //       icon: Icon(Icons.home),
-      //       label: "Home"
-      //     ),
-      //     NavigationDestination(
-      //       icon: Icon(Icons.login),
-      //       label: "Home"
-      //     ),
-      //   ]
-      // )
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
