@@ -11,14 +11,8 @@ class _ReferFriendsState extends State<ReferFriends> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-      ),
-      body: Column(
-        children: [
-          Text("Refer and Earn")
-        ],
-      ),
+      appBar: AppBar(centerTitle: true, title: Text("Refer & Earn")),
+      body: Center(child: Text("Refer and Earn Page")),
     );
   }
 }

@@ -10,10 +10,14 @@ import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
 import 'package:second_flutter/pages/digi_target.dart';
 import 'package:second_flutter/pages/digi_target_savings.dart';
+import 'package:second_flutter/pages/edit_profile.dart';
 import 'package:second_flutter/pages/faq.dart';
 import 'package:second_flutter/pages/home_page.dart';
+import 'package:second_flutter/pages/kyc_verification.dart';
 import 'package:second_flutter/pages/landing_page.dart';
 import 'package:second_flutter/pages/lock_funds.dart';
+import 'package:second_flutter/pages/notification_page.dart';
+import 'package:second_flutter/pages/payment_methods.dart';
 import 'package:second_flutter/pages/refer_friends.dart';
 import 'package:second_flutter/pages/security.dart';
 import 'package:second_flutter/pages/sign_in.dart';
@@ -28,7 +32,6 @@ import 'package:second_flutter/pages/support.dart';
 import 'package:second_flutter/pages/total_progress.dart';
 import 'package:second_flutter/pages/transfer_money.dart';
 
-
 // This the root of the application. The main method is the entry point ofthe flutter application
 void main() {
   // We call the runApp method to run the application but we wrap it around a changeNotifier to ensure state management which will ensure data is accessible across the entire app
@@ -42,7 +45,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => BeneficiariesProvider()),
         ChangeNotifierProvider(create: (context) => DigiSavingsPlans()),
         ChangeNotifierProvider(create: (context) => TransactionActivity()),
-        ChangeNotifierProvider(create: (context) => ThemeProvider())
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
       child: MyApp(),
     ),
@@ -81,6 +84,11 @@ class MyApp extends StatelessWidget {
         "/digiLockPage": (context) => const DigiLock(),
         "/transerMoneyPage": (context) => const TransferMoney(),
         "/totalProgress": (context) => const TotalProgress(),
+        "/editProfilePage": (context) => EditProfile(),
+        "/notificationPage": (context) => NotificationPage(),
+        "/paymentMethods" : (context) => PaymentMethods(),
+        "/kycVerificationPage" : (context) => KycVerification(),
+        
       },
     );
   }

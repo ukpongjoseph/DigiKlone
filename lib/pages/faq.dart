@@ -12,13 +12,12 @@ class _FaqState extends State<Faq> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
+        centerTitle: true,
+        title: Text("FAQ"),
       ),
-      body: Column(
-        children: [
-          Text("FAQ")
-        ],
-      ),
+      body: Center(
+        child: Text("Faq Page"),
+      )
     );
   }
 }

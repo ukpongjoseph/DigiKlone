@@ -19,6 +19,8 @@ class _BottomNavState extends State<BottomNav> {
     ).getCurrentPage();
     ThemeData theme = context.read<ThemeProvider>().getTheme();
     return NavigationBar(
+      shadowColor: Colors.grey[900],
+      elevation: 50.0,
       backgroundColor: theme.colorScheme.surfaceContainerHighest,
       indicatorColor: Colors.transparent,
       onDestinationSelected: (int value) {

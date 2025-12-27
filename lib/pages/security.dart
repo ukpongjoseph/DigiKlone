@@ -11,14 +11,8 @@ class _SecurityState extends State<Security> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-      ),
-      body: Column(
-        children: [
-          Text("Security")
-        ],
-      ),
+      appBar: AppBar(centerTitle: true, title: Text("Security")),
+      body: Center(child: Text("Security Page")),
     );
   }
 }

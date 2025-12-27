@@ -13,6 +13,7 @@ ThemeData lightTheme = ThemeData(
     primaryContainer: const Color(0xFF8B9EF5), // primaryLight
     // Secondary Brand Colors
     secondary: const Color(0xFF764BA2),
+    secondaryFixedDim: const Color.fromARGB(255, 187, 140, 234),
     onSecondary: const Color(0xFFFFFFFF),
 
     // Tertiary (using input background)
