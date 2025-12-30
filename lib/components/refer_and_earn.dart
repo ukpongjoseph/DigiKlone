@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/refer_friends.dart';
 
 class ReferAndEarn extends StatefulWidget {
