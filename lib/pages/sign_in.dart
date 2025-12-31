@@ -26,6 +26,7 @@ class _SignInState extends State<SignIn> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool submitting = false;
+  bool isButtonEnabled = true;
   void handleLogin() async {
     final snackDemo = SnackBar(
       content: Text(

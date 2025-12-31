@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/beneficiaries_provider.dart';
+import 'package:second_flutter/a_List_providers/digi_target_providers.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
 import 'package:second_flutter/a_List_providers/savings_plan.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
@@ -19,6 +20,7 @@ import 'package:second_flutter/pages/lock_funds.dart';
 import 'package:second_flutter/pages/notification_page.dart';
 import 'package:second_flutter/pages/payment_methods.dart';
 import 'package:second_flutter/pages/refer_friends.dart';
+import 'package:second_flutter/pages/review_digi_target.dart';
 import 'package:second_flutter/pages/security.dart';
 import 'package:second_flutter/pages/sign_in.dart';
 import 'package:second_flutter/pages/signup/confirm_password.dart';
@@ -46,6 +48,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => DigiSavingsPlans()),
         ChangeNotifierProvider(create: (context) => TransactionActivity()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => DigiTargetProviders())
       ],
       child: MyApp(),
     ),
@@ -88,6 +91,7 @@ class MyApp extends StatelessWidget {
         "/notificationPage": (context) => NotificationPage(),
         "/paymentMethods" : (context) => PaymentMethods(),
         "/kycVerificationPage" : (context) => KycVerification(),
+        "/reviewDigiTarget" : (context) => ReviewDigitarget()
         
       },
     );
