@@ -19,6 +19,7 @@ ThemeData lightTheme = ThemeData(
     // Tertiary (using input background)
     tertiary: const Color(0xFFF8FAFC),
     onTertiary: const Color(0xFF0F172A),
+    onTertiaryFixed: Colors.grey.shade200,
 
     // Status Colors
     error: const Color(0xFFEF4444),
@@ -64,6 +65,7 @@ ThemeData darkTheme = ThemeData(
     // Tertiary (using input background)
     tertiary: const Color(0xFF262626),
     onTertiary: const Color(0xDEFFFFFF),
+    onTertiaryFixed: Colors.grey.shade700,
 
     // Status Colors
     error: const Color(0xFFF87171),

@@ -70,6 +70,8 @@ class _DigiTargetSavingsState extends State<DigiTargetSavings> {
 
     void handleSavingsNameTarget(controllerText) {
       context.read<DigiTargetProviders>().setSavingsName(controllerText);
+      context.read<DigiTargetProviders>().setPlanAutomatiion(true);
+      context.read<DigiTargetProviders>().setSavingsFrequency("Weekly Contribution");
     }
 
     void handleSavingsAmountTarget(controllerText) {
@@ -86,11 +88,17 @@ class _DigiTargetSavingsState extends State<DigiTargetSavings> {
 
     void handleSavingsFrequency(int index) {
       if (index == 0) {
-        context.read<DigiTargetProviders>().setSavingsFrequency("Daily");
+        context.read<DigiTargetProviders>().setSavingsFrequency(
+          "Daily Contribution",
+        );
       } else if (index == 1) {
-        context.read<DigiTargetProviders>().setSavingsFrequency("Weekly");
+        context.read<DigiTargetProviders>().setSavingsFrequency(
+          "Weekly Contribution",
+        );
       } else {
-        context.read<DigiTargetProviders>().setSavingsFrequency("Monthly");
+        context.read<DigiTargetProviders>().setSavingsFrequency(
+          "Monthly Contribution",
+        );
       }
     }
 
@@ -217,6 +225,9 @@ class _DigiTargetSavingsState extends State<DigiTargetSavings> {
                             value: isSwitched,
                             activeTrackColor: Colors.green,
                             onChanged: (bool value) {
+                              context
+                                  .read<DigiTargetProviders>()
+                                  .setPlanAutomatiion(value);
                               setState(() {
                                 isSwitched = value;
                               });

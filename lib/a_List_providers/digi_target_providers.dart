@@ -6,9 +6,15 @@ class DigiTargetProviders extends ChangeNotifier {
   late String _savingsFrequency;
   late String _startDate;
   late String _endDate;
+  late bool _automatedPlan;
 
   void setSavingsName(String savingsName) {
     _savingsName = savingsName;
+    notifyListeners();
+  }
+
+  void setPlanAutomatiion(bool value) {
+    _automatedPlan = value;
     notifyListeners();
   }
 
@@ -37,4 +43,5 @@ class DigiTargetProviders extends ChangeNotifier {
   String getSavingsFrequency() => _savingsFrequency;
   String getStartDate() => _startDate;
   String getEndDate() => _endDate;
+  bool getPlanAutomation() => _automatedPlan;
 }
