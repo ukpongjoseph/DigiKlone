@@ -7,6 +7,7 @@ ThemeData lightTheme = ThemeData(
     surface: const Color(0xFFFFFFFF),
     surfaceContainerHigh: const Color(0xFFF8FAFC), // surfaceElevated
     surfaceContainerHighest: const Color(0xFFFFFFFF), // cardBackground
+    surfaceContainerLow: Colors.black,
     // Primary Brand Colors
     primary: const Color(0xFF667EEA),
     onPrimary: const Color(0xFFFFFFFF),
@@ -54,6 +55,7 @@ ThemeData darkTheme = ThemeData(
       45,
       45,
     ), // cardBackground
+    surfaceContainerLow: Colors.white, // cardBackground
     // Primary Brand Colors
     primary: const Color(0xFF8B9EF5),
     onPrimary: const Color(0xFFFFFFFF),
