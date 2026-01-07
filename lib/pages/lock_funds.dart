@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/components/lock_container.dart';
+import 'package:second_flutter/pages/createDigiLock/create_digi_lock.dart';
 
 class LockFunds extends StatefulWidget {
   const LockFunds({super.key});
@@ -54,7 +55,13 @@ class _LockFundsState extends State<LockFunds> {
                     Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Text("Recent Activity", style: TextStyle(fontWeight: FontWeight.bold, fontSize: isMobile ? 13 : 15),),
                     customRecentActivities(Icons.add, Colors.green.shade900, Colors.green.shade300, "Fixed Plan Created", "Rent Money savings plan created", "200,000", "lock", "2026-01-05 14:35:41.438"),
-                    customRecentActivities(Icons.add, Colors.green.shade900, Colors.green.shade300, "Fixed Plan Created", "Rent Money savings plan created", "200,000", "savings", "2026-01-05 14:35:41.438"),
+                    customRecentActivities(Icons.percent, Colors.orangeAccent.shade700, Colors.orange.shade300, "Interest Earned", "Monthly interest on Rent Money", "200,000", "savings", "2026-01-05 14:35:41.438"),
+                    customRecentActivities(Icons.add, Colors.green.shade900, Colors.green.shade300, "Fixed Plan Created", "School fees savings plan created", "500,000", "lock", "2026-01-05 14:35:41.438"),
+                    customRecentActivities(Icons.percent, Colors.deepOrangeAccent.shade700, Colors.orange.shade300, "Interest earned", "Monthly interest on school fees", "8,750", "savings", "2026-01-05 14:35:41.438"),
+                    customRecentActivities(Icons.add, Colors.green.shade900, Colors.green.shade300, "Fixed Plan Created", "Rent Money savings plan created", "150,000", "lock", "2026-01-05 14:35:41.438"),
+                    customRecentActivities(Icons.check_circle_outline_sharp, Colors.greenAccent.shade700, Colors.green.shade300, "Plans Matured", "Car down payment completed", "105,250", "savings", "2026-01-05 14:35:41.438"),
+                    customRecentActivities(Icons.trending_up, Colors.redAccent.shade700, Colors.red.shade300, "Funds Withdrawn", "Matured funds transferred to digiwallet", "105,250", "withdrawal", "2026-01-05 14:35:41.438"),
+                    SizedBox(height: 70,)
                   ],
                 ),
               )
@@ -63,7 +70,10 @@ class _LockFundsState extends State<LockFunds> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        mini: true,
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateDigiLock()));
+        },
         shape: CircleBorder(),
         backgroundColor: Colors.pink,
         child: Icon(Icons.add),
@@ -156,10 +166,10 @@ class _LockFundsState extends State<LockFunds> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: spacing),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CircleAvatar(
                 radius: isMobile ? 12 : 15,
@@ -172,7 +182,7 @@ class _LockFundsState extends State<LockFunds> {
                 children: [
                   Text(title, style: TextStyle(fontSize: isMobile ? 11 : 13, fontWeight: FontWeight.bold),),
                   Text(subtitle, style: TextStyle(fontSize: isMobile ? 9 : 11),),
-                  Text("₦$value", style: TextStyle(fontWeight: FontWeight.bold, fontSize: isMobile ? 12 : 14, color: valueType == "savings" ? Colors.green : theme.colorScheme.surfaceContainerLow),)
+                  Text(valueType == "savings" ? "+₦$value" : "₦$value", style: TextStyle(fontWeight: FontWeight.bold, fontSize: isMobile ? 12 : 14, color: valueType == "savings" ? Colors.green : theme.colorScheme.surfaceContainerLow),)
                 ],
               )
             ],

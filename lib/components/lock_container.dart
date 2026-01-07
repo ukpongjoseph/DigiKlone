@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/theme_provider.dart';
 
 
 class LockContainer extends StatefulWidget {
@@ -13,19 +15,51 @@ class _LockContainerState extends State<LockContainer> {
     showModalBottomSheet(
       isDismissible: false,
       context: context, builder: (BuildContext context){
-      return SizedBox(
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isMobile = screenWidth < 600;
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal : 10),
         width: double.infinity,
-        child: ElevatedButton(onPressed: (){
-          Navigator.of(context).pop();
-        }, child: Container(
-          margin: EdgeInsets.zero,
-          width: double.infinity,
-          height:  MediaQuery.of(context).size.height * 0.3,
-          decoration: BoxDecoration(
-            color: Colors.transparent
-          ),
-          child: Text("Close"),
-        )),
+        height: MediaQuery.of(context).size.height * 0.40,
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("How DigiLock Works", style: TextStyle(fontWeight: FontWeight.bold, fontSize: isMobile ? 12 : 14),),
+                IconButton(onPressed: (){
+                  Navigator.of(context).pop();
+                }, 
+                icon: Icon(Icons.close, size: isMobile ? 15 : 18,)
+              )
+              ],
+            ),
+            ListTile(
+                leading: Icon(Icons.shield_outlined, color: Colors.blueAccent.shade700,),
+                title: Text("Higher Returns", style: TextStyle(fontSize: isMobile ? 10 : 12, fontWeight: FontWeight.w600),),
+                subtitle: Text("Earn higher interest rates up to 6.5% APY by lovking your funds for lock periods", style: TextStyle(fontSize: isMobile ? 8 : 10),),
+                contentPadding: EdgeInsets.zero,
+              ),
+            ListTile(
+              leading: Icon(Icons.lock_outline_rounded, color: Colors.deepOrange.shade500,),
+              title: Text("No Early Withdrawals", style: TextStyle(fontSize: isMobile ? 10 : 12, fontWeight: FontWeight.w600),),
+              subtitle: Text("Earn higher interest rates up to 6.5% APY by lovking your funds for lock periods", style: TextStyle(fontSize: isMobile ? 8 : 10),),
+                contentPadding: EdgeInsets.zero,
+            ),
+            ListTile(
+              leading: Icon(Icons.check_circle_outline_rounded, color: Colors.green.shade900,),
+              title: Text("Guaranteed Returns", style: TextStyle(fontSize: isMobile ? 10 : 12, fontWeight: FontWeight.w600),),
+              subtitle: Text("Earn higher interest rates up to 6.5% APY by lovking your funds for lock periods", style: TextStyle(fontSize: isMobile ? 8 : 10),),
+                contentPadding: EdgeInsets.zero,
+            ),
+          ],
+        )
       );
     });
   }

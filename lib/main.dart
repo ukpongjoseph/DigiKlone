@@ -7,6 +7,7 @@ import 'package:second_flutter/a_List_providers/savings_plan.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/a_List_providers/transaction_activity.dart';
 import 'package:second_flutter/pages/add_card.dart';
+import 'package:second_flutter/pages/createDigiLock/create_digi_lock.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
 import 'package:second_flutter/pages/digi_target.dart';
@@ -91,7 +92,8 @@ class MyApp extends StatelessWidget {
         "/notificationPage": (context) => NotificationPage(),
         "/paymentMethods" : (context) => PaymentMethods(),
         "/kycVerificationPage" : (context) => KycVerification(),
-        "/reviewDigiTarget" : (context) => ReviewDigitarget()
+        "/reviewDigiTarget" : (context) => ReviewDigitarget(),
+        "/createDigilock" : (context) => CreateDigiLock()
         
       },
     );
