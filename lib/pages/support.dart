@@ -11,8 +11,13 @@ class _SupportState extends State<Support> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text("Contact Support")),
-      body: Center(child: Text("Support Page, We are here to help you")),
+      appBar: AppBar(
+        centerTitle: true, 
+        title: Text("Contact Support")
+      ),
+      body: Center(
+        child: Text("Support Page, We are here to help you")
+      ),
     );
   }
 }
