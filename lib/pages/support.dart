@@ -13,9 +13,12 @@ class _SupportState extends State<Support> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true, 
-        title: Text("Contact Support")
+        title: Text("Contact Support"),
+        actions: [],
       ),
-      body: Center(child: Text("Support Page, We are here to help you")),
+      body: Center(
+        child: Text("Support Page, We are here to help you")
+      ),
     );
   }
 }

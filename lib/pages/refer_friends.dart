@@ -92,7 +92,7 @@ class _ReferFriendsState extends State<ReferFriends> {
                     ),
                     SizedBox(height: spacing * 1.5),
                     Text(
-                      "Tota Earnings",
+                      "Total Earnings",
                       style: TextStyle(fontSize: isMobile ? 12 : 14),
                     ),
                     SizedBox(height: spacing * 1.5),
