@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
+import 'package:second_flutter/components/bank_account_tiles.dart';
+import 'package:second_flutter/components/payment_add_new.dart';
 import 'package:second_flutter/components/payment_virtual_account.dart';
 import 'package:second_flutter/components/saved_payment_methods.dart';
 
@@ -21,22 +23,32 @@ class _AddCardState extends State<AddCard> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Payment Methods",
+        title: Text(
+          "Payment Methods",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: isMobile ? 17 : 20,
-          ),),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: isMobile ? EdgeInsets.all(8) : EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              PaymentVirtualAccount(),
-              SizedBox(height: spacing * 2,),
-              SavedPaymentMethods()
-            ],
+          color: theme.colorScheme.surfaceContainerHigh,
+          child: Container(
+            margin: isMobile ? EdgeInsets.all(8) : EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PaymentVirtualAccount(),
+                SizedBox(height: spacing * 2),
+                SavedPaymentMethods(),
+                SizedBox(height: spacing * 2),
+                BankAccountTiles(),
+                SizedBox(height: spacing * 4),
+                PaymentAddNew(),
+                SizedBox(height: 100),
+              ],
+            ),
           ),
         ),
       ),
