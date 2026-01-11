@@ -4,11 +4,12 @@ import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/components/danger_zone.dart';
 import 'package:second_flutter/components/profile_image_card.dart';
 import 'package:second_flutter/components/refer_and_earn.dart';
+import 'package:second_flutter/pages/add_card.dart';
 import 'package:second_flutter/pages/edit_profile.dart';
 import 'package:second_flutter/pages/faq.dart';
 import 'package:second_flutter/pages/kyc_verification.dart';
 import 'package:second_flutter/pages/notification_page.dart';
-import 'package:second_flutter/pages/payment_methods.dart';
+// import 'package:second_flutter/pages/payment_methods.dart';
 import 'package:second_flutter/pages/profile_preference.dart';
 import 'package:second_flutter/pages/security.dart';
 import 'package:second_flutter/pages/sign_in.dart';
@@ -50,7 +51,7 @@ class _ProfileState extends State<Profile> {
       setState(() {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PaymentMethods()),
+          MaterialPageRoute(builder: (context) => AddCard()),
         );
       });
     }

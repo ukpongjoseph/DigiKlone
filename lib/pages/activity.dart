@@ -44,6 +44,7 @@ class _ActivityState extends State<Activity>
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
+    ThemeData theme = context.read<ThemeProvider>().getTheme();
     void fetchdate() {
       showDatePicker(
         context: context,
@@ -61,7 +62,7 @@ class _ActivityState extends State<Activity>
           return StatefulBuilder(
             builder: (context, setDialogState) {
               return AlertDialog(
-                backgroundColor: Colors.white,
+                backgroundColor: theme.colorScheme.surfaceContainer,
                 contentPadding: EdgeInsets.all(12.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.all(Radius.circular(10)),
