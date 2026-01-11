@@ -118,9 +118,14 @@ class _SupportState extends State<Support> {
                 SizedBox(height: spacing * 3),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.all(isMobile ? 7 : 9),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 7 : 9,
+                    vertical: isMobile ? 12 : 14,
+                  ),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.surfaceContainerHighest,
+                    color: theme == lightTheme
+                        ? Colors.grey.shade300
+                        : theme.colorScheme.surfaceContainerHighest,
                     border: Border.all(
                       width: 1.5,
                       color: theme.colorScheme.surfaceContainerHighest,
