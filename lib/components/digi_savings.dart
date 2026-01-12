@@ -4,6 +4,7 @@ import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
 import 'package:second_flutter/pages/digi_target.dart';
+import 'package:second_flutter/pages/lock_funds.dart';
 
 class DigiSavings extends StatefulWidget {
   const DigiSavings({super.key});
@@ -286,7 +287,7 @@ class _DigiSavingsState extends State<DigiSavings> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DigiLock()),
+                    MaterialPageRoute(builder: (context) => LockFunds()),
                   );
                 },
                 child: Container(
