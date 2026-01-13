@@ -4,6 +4,7 @@ import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/components/account_and_security_expanded.dart';
 import 'package:second_flutter/components/faq_card.dart';
 import 'package:second_flutter/components/help.dart';
+import 'package:second_flutter/components/referral_and_rewards.dart';
 import 'package:second_flutter/components/savings_and_interest.dart';
 import 'package:second_flutter/components/transactions_and_payment.dart';
 
@@ -41,6 +42,8 @@ class _FaqState extends State<Faq> {
                 SavingsAndInterest(),
                 SizedBox(height: spacing,),
                 TransactionsAndPayment(),
+                SizedBox(height: spacing,),
+                ReferralAndRewards(),
                 Help()
               ],
             ),
