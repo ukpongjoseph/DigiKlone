@@ -3,16 +3,15 @@ import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/theme/app_theme.dart';
 
-class FaqCard extends StatefulWidget {
-  const FaqCard({super.key});
+class FaqCard extends StatelessWidget {
+  final TextEditingController controller;
+  final Function onSearch;
+  const FaqCard({
+    super.key, 
+    required this.controller,
+    required this.onSearch 
+    });
 
-  @override
-  State<FaqCard> createState() => _FaqCardState();
-}
-
-class _FaqCardState extends State<FaqCard> {
-  final _formKey = GlobalKey<FormState>();
-  final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     ThemeData theme = context.read<ThemeProvider>().getTheme();
@@ -26,13 +25,17 @@ class _FaqCardState extends State<FaqCard> {
           Container(
             margin: EdgeInsets.all(spacing),
             child: Form(
-              key: _formKey,
               child: Column(
                 children: [
                   TextField(
-                    controller: _searchController,
+                    onChanged: (value) {
+                      onSearch(value);
+                    },
+                    style: TextStyle(
+                      fontSize: isMobile ? 10:12
+                    ),
+                    controller: controller,
                     decoration: InputDecoration(
-                      // prefixIconConstraints: BoxConstraints(),
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(horizontal: spacing),
                       prefixIcon: Icon(Icons.search, size: 25,),
@@ -41,6 +44,9 @@ class _FaqCardState extends State<FaqCard> {
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                     ),
+                    onSubmitted: (value) {
+                      onSearch(value);
+                    },
                   )
                 ],
               )
