@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
-import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
 import 'package:second_flutter/pages/digi_target.dart';
 import 'package:second_flutter/pages/lock_funds.dart';
