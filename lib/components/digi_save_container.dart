@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
@@ -184,10 +185,68 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
     }
     );
   }
+
+  void displayWithdrawalSheet(){
+    showModalBottomSheet(
+      context: context, 
+      builder: (BuildContext content){
+        final formKey = GlobalKey<FormState>();
+        final amountController = TextEditingController();
+        final pinController = TextEditingController();
+        ThemeData theme = context.read<ThemeProvider>().getTheme();
+        return Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surfaceContainer,
+            borderRadius: BorderRadiusDirectional.only(topEnd: Radius.circular(10), topStart: Radius.circular(10))
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Withdraw from DigiSave"),
+              Container(
+                decoration: BoxDecoration(),
+                child: Row(
+                  children: [
+                    Icon(Icons.warning),
+                    Text("1.75% penalty for early withdrawal",)
+                  ],
+                ),
+              ),
+              Form(
+                key: formKey,
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                   inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                  controller: amountController,
+                  decoration: InputDecoration(
+                    hint: Text("Enter amount", textAlign: TextAlign.center,),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        width: 1.5,
+                        color: Colors.grey
+                      )
+                    )
+                  ),
+                  style: TextStyle(fontSize: 12),
+                )
+              ),
+              Center(child: Text("Available balance : ₦45,500",)),
+              SizedBox(height: 20,),
+              Text("Destination")
+            ],
+          ),
+        );
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     int cycle = 2;
-    // ThemeData theme = context.read<ThemeProvider>().getTheme();
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile ? 5:8;
@@ -287,7 +346,9 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                         borderRadius: BorderRadius.circular(10),
                       )
                     ),
-                    onPressed: (){}, 
+                    onPressed: (){
+                      displayWithdrawalSheet();
+                    }, 
                     child: Text("-  Withdraw", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),)
                   ),
                 ),
