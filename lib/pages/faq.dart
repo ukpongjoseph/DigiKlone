@@ -31,7 +31,7 @@ class AccountExpanded {
 
 class _FaqState extends State<Faq> {
    bool itemFound = true;
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   final _searchController = TextEditingController();
   late AccountExpanded searchQuery;
   List<AccountExpanded> panelData = [
@@ -80,11 +80,11 @@ class _FaqState extends State<Faq> {
         AccountExpanded result = panelData.firstWhere((i) => i.title==textToBeFound);
         itemFound = true;
         searchQuery = result;
-        print(searchQuery);
+        // print(searchQuery);
       } catch (e) {
         itemFound = false;
         searchQuery = AccountExpanded(title: "No rsult", body: "Sorry, we couldn't find the result to yor search", isExpanded: false);
-        print(searchQuery);
+        // print(searchQuery);
         return;
       }
     });

@@ -45,8 +45,12 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
   }
 
   void showBottomModal() {
+
+  void showBottomModal() {
     showModalBottomSheet(
       isDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         ThemeData theme = context.read<ThemeProvider>().getTheme();
@@ -160,11 +164,124 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
         );
       },
     );
+        return Container(
+          padding: EdgeInsets.all(10),
+          height: (MediaQuery.of(context).size.height) * .5,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surfaceContainer,
+            borderRadius: BorderRadiusDirectional.only(
+              topEnd: Radius.circular(10),
+              topStart: Radius.circular(10),
+            ),
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "How DigiSave Works",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.close),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    ListTile(
+                      titleAlignment: ListTileTitleAlignment.top,
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      minLeadingWidth: 6,
+                      leading: Icon(
+                        Icons.watch_later_outlined,
+                        size: 20,
+                        color: Colors.blueAccent,
+                      ),
+                      title: Text(
+                        "3-Month Cycles",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "Your savings are locked in 3-month cycles. You can withdraw without penalty at te end of each cycle",
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ),
+                    ListTile(
+                      titleAlignment: ListTileTitleAlignment.top,
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      minLeadingWidth: 6,
+                      leading: Icon(
+                        Icons.warning_amber,
+                        size: 20,
+                        color: Colors.yellow,
+                      ),
+                      title: Text(
+                        "Early Withdrawal Penalty",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "Your savings are locked in 3-month cycles. You can withdraw without penalty at te end of each cycle",
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ),
+                    ListTile(
+                      titleAlignment: ListTileTitleAlignment.top,
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      minLeadingWidth: 6,
+                      leading: Icon(
+                        Icons.check_circle_outline_outlined,
+                        size: 20,
+                        color: Colors.blue,
+                      ),
+                      title: Text(
+                        "Flexible Deposits",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "Your savings are locked in 3-month cycles. You can withdraw without penalty at te end of each cycle",
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void displayQuickSave() {
+  void displayQuickSave() {
     showModalBottomSheet(
       isDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         ThemeData theme = context.read<ThemeProvider>().getTheme();
@@ -177,9 +294,20 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
               topEnd: Radius.circular(10),
               topStart: Radius.circular(10),
             ),
+            borderRadius: BorderRadiusDirectional.only(
+              topEnd: Radius.circular(10),
+              topStart: Radius.circular(10),
+            ),
           ),
           child: Column(
             children: [
+              Text(
+                "Deposit to DigiSave",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              SizedBox(height: 3),
+              Text("Enter amount to deposit", style: TextStyle(fontSize: 10)),
+              SizedBox(height: 3),
               Text(
                 "Deposit to DigiSave",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
@@ -196,11 +324,16 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(width: 1.5, color: Colors.grey),
                     ),
+                      borderSide: BorderSide(width: 1.5, color: Colors.grey),
+                    ),
                   ),
                   controller: depositController,
                   style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
                 ),
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                ),
               ),
+              SizedBox(height: 3),
               SizedBox(height: 3),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -212,13 +345,20 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
+                      onPressed: () {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                       child: Text("Cancel"),
                     ),
+                      },
+                      child: Text("Cancel"),
+                    ),
                   ),
+                  SizedBox(width: 20),
                   SizedBox(width: 20),
                   Expanded(
                     child: ElevatedButton(
@@ -227,28 +367,39 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                       onPressed: () {
+                      onPressed: () {
                         confirmDeposit();
+                      },
                       },
                       child: Text(
                         "Deposit",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w700,
                         ),
+                      ),
+                    ),
+                  ),
                       ),
                     ),
                   ),
                 ],
               ),
+              ),
             ],
           ),
         );
       },
+      },
     );
   }
 
+  void displayWithdrawalSheet() {
   void displayWithdrawalSheet() {
     showModalBottomSheet(
       context: context,
@@ -413,13 +564,16 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile ? 5 : 8;
+    double spacing = isMobile ? 5 : 8;
     return SizedBox(
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.all(spacing * 4),
+            padding: EdgeInsets.all(spacing * 4),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 21, 38, 192),
+              borderRadius: BorderRadius.circular(10),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
@@ -428,8 +582,14 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(width: spacing * 5),
+                    SizedBox(width: spacing * 5),
                     CircleAvatar(
                       backgroundColor: const Color.fromARGB(255, 97, 90, 242),
+                      child: Icon(
+                        Icons.savings_outlined,
+                        color: Colors.white,
+                        size: isMobile ? 30 : 40,
+                      ),
                       child: Icon(
                         Icons.savings_outlined,
                         color: Colors.white,
@@ -438,16 +598,37 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                     ),
                     GestureDetector(
                       onTap: () {
+                      onTap: () {
                         showBottomModal();
                       },
                       child: CircleAvatar(
                         radius: isMobile ? 13 : 20,
+                        radius: isMobile ? 13 : 20,
                         backgroundColor: const Color.fromARGB(255, 97, 90, 242),
+                        child: Icon(Icons.info_outline, color: Colors.white),
                         child: Icon(Icons.info_outline, color: Colors.white),
                       ),
                     ),
+                    ),
                   ],
                 ),
+                SizedBox(height: spacing),
+                Text(
+                  "DigiSave Balance",
+                  style: TextStyle(
+                    color: Colors.grey[100],
+                    fontSize: isMobile ? 12 : 14,
+                  ),
+                ),
+                Text(
+                  "₦45,000",
+                  style: TextStyle(
+                    fontSize: isMobile ? 30 : 35,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: spacing * 2),
                 SizedBox(height: spacing),
                 Text(
                   "DigiSave Balance",
@@ -471,6 +652,7 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 82, 74, 246),
                     borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     children: [
@@ -488,6 +670,34 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                             fontSize: isMobile ? 12 : 14,
                             fontWeight: FontWeight.w700,
                           ),
+                        ),
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.trending_up_rounded,
+                          color: Colors.green,
+                        ),
+                        label: Text(
+                          "Interest Accrued",
+                          style: TextStyle(
+                            color: Colors.grey[100],
+                            fontSize: isMobile ? 12 : 14,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "+₦1,250.75",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: isMobile ? 16 : 18,
+                        ),
+                      ),
+                      Text(
+                        "12.5% p.a.",
+                        style: TextStyle(
+                          color: Colors.grey[100],
+                          fontSize: isMobile ? 10 : 12,
                         ),
                       ),
                       Text(
@@ -518,7 +728,18 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                   ),
                 ),
                 SizedBox(height: spacing),
+                SizedBox(height: spacing * 2),
+                Text(
+                  "Current Cycle : $cycle of 3",
+                  style: TextStyle(
+                    fontSize: isMobile ? 12 : 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: spacing),
                 LinearProgressIndicator(
+                  value: (cycle / 3),
                   value: (cycle / 3),
                   valueColor: AlwaysStoppedAnimation(Colors.white),
                   backgroundColor: const Color.fromARGB(255, 118, 112, 231),
@@ -530,9 +751,17 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                     fontSize: isMobile ? 10 : 12,
                   ),
                 ),
+                Text(
+                  "Next withdrawal: Jan 15, 2025",
+                  style: TextStyle(
+                    color: Colors.grey[100],
+                    fontSize: isMobile ? 10 : 12,
+                  ),
+                ),
               ],
             ),
           ),
+          SizedBox(height: spacing * 2),
           SizedBox(height: spacing * 2),
           SizedBox(
             width: double.infinity,
@@ -546,9 +775,19 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
+                      ),
                     ),
                     onPressed: () {
+                    onPressed: () {
                       displayQuickSave();
+                    },
+                    child: Text(
+                      "+  Quick Save",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                     },
                     child: Text(
                       "+  Quick Save",
@@ -560,16 +799,28 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                   ),
                 ),
                 SizedBox(width: spacing * 2),
+                SizedBox(width: spacing * 2),
                 Expanded(
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 192, 21, 21),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
+                      ),
                     ),
                     onPressed: () {
+                    onPressed: () {
                       displayWithdrawalSheet();
+                    },
+                    child: Text(
+                      "-  Withdraw",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                     },
                     child: Text(
                       "-  Withdraw",
@@ -583,8 +834,10 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
               ],
             ),
           ),
+          ),
         ],
       ),
     );
   }
 }
+
