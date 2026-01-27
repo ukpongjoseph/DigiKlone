@@ -799,28 +799,16 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                   ),
                 ),
                 SizedBox(width: spacing * 2),
-                SizedBox(width: spacing * 2),
                 Expanded(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 192, 21, 21),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      ),
                     ),
-                    onPressed: () {
                     onPressed: () {
                       displayWithdrawalSheet();
-                    },
-                    child: Text(
-                      "-  Withdraw",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
                     },
                     child: Text(
                       "-  Withdraw",
@@ -834,10 +822,8 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
               ],
             ),
           ),
-          ),
         ],
       ),
     );
   }
 }
-
