@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
+import 'package:second_flutter/theme/app_theme.dart';
 
 class DigiSaveContainer extends StatefulWidget {
   const DigiSaveContainer({super.key});
@@ -15,6 +16,11 @@ class DigiSaveContainer extends StatefulWidget {
 class _DigiSaveContainerState extends State<DigiSaveContainer> {
   final formkey = GlobalKey<FormState>();
   final depositController = TextEditingController();
+  String possibleAmountError = "";
+  String possiblePinError = "";
+  final amountController = TextEditingController();
+  final pinController = TextEditingController();
+  String selectedValue = "wallet";
 
   void confirmDeposit() {
     showCupertinoDialog(
@@ -250,17 +256,35 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
     );
   }
 
-  void displayWithdrawalSheet() {
-    showModalBottomSheet(
+  void displayErrorModal(String errorText) {
+    showDialog(
       context: context,
       builder: (BuildContext context) {
-        final formKey = GlobalKey<FormState>();
-        final formKey1 = GlobalKey<FormState>();
-        final amountController = TextEditingController();
-        final pinController = TextEditingController();
-        ThemeData theme = context.read<ThemeProvider>().getTheme();
-        String selectedValue = "wallet";
+        return CupertinoAlertDialog(
+          title: Text(errorText),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
+  void displayWithdrawalSheet() {
+    showModalBottomSheet(
+      // isDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        final formKey1 = GlobalKey<FormState>();
+        final formKey2 = GlobalKey<FormState>();
+        ThemeData theme = context.read<ThemeProvider>().getTheme();
+        bool isTermSelected = false;
+        bool isPinObscured = true;
         return StatefulBuilder(
           builder: (BuildContext context, setModalState) {
             return SingleChildScrollView(
@@ -277,26 +301,64 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(child: Text("Withdraw from DigiSave")),
+                    Center(
+                      child: Text(
+                        "Withdraw from DigiSave",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                     SizedBox(height: 10),
                     Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: theme == lightTheme
+                            ? Colors.amber.shade200
+                            : Colors.deepOrange.shade700,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Row(
                         children: [
-                          Icon(Icons.warning),
-                          Text("1.75% penalty for early withdrawal"),
+                          Icon(
+                            Icons.warning_amber,
+                            size: 15,
+                            color: Colors.amber.shade600,
+                          ),
+                          Text(
+                            "1.75% penalty for early withdrawal",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.amber.shade600,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                     SizedBox(height: 10),
                     Form(
-                      key: formKey,
+                      key: formKey1,
                       child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            possibleAmountError = "Please enter a valid amount";
+                            return possibleAmountError;
+                          } else {
+                            return null;
+                          }
+                        },
                         keyboardType: TextInputType.number,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                         ],
                         controller: amountController,
                         decoration: InputDecoration(
+                          errorStyle: TextStyle(fontSize: 0.0, height: 0.0),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           hintText: "Enter amount",
                           hintStyle: TextStyle(),
                           border: OutlineInputBorder(
@@ -311,62 +373,133 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                       ),
                     ),
                     SizedBox(height: 10),
-                    Center(child: Text("Available balance : ₦45,500")),
+                    Center(
+                      child: Text(
+                        "Available balance : ₦45,500",
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ),
                     SizedBox(height: 20),
-                    Text("Destination"),
-                    DropdownButton(
-                      isExpanded: true,
-                      value: selectedValue,
-                      items: [
-                        DropdownMenuItem(
-                          value: "wallet",
-                          child: Row(
-                            children: [
-                              Icon(Icons.wallet),
-                              SizedBox(width: 8),
-                              Text("DigiWallet"),
-                            ],
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: "bank",
-                          child: Row(
-                            children: [
-                              Icon(Icons.apartment),
-                              SizedBox(width: 8),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                    Text(
+                      "Destination",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 4),
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 1.5, color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                          isExpanded: true,
+                          value: selectedValue,
+                          items: [
+                            DropdownMenuItem(
+                              value: "wallet",
+                              child: Row(
                                 children: [
-                                  Text("Bank Account"),
-                                  Text("GTBank - 1234567890"),
+                                  Icon(
+                                    Icons.wallet,
+                                    color: Colors.blueAccent,
+                                    size: 25,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    "DigiWallet",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                            DropdownMenuItem(
+                              value: "bank",
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.apartment,
+                                    color: Colors.blueAccent,
+                                    size: 25,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Bank Account",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "GTBank - 1234567890",
+                                        style: TextStyle(fontSize: 9),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            setModalState(() {
+                              selectedValue = value!;
+                            });
+                          },
                         ),
-                      ],
-                      onChanged: (value) {
-                        setModalState(() {
-                          selectedValue = value!;
-                        });
-                      },
+                      ),
                     ),
                     SizedBox(height: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Withdrawal PIN"),
+                        Text(
+                          "Withdrawal PIN",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 5),
                         Form(
-                          key: formKey1,
+                          key: formKey2,
                           child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                possiblePinError =
+                                    "Please enter your withdrawal pin";
+                                return possiblePinError;
+                              } else {
+                                return null;
+                              }
+                            },
+                            obscureText: isPinObscured,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
                             ],
                             controller: pinController,
                             decoration: InputDecoration(
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              errorStyle: TextStyle(fontSize: 0.0, height: 0),
                               hintText: "Enter 4-digit PIN",
                               hintStyle: TextStyle(),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setModalState(() {
+                                    isPinObscured = !isPinObscured;
+                                  });
+                                },
+                                child: isPinObscured
+                                    ? Icon(Icons.remove_red_eye_outlined)
+                                    : Icon(Icons.visibility_off_outlined),
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide(
@@ -382,18 +515,21 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                     ),
                     Row(
                       children: [
-                        Radio(
-                          value: true,
-                          groupValue: true,
-                          onChanged: (value) {},
-                          activeColor: Colors.blueGrey,
+                        Checkbox(
+                          value: isTermSelected,
+                          shape: CircleBorder(),
+                          onChanged: (bool? value) {
+                            setModalState(() {
+                              isTermSelected = value!;
+                            });
+                          },
                         ),
                         Expanded(
                           child: Text(
                             "I accept the terms and conditions of withdrawal penalty",
                             style: TextStyle(fontSize: 9),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -405,32 +541,292 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
                               Navigator.of(context).pop();
                             },
                             style: ElevatedButton.styleFrom(
+                              backgroundColor: theme == lightTheme
+                                  ? Colors.grey.shade100
+                                  : Colors.grey.shade700,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            child: Text("Cancel"),
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(color: Colors.grey),
+                            ),
                           ),
                         ),
                         SizedBox(width: 5),
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              bool isPinValid = formKey2.currentState!
+                                  .validate();
+                              bool isAmountValid = formKey1.currentState!
+                                  .validate();
+                              if (formKey2.currentState!.validate() &&
+                                  formKey1.currentState!.validate() &&
+                                  isTermSelected == true) {
+                                displayConfirmationModal();
+                              } else if (!isAmountValid) {
+                                displayErrorModal(possibleAmountError);
+                              } else if (!isPinValid) {
+                                displayErrorModal(possiblePinError);
+                              } else if (isTermSelected == false) {
+                                displayErrorModal(
+                                  "Please accept the terms and condition",
+                                );
+                              }
+                            },
                             style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blueAccent,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            child: Text("Next"),
+                            child: Text(
+                              "Next",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                        )
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
             );
           },
+        );
+      },
+    );
+  }
+
+  void displayWithdrawalModal() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text("Success"),
+          content: Text("Withdrawal processed successfully"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => DigiSaveBalance()),
+                );
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void displayConfirmationModal() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        ThemeData theme = context.read<ThemeProvider>().getTheme();
+        return Container(
+          // height: (MediaQuery.of(context).size.height) * 0.4,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surfaceContainerHigh,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          padding: EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    Text(
+                      "Withdrawal Summary",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      "Please review your withdrawal details",
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1.5, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Withdrawal Amount",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "₦${amountController.text}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Withholding tax (10%)",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "-₦${int.parse(amountController.text) * 0.1}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Penalty fee (1.75%)",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "-₦${int.parse(amountController.text) * 0.0175}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Divider(thickness: 1.5, color: Colors.grey),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Amount to Receive",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "₦${2000 - (int.parse(amountController.text) * 0.1175)}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Remaining Balance",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "₦${45500 - int.parse(amountController.text)}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                "Destination",
+                style: TextStyle(fontWeight: FontWeight.bold),
+                // textAlign: TextAlign.left,
+              ),
+              selectedValue == "wallet"
+                  ? Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 1.5, color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.wallet, color: Colors.blueAccent),
+                          SizedBox(width: 5),
+                          Text("DigiWallet"),
+                        ],
+                      ),
+                    )
+                  : Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 1.5, color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.apartment, color: Colors.blueAccent),
+                          SizedBox(width: 5),
+                          Text("GTBank - 1234567890"),
+                        ],
+                      ),
+                    ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey.shade600,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                  ElevatedButton(
+                    onPressed: () {
+                      displayWithdrawalModal();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text(
+                      "Confirm Withdrawal",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         );
       },
     );
