@@ -7,6 +7,7 @@ import 'package:second_flutter/a_List_providers/savings_plan.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/a_List_providers/transaction_activity.dart';
 import 'package:second_flutter/pages/add_card.dart';
+import 'package:second_flutter/pages/auto_save_settings_page.dart';
 import 'package:second_flutter/pages/createDigiLock/create_digi_lock.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
@@ -23,6 +24,7 @@ import 'package:second_flutter/pages/payment_methods.dart';
 import 'package:second_flutter/pages/refer_friends.dart';
 import 'package:second_flutter/pages/review_digi_target.dart';
 import 'package:second_flutter/pages/security.dart';
+import 'package:second_flutter/pages/set_up_auto_save_page.dart';
 import 'package:second_flutter/pages/sign_in.dart';
 import 'package:second_flutter/pages/signup/confirm_password.dart';
 import 'package:second_flutter/pages/signup/email.dart';
@@ -93,7 +95,9 @@ class MyApp extends StatelessWidget {
         "/paymentMethods" : (context) => PaymentMethods(),
         "/kycVerificationPage" : (context) => KycVerification(),
         "/reviewDigiTarget" : (context) => ReviewDigitarget(),
-        "/createDigilock" : (context) => CreateDigiLock()
+        "/createDigilock" : (context) => CreateDigiLock(),
+        "/autoSaveSettingspage" : (context)=>AutoSaveSettingsPage(),
+        "/setUpAutoSavePage" : (context)=>SetUpAutoSavePage()
         
       },
     );

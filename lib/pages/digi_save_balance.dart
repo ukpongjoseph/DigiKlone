@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
+import 'package:second_flutter/components/digi_save_auto_save.dart';
 import 'package:second_flutter/components/digi_save_container.dart';
 import 'package:second_flutter/components/digi_save_recent_transactions.dart';
 
@@ -29,8 +30,10 @@ class _DigiSaveBalanceState extends State<DigiSaveBalance> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DigiSaveContainer(), 
-                DigiSaveRecentTransactions()
+                DigiSaveContainer(),
+                DigiSaveAutoSave(),
+                DigiSaveRecentTransactions(),
+                SizedBox(height: 70),
               ],
             ),
           ),
