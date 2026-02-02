@@ -260,15 +260,6 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-<<<<<<< HEAD
-        final formKey = GlobalKey<FormState>();
-        final formKey1 = GlobalKey<FormState>();
-        final amountController = TextEditingController();
-        final pinController = TextEditingController();
-        bool isTermSelected = false;
-        ThemeData theme = context.read<ThemeProvider>().getTheme();
-        String selectedValue = "wallet";
-=======
         return CupertinoAlertDialog(
           title: Text(errorText),
           actions: [
@@ -283,7 +274,6 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
       },
     );
   }
->>>>>>> a5dbfc9f440954bc3071a9afe50426d0e4f2b879
 
   void displayWithdrawalSheet() {
     showModalBottomSheet(

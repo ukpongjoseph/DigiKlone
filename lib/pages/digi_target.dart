@@ -32,8 +32,12 @@ class _DigiTargetState extends State<DigiTarget> {
             )
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TargetTopCard()
+              TargetTopCard(),
+              SizedBox(height: 10,),
+              Text("Track your progress", style: TextStyle(color: Colors.white),),
+              Text("3 active goals", style: TextStyle(color: Colors.white),)
             ],
           ),
         ),
