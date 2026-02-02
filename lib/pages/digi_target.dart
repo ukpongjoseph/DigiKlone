@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_flutter/components/target_top_card.dart';
 
 class DigiTarget extends StatefulWidget {
   const DigiTarget({super.key});
@@ -11,8 +12,32 @@ class _DigiTargetState extends State<DigiTarget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(children: [Text("Digi Target page")]),
+      appBar: AppBar(
+        backgroundColor:const Color.fromARGB(255, 27, 74, 33),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              end: Alignment.bottomCenter,
+              begin: Alignment.topCenter,
+              colors: [
+                const Color.fromARGB(255, 27, 74, 33),
+                const Color.fromARGB(255, 23, 63, 28),
+                const Color.fromARGB(255, 18, 55, 22),
+                const Color.fromARGB(255, 32, 67, 36),
+                const Color.fromARGB(255, 16, 39, 44),
+              ]
+            )
+          ),
+          child: Column(
+            children: [
+              TargetTopCard()
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

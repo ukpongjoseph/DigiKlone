@@ -258,6 +258,7 @@ class _DigiSaveContainerState extends State<DigiSaveContainer> {
         final formKey1 = GlobalKey<FormState>();
         final amountController = TextEditingController();
         final pinController = TextEditingController();
+        bool isTermSelected = false;
         ThemeData theme = context.read<ThemeProvider>().getTheme();
         String selectedValue = "wallet";
 
