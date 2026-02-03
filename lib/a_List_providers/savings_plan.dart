@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
+import 'package:second_flutter/pages/digi_target.dart';
+import 'package:second_flutter/pages/lock_funds.dart';
 import 'package:second_flutter/pages/total_progress.dart';
 
 class DigiSavingsPlans extends ChangeNotifier {
@@ -32,7 +34,7 @@ class DigiSavingsPlans extends ChangeNotifier {
       "avatar-color": const Color.fromARGB(255, 109, 238, 114),
       "container-color": const Color.fromARGB(255, 4, 122, 6),
       "page_exists": true,
-      "page": TotalProgress(),
+      "page": DigiTarget(),
     },
     {
       "icon": Icons.shield_outlined,
@@ -46,7 +48,7 @@ class DigiSavingsPlans extends ChangeNotifier {
       "avatar_color": const Color.fromARGB(255, 242, 133, 125),
       "container-color": const Color.fromARGB(255, 116, 3, 40),
       "page_exists": true,
-      "page": DigiLock(),
+      "page": LockFunds(),
     },
     {
       "icon": Icons.people_alt_outlined,
