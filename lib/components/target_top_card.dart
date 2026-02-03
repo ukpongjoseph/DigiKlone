@@ -79,7 +79,7 @@ class _TargetTopCardState extends State<TargetTopCard> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = context.read<ThemeProvider>().getTheme();
+    // ThemeData theme = context.read<ThemeProvider>().getTheme();
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile?5:8;

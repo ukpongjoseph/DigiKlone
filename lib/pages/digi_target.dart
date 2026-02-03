@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_flutter/components/dream_vacation.dart';
 import 'package:second_flutter/components/target_top_card.dart';
 
 class DigiTarget extends StatefulWidget {
@@ -37,7 +38,8 @@ class _DigiTargetState extends State<DigiTarget> {
               TargetTopCard(),
               SizedBox(height: 10,),
               Text("Track your progress", style: TextStyle(color: Colors.white),),
-              Text("3 active goals", style: TextStyle(color: Colors.white),)
+              Text("3 active goals", style: TextStyle(color: Colors.white),),
+              DreamVacation()
             ],
           ),
         ),
