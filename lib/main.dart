@@ -13,12 +13,15 @@ import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
 import 'package:second_flutter/pages/digi_target.dart';
 import 'package:second_flutter/pages/digi_target_savings.dart';
+import 'package:second_flutter/pages/dream_vacation_page.dart';
 import 'package:second_flutter/pages/edit_profile.dart';
+import 'package:second_flutter/pages/emergency_fund_page.dart';
 import 'package:second_flutter/pages/faq.dart';
 import 'package:second_flutter/pages/home_page.dart';
 import 'package:second_flutter/pages/kyc_verification.dart';
 import 'package:second_flutter/pages/landing_page.dart';
 import 'package:second_flutter/pages/lock_funds.dart';
+import 'package:second_flutter/pages/new_car_page.dart';
 import 'package:second_flutter/pages/notification_page.dart';
 import 'package:second_flutter/pages/payment_methods.dart';
 import 'package:second_flutter/pages/refer_friends.dart';
@@ -97,8 +100,10 @@ class MyApp extends StatelessWidget {
         "/reviewDigiTarget" : (context) => ReviewDigitarget(),
         "/createDigilock" : (context) => CreateDigiLock(),
         "/autoSaveSettingspage" : (context)=>AutoSaveSettingsPage(),
-        "/setUpAutoSavePage" : (context)=>SetUpAutoSavePage()
-        
+        "/setUpAutoSavePage" : (context)=>SetUpAutoSavePage(),
+        "/dreamVacationpage": (context)=>DreamVacationPage(),
+        "/emergencyFundPage" : (context)=>EmergencyFundPage(),
+        "/newCarPage":(context)=>NewCarPage()
       },
     );
   }
