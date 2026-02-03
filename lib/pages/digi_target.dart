@@ -182,9 +182,7 @@ class _DigiTargetState extends State<DigiTarget> {
                 Expanded(
                   child: LinearProgressIndicator(
                     value: linearIndicatorValue,
-                    backgroundColor: theme == lightTheme
-                        ? indicatorBackgroundColor
-                        : Colors.white,
+                    backgroundColor: indicatorBackgroundColor,
                     borderRadius: BorderRadius.circular(10),
                     valueColor: AlwaysStoppedAnimation<Color>(colorValue),
                   ),
