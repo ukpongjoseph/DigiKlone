@@ -38,7 +38,9 @@ import 'package:second_flutter/a_List_providers/auth_login_provider.dart';
 import 'package:second_flutter/a_List_providers/auth_register.dart';
 import 'package:second_flutter/pages/support.dart';
 import 'package:second_flutter/pages/total_progress.dart';
-import 'package:second_flutter/pages/transfer_money.dart';
+import 'package:second_flutter/pages/transferMoney/transfer_money.dart';
+import 'package:second_flutter/pages/transferMoney/transfer_money_2.dart';
+import 'package:second_flutter/pages/transferMoney/transfer_money_3.dart';
 
 // This the root of the application. The main method is the entry point ofthe flutter application
 void main() {
@@ -92,6 +94,8 @@ class MyApp extends StatelessWidget {
         "/digiTargetPage": (context) => const DigiTarget(),
         "/digiLockPage": (context) => const DigiLock(),
         "/transerMoneyPage": (context) => const TransferMoney(),
+        "/transerMoneyPage2": (context) => const TransferMoney2(),
+        "/transerMoneyPage3": (context) => const TransferMoney3(),
         "/totalProgress": (context) => const TotalProgress(),
         "/editProfilePage": (context) => EditProfile(),
         "/notificationPage": (context) => NotificationPage(),
