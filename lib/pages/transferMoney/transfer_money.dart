@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:second_flutter/a_List_providers/theme_provider.dart';
+// import 'package:provider/provider.dart';
+// import 'package:second_flutter/a_List_providers/theme_provider.dart';
+import 'package:second_flutter/components/account_number_and_saved_recipient.dart';
 import 'package:second_flutter/pages/transferMoney/transfer_money_2.dart';
 
 class TransferMoney extends StatefulWidget {
@@ -13,7 +14,7 @@ class TransferMoney extends StatefulWidget {
 class _TransferMoneyState extends State<TransferMoney> {
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = context.read<ThemeProvider>().getTheme();
+    // ThemeData theme = context.read<ThemeProvider>().getTheme();
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
     double spacing = isMobile ? 5 : 8;
@@ -28,24 +29,17 @@ class _TransferMoneyState extends State<TransferMoney> {
           ),
         ),
       ),
-      body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(),
-        child: Column(
-          children: [
-            customPageTracker(),
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TransferMoney2()),
-                  );
-                },
-                child: Text("Next"),
-              ),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(spacing * 2),
+          decoration: BoxDecoration(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(child: customPageTracker()),
+              AccountNumberAndSavedRecipient(),
+            ],
+          ),
         ),
       ),
     );

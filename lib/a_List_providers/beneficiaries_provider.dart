@@ -14,11 +14,11 @@ class BeneficiariesProvider extends ChangeNotifier {
 
   void addBeneficiary(Map<String, dynamic> newBeneficary) {
     _beneficiaries.add(newBeneficary);
-    ChangeNotifier();
+    notifyListeners();
   }
 
   void deleteAllBeneficiaries() {
     _beneficiaries.clear();
-    ChangeNotifier();
+    notifyListeners();
   }
 }

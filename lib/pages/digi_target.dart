@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
-// import 'package:provider/provider.dart';
-// import 'package:second_flutter/a_List_providers/theme_provider.dart';
-import 'package:second_flutter/components/dream_vacation.dart';
 import 'package:second_flutter/components/target_top_card.dart';
 import 'package:second_flutter/pages/dream_vacation_page.dart';
 import 'package:second_flutter/pages/emergency_fund_page.dart';

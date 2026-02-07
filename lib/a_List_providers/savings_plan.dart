@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
 import 'package:second_flutter/pages/digi_target.dart';
 import 'package:second_flutter/pages/lock_funds.dart';
-import 'package:second_flutter/pages/total_progress.dart';
 
 class DigiSavingsPlans extends ChangeNotifier {
   DateTime time = DateTime.now();

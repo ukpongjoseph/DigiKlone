@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:second_flutter/a_List_providers/theme_provider.dart';
+// import 'package:provider/provider.dart';
+// import 'package:second_flutter/a_List_providers/theme_provider.dart';
 
 class TransferMoney3 extends StatefulWidget {
   const TransferMoney3({super.key});
@@ -12,10 +12,10 @@ class TransferMoney3 extends StatefulWidget {
 class _TransferMoney3State extends State<TransferMoney3> {
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = context.read<ThemeProvider>().getTheme();
+    // ThemeData theme = context.read<ThemeProvider>().getTheme();
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
-    double spacing = isMobile ? 5 : 8;
+    // double spacing = isMobile ? 5 : 8;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

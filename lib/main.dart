@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/beneficiaries_provider.dart';
 import 'package:second_flutter/a_List_providers/digi_target_providers.dart';
+import 'package:second_flutter/a_List_providers/money_transfer_provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
 import 'package:second_flutter/a_List_providers/savings_plan.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
@@ -56,7 +57,8 @@ void main() {
         ChangeNotifierProvider(create: (context) => DigiSavingsPlans()),
         ChangeNotifierProvider(create: (context) => TransactionActivity()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
-        ChangeNotifierProvider(create: (context) => DigiTargetProviders())
+        ChangeNotifierProvider(create: (context) => DigiTargetProviders()),
+        ChangeNotifierProvider(create: (context) => MoneyTransferProvider())
       ],
       child: MyApp(),
     ),
