@@ -13,7 +13,7 @@ class TransferMoney2 extends StatefulWidget {
 
 class _TransferMoney2State extends State<TransferMoney2> {
   // variable to recieve boolean from child
-  bool canContinue = true;
+  bool canContinue = false;
 
   // defined function that will be passed to child, called in child so as to recieveb boolean value from child
   void recieveBool(bool fromChild) {
