@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_flutter/components/page_2_transfer_money_page_2.dart';
 // import 'package:provider/provider.dart';
 // import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/transferMoney/transfer_money_3.dart';
@@ -11,12 +12,22 @@ class TransferMoney2 extends StatefulWidget {
 }
 
 class _TransferMoney2State extends State<TransferMoney2> {
+  // variable to recieve boolean from child
+  bool canContinue = true;
+
+  // defined function that will be passed to child, called in child so as to recieveb boolean value from child
+  void recieveBool(bool fromChild) {
+    setState(() {
+      canContinue = fromChild;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // ThemeData theme = context.read<ThemeProvider>().getTheme();
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth < 600;
-    // double spacing = isMobile ? 5 : 8;
+    double spacing = isMobile ? 5 : 8;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -29,36 +40,37 @@ class _TransferMoney2State extends State<TransferMoney2> {
         ),
       ),
       body: Container(
-        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: spacing * 2),
         decoration: BoxDecoration(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            customPageTracker(),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Prev"),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TransferMoney3(),
-                        ),
-                      );
-                    },
-                    child: Text("Next"),
-                  ),
-                ],
-              ),
-            ),
+            Center(child: customPageTracker()),
+            Page2TransferMoneyPage2(boolToBePassed: recieveBool),
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.all(10),
+        child: TextButton(
+          onPressed: () {
+            canContinue
+                ? Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TransferMoney3()),
+                  )
+                : null;
+          },
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            backgroundColor: canContinue ? Colors.blue : Colors.grey,
+          ),
+          child: Text(
+            "Continue",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );

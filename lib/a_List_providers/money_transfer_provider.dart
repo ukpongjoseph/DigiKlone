@@ -4,6 +4,8 @@ class MoneyTransferProvider extends ChangeNotifier {
   late String _beneficiaryName;
   late String _beneficiaryAccountNumber;
   late bool _isFavorite;
+  late String _transferDescription;
+  late String _transferAmount;
 
   void setBeneficiaryName(String name) {
     _beneficiaryName = name;
@@ -20,9 +22,21 @@ class MoneyTransferProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setTransferDescription(String description) {
+    _transferDescription = description;
+    notifyListeners();
+  }
+
+  void setTransferAmount(String amount) {
+    _transferAmount = amount;
+    notifyListeners();
+  }
+
   String getBeneficiaryName() => _beneficiaryName;
   String getBeneficiaryAccountNumber() => _beneficiaryAccountNumber;
   bool getIsFavorite() => _isFavorite;
+  String getTransferDescription() => _transferDescription;
+  String getTransferAmount() => _transferAmount;
 
   void setAllInstanceData(String name, String accNum, bool isFav) {
     _beneficiaryAccountNumber = accNum;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 // import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/components/account_number_and_saved_recipient.dart';
-import 'package:second_flutter/pages/transferMoney/transfer_money_2.dart';
+// import 'package:second_flutter/pages/transferMoney/transfer_money_2.dart';
 
 class TransferMoney extends StatefulWidget {
   const TransferMoney({super.key});

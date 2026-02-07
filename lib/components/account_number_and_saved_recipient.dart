@@ -184,20 +184,23 @@ class _AccountNumberAndSavedRecipientState
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.grey.shade100,
-                          radius: isMobile ? 15 : 17,
-                          child: e["isFavorite"] == true
-                              ? Icon(
-                                  Icons.star_border_outlined,
-                                  size: isMobile ? 20 : 24,
-                                  color: Colors.amber,
-                                )
-                              : Icon(
-                                  Icons.person_2_outlined,
-                                  size: isMobile ? 20 : 24,
-                                  color: Colors.blueAccent,
-                                ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: spacing),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.grey.shade100,
+                            radius: isMobile ? 15 : 17,
+                            child: e["isFavorite"] == true
+                                ? Icon(
+                                    Icons.star_border_outlined,
+                                    size: isMobile ? 20 : 24,
+                                    color: Colors.amber,
+                                  )
+                                : Icon(
+                                    Icons.person_2_outlined,
+                                    size: isMobile ? 20 : 24,
+                                    color: Colors.blueAccent,
+                                  ),
+                          ),
                         ),
                         Text(
                           e["acctName"],
