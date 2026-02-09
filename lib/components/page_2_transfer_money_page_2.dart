@@ -30,6 +30,7 @@ class _Page2TransferMoneyPage2State extends State<Page2TransferMoneyPage2> {
     amountController.addListener(() {
       setState(() {
         canProceed = (amountController.text.isNotEmpty);
+        context.read<MoneyTransferProvider>().setTransferAmount(amountController.text);
         sendDataToParent();
       });
     });

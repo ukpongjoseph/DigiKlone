@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/beneficiaries_provider.dart';
+import 'package:second_flutter/a_List_providers/money_transfer_provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/pages/transferMoney/transfer_money.dart';
+import 'package:second_flutter/pages/transferMoney/transfer_money_2.dart';
 
 class QuickTransfer extends StatefulWidget {
   const QuickTransfer({super.key});
@@ -281,10 +283,12 @@ class _QuickTransferState extends State<QuickTransfer> {
                       ...beneficiaries.map((items) {
                         return GestureDetector(
                           onTap: () {
+                            context.read<MoneyTransferProvider>().setBeneficiaryName(items["name"]);
+                            context.read<MoneyTransferProvider>().setBeneficiaryAccountNumber(items["number"]);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TransferMoney(),
+                                builder: (context) => TransferMoney2(),
                               ),
                             );
                           },
