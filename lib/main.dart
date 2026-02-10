@@ -17,7 +17,7 @@ import 'package:second_flutter/pages/digi_target_savings.dart';
 import 'package:second_flutter/pages/dream_vacation_page.dart';
 import 'package:second_flutter/pages/edit_profile.dart';
 import 'package:second_flutter/pages/emergency_fund_page.dart';
-import 'package:second_flutter/pages/faq.dart';
+import 'package:second_flutter/pages/faq.dart'; 
 import 'package:second_flutter/pages/home_page.dart';
 import 'package:second_flutter/pages/kyc_verification.dart';
 import 'package:second_flutter/pages/landing_page.dart';
