@@ -15,6 +15,8 @@ class _EditProfileState extends State<EditProfile> {
   final dobController = TextEditingController();
   final houseAddressController = TextEditingController();
   final additionalAddressController = TextEditingController();
+  bool isSaving = false;
+
   List<String> listOfGenders = [
     "",
     "Male",
@@ -64,6 +66,45 @@ class _EditProfileState extends State<EditProfile> {
         controller.text = DateFormat("dd/MM/yyyy").format(selectedDate);
       });
     }
+  }
+
+  void saveChanges() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text("Success"),
+          content: Text("Profile updated successfully"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => LandingPage(),
+                  ),
+                );
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> delayTimerForSaveButton() async {
+    await Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        isSaving = false;
+      });
+      saveChanges();
+    });
+  }
+
+  void submit() async {
+    await delayTimerForSaveButton();
+    saveChanges();
   }
 
   @override
@@ -274,12 +315,16 @@ class _EditProfileState extends State<EditProfile> {
             backgroundColor: Colors.blueAccent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
-              side: BorderSide(width: 1.5, color: Colors.grey),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              isSaving = true;
+            });
+            submit();
+          },
           child: Text(
-            "Continue",
+            isSaving ? "Saving ..." : "Save Changes",
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
