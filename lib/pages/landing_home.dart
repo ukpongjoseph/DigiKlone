@@ -6,6 +6,7 @@ import 'package:second_flutter/components/balance_component.dart';
 import 'package:second_flutter/components/digi_savings.dart';
 import 'package:second_flutter/components/quick_actions.dart';
 import 'package:second_flutter/components/quick_transfer.dart';
+import 'package:second_flutter/pages/message_center.dart';
 
 class LandingHome extends StatefulWidget {
   const LandingHome({super.key});
@@ -74,7 +75,9 @@ class _LandingHomeState extends State<LandingHome> {
               ),
               child: IconButton(
                 icon: Icon(Icons.notifications_none),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MessageCenter()));
+                },
               ),
             ),
           ),

@@ -17,11 +17,12 @@ import 'package:second_flutter/pages/digi_target_savings.dart';
 import 'package:second_flutter/pages/dream_vacation_page.dart';
 import 'package:second_flutter/pages/edit_profile.dart';
 import 'package:second_flutter/pages/emergency_fund_page.dart';
-import 'package:second_flutter/pages/faq.dart'; 
+import 'package:second_flutter/pages/faq.dart';
 import 'package:second_flutter/pages/home_page.dart';
 import 'package:second_flutter/pages/kyc_verification.dart';
 import 'package:second_flutter/pages/landing_page.dart';
 import 'package:second_flutter/pages/lock_funds.dart';
+import 'package:second_flutter/pages/message_center.dart';
 import 'package:second_flutter/pages/new_car_page.dart';
 import 'package:second_flutter/pages/notification_page.dart';
 import 'package:second_flutter/pages/payment_methods.dart';
@@ -58,7 +59,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => TransactionActivity()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => DigiTargetProviders()),
-        ChangeNotifierProvider(create: (context) => MoneyTransferProvider())
+        ChangeNotifierProvider(create: (context) => MoneyTransferProvider()),
       ],
       child: MyApp(),
     ),
@@ -101,15 +102,16 @@ class MyApp extends StatelessWidget {
         "/totalProgress": (context) => const TotalProgress(),
         "/editProfilePage": (context) => EditProfile(),
         "/notificationPage": (context) => NotificationPage(),
-        "/paymentMethods" : (context) => PaymentMethods(),
-        "/kycVerificationPage" : (context) => KycVerification(),
-        "/reviewDigiTarget" : (context) => ReviewDigitarget(),
-        "/createDigilock" : (context) => CreateDigiLock(),
-        "/autoSaveSettingspage" : (context)=>AutoSaveSettingsPage(),
-        "/setUpAutoSavePage" : (context)=>SetUpAutoSavePage(),
-        "/dreamVacationpage": (context)=>DreamVacationPage(),
-        "/emergencyFundPage" : (context)=>EmergencyFundPage(),
-        "/newCarPage":(context)=>NewCarPage()
+        "/paymentMethods": (context) => PaymentMethods(),
+        "/kycVerificationPage": (context) => KycVerification(),
+        "/reviewDigiTarget": (context) => ReviewDigitarget(),
+        "/createDigilock": (context) => CreateDigiLock(),
+        "/autoSaveSettingspage": (context) => AutoSaveSettingsPage(),
+        "/setUpAutoSavePage": (context) => SetUpAutoSavePage(),
+        "/dreamVacationpage": (context) => DreamVacationPage(),
+        "/emergencyFundPage": (context) => EmergencyFundPage(),
+        "/newCarPage": (context) => NewCarPage(),
+        "/message_center": (context) => MessageCenter(),
       },
     );
   }
