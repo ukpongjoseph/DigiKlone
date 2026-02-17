@@ -48,7 +48,7 @@ class _MessageCenterState extends State<MessageCenter>
       "time" : "1 day ago",
       "redirection" : "Set Up Now",
       "isTitleIconPresent" : true,
-      "leadingIcon" : Icons.star_border_outlined,
+      "leadingIcon" : Icons.star_border_purple500_rounded,
       "title" : "New Feature: Auto-Save is Here",
       "activity_type" : "Features",
       "titleIcon" : Icons.star_rate_rounded,
