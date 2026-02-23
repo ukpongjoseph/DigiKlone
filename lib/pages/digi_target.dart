@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/components/target_top_card.dart';
+import 'package:second_flutter/pages/digi_target_savings.dart';
 import 'package:second_flutter/pages/dream_vacation_page.dart';
 import 'package:second_flutter/pages/emergency_fund_page.dart';
 import 'package:second_flutter/pages/new_car_page.dart';
@@ -95,10 +96,19 @@ class _DigiTargetState extends State<DigiTarget> {
                 "28,750",
                 const Color.fromARGB(255, 170, 233, 145),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 70),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        mini: true,
+        shape: CircleBorder(),
+        backgroundColor: const Color.fromARGB(255, 56, 129, 58),
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>DigiTargetSavings()));
+        },
+        child: Icon(Icons.add, color: Colors.white,),
       ),
     );
   }
