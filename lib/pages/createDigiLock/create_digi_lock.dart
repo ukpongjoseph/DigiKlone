@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:second_flutter/a_List_providers/theme_provider.dart';
+import 'package:second_flutter/a_List_providers/digi_lock_provider.dart';
 import 'package:second_flutter/pages/createDigiLock/Digi_Lock_Plan_Details.dart';
 
 class CreateDigiLock extends StatefulWidget {
@@ -126,7 +126,7 @@ class _CreateDigiLockState extends State<CreateDigiLock> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = context.read<ThemeProvider>().getTheme();
+    // ThemeData theme = context.read<ThemeProvider>().getTheme();
     double width = MediaQuery.of(context).size.width;
     bool isMobile = width < 600;
     double spacing = isMobile ? 5 : 8;
@@ -244,7 +244,8 @@ class _CreateDigiLockState extends State<CreateDigiLock> {
             ),
           ),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>DigiLockPlanDetails()));
+            context.read<DigiLockProvider>().setDays(int.parse(daysController.text));
+           displayCard? Navigator.push(context, MaterialPageRoute(builder: (context)=>DigiLockPlanDetails())):null;
           },
           child: Text("Continue", style: TextStyle(color: Colors.white)),
         ),

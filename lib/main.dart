@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/beneficiaries_provider.dart';
+import 'package:second_flutter/a_List_providers/digi_lock_provider.dart';
 import 'package:second_flutter/a_List_providers/digi_target_providers.dart';
 import 'package:second_flutter/a_List_providers/money_transfer_provider.dart';
 import 'package:second_flutter/a_List_providers/nav_provider.dart';
@@ -11,6 +12,7 @@ import 'package:second_flutter/pages/add_card.dart';
 import 'package:second_flutter/pages/auto_save_settings_page.dart';
 import 'package:second_flutter/pages/createDigiLock/Digi_Lock_Plan_Details.dart';
 import 'package:second_flutter/pages/createDigiLock/create_digi_lock.dart';
+import 'package:second_flutter/pages/createDigiLock/interest_payment_method.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
 import 'package:second_flutter/pages/digi_target.dart';
@@ -61,6 +63,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => DigiTargetProviders()),
         ChangeNotifierProvider(create: (context) => MoneyTransferProvider()),
+        ChangeNotifierProvider(create: (context)=>DigiLockProvider())
       ],
       child: MyApp(),
     ),
@@ -113,7 +116,8 @@ class MyApp extends StatelessWidget {
         "/emergencyFundPage": (context) => EmergencyFundPage(),
         "/newCarPage": (context) => NewCarPage(),
         "/message_center": (context) => MessageCenter(),
-        "/digiLockPlanDetails" : (context) => DigiLockPlanDetails()
+        "/digiLockPlanDetails" : (context) => DigiLockPlanDetails(),
+        "/interestPaymentMethod" : (context) => InterestPaymentMethod()
       },
     );
   }
