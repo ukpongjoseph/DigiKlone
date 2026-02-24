@@ -9,6 +9,7 @@ import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/a_List_providers/transaction_activity.dart';
 import 'package:second_flutter/pages/add_card.dart';
 import 'package:second_flutter/pages/auto_save_settings_page.dart';
+import 'package:second_flutter/pages/createDigiLock/Digi_Lock_Plan_Details.dart';
 import 'package:second_flutter/pages/createDigiLock/create_digi_lock.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
@@ -112,6 +113,7 @@ class MyApp extends StatelessWidget {
         "/emergencyFundPage": (context) => EmergencyFundPage(),
         "/newCarPage": (context) => NewCarPage(),
         "/message_center": (context) => MessageCenter(),
+        "/digiLockPlanDetails" : (context) => DigiLockPlanDetails()
       },
     );
   }
