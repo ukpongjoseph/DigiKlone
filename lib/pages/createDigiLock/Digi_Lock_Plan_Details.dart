@@ -107,7 +107,7 @@ class _DigiLockPlanDetailsState extends State<DigiLockPlanDetails> {
               ),
             ),
             Text(
-              "Savings Title",
+              "Amount to Lock",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: isMobile ? 13 : 15,
