@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_flutter/a_List_providers/digi_lock_provider.dart';
+import 'package:second_flutter/pages/createDigiLock/page_4_create_lock_page.dart';
 
 class InterestPaymentMethod extends StatefulWidget {
   const InterestPaymentMethod({super.key});
@@ -129,7 +132,10 @@ class _InterestPaymentMethodState extends State<InterestPaymentMethod> {
               borderRadius: BorderRadiusGeometry.circular(10),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+              selectedIndex == 1 ? context.read<DigiLockProvider>().setInterestPayment("on Maturity"):context.read<DigiLockProvider>().setInterestPayment("Upfront");
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Page4CreateLockPage()));
+          },
           child: Text("Continue", style: TextStyle(color: Colors.white)),
         ),
       ),
