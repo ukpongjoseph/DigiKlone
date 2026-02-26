@@ -201,6 +201,9 @@ class _DigiLockPlanDetailsState extends State<DigiLockPlanDetails> {
           ),
           onPressed: () {
             canSubmit?Navigator.push(context, MaterialPageRoute(builder: (context)=>InterestPaymentMethod())):null;
+            (context.read<DigiLockProvider>().getDays()>=9 && context.read<DigiLockProvider>().getDays() <= 30) ? context.read<DigiLockProvider>().setInterestRate(double.parse("14.0")) : (context.read<DigiLockProvider>().getDays()>=31 && context.read<DigiLockProvider>().getDays() <= 60)? context.read<DigiLockProvider>().setInterestRate(double.parse("14.5")) : (context.read<DigiLockProvider>().getDays()>=61 && context.read<DigiLockProvider>().getDays() <= 90)? context.read<DigiLockProvider>().setInterestRate(double.parse("15.5")) : (context.read<DigiLockProvider>().getDays()>=91 && context.read<DigiLockProvider>().getDays() <= 180) ? context.read<DigiLockProvider>().setInterestRate(double.parse("17.0")) : context.read<DigiLockProvider>().setInterestRate(double.parse("21.0"));
+            context.read<DigiLockProvider>().setSavingsTitle(titleController.text);
+            context.read<DigiLockProvider>().setAmount(int.parse(amountController.text));
           },
           child: Text("Continue", style: TextStyle(color: Colors.white)),
         ),

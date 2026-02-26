@@ -14,6 +14,7 @@ import 'package:second_flutter/pages/createDigiLock/Digi_Lock_Plan_Details.dart'
 import 'package:second_flutter/pages/createDigiLock/create_digi_lock.dart';
 import 'package:second_flutter/pages/createDigiLock/interest_payment_method.dart';
 import 'package:second_flutter/pages/createDigiLock/page_4_create_lock_page.dart';
+import 'package:second_flutter/pages/createDigiLock/payment_source.dart';
 import 'package:second_flutter/pages/digi_lock.dart';
 import 'package:second_flutter/pages/digi_save_balance.dart';
 import 'package:second_flutter/pages/digi_target.dart';
@@ -119,7 +120,8 @@ class MyApp extends StatelessWidget {
         "/message_center": (context) => MessageCenter(),
         "/digiLockPlanDetails" : (context) => DigiLockPlanDetails(),
         "/interestPaymentMethod" : (context) => InterestPaymentMethod(),
-        "/page4CreateLockPage" : (context) => Page4CreateLockPage()
+        "/page4CreateLockPage" : (context) => Page4CreateLockPage(),
+        "/paymentSource" : (context) => PaymentSource()
       },
     );
   }
