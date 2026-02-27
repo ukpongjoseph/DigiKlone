@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
 import 'package:second_flutter/components/lock_container.dart';
 import 'package:second_flutter/pages/createDigiLock/create_digi_lock.dart';
+import 'package:second_flutter/pages/landing_home.dart';
 
 class LockFunds extends StatefulWidget {
   const LockFunds({super.key});
@@ -19,7 +20,10 @@ class _LockFundsState extends State<LockFunds> {
     bool isMobile = screenWidth < 600;
     return Scaffold(
       appBar: AppBar(
-        // automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
+        leading: IconButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>LandingHome()));
+        }, icon: Icon(Icons.arrow_back)),
         backgroundColor: Colors.pink,
       ),
       body: SingleChildScrollView(
