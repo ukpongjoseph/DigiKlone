@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_flutter/a_List_providers/theme_provider.dart';
+import 'package:second_flutter/components/dream_vacation_container.dart';
+import 'package:second_flutter/components/target_progress_card.dart';
 import 'package:second_flutter/theme/app_theme.dart';
 
 class DreamVacationPage extends StatefulWidget {
@@ -26,10 +28,25 @@ class _DreamVacationPageState extends State<DreamVacationPage> {
         ],
       ),
       body: Container(
+        padding: EdgeInsets.all(spacing*2),
         decoration : BoxDecoration(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
+            DreamVacationContainer(
+              screenWidth: screenWidth,
+              isMobile:isMobile, 
+              spacing:spacing
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: spacing),
+              child: Text("Target Progress", style: TextStyle(fontWeight: FontWeight.bold, fontSize: isMobile?14:16),),
+            ),
+            TargetProgressCard(
+              screenWidth: screenWidth,
+              isMobile:isMobile, 
+              spacing:spacing
+            )
           ],
         ),
       ),
