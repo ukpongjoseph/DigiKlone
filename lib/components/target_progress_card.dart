@@ -43,16 +43,26 @@ class _TargetProgressCardState extends State<TargetProgressCard> {
               ),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: widget.spacing*2),
-            child: LinearProgressIndicator(
-              value: 0.41,
-              backgroundColor: Colors.blue.shade100,
-              color: Colors.blue.shade800,
-              borderRadius: BorderRadius.circular(10),
-            ),
+          Row(
+            children: [
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: widget.spacing*2),
+                  child: LinearProgressIndicator(
+                    value: 0.41,
+                    backgroundColor: Colors.blue.shade100,
+                    color: Colors.blue.shade800,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 3.0),
+                child: Text("41%", style: TextStyle(color: Colors.blue.shade900, fontSize: widget.isMobile?12:14),),
+              )
+            ],
           ),
-          Divider(),
+          Divider(color: Colors.grey,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
