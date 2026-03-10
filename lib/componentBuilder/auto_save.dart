@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_flutter/componentBuilder/single_content_single_button_modal.dart';
 import 'package:second_flutter/pages/auto_save_settings_page.dart';
 
 class AutoSave extends StatefulWidget {
@@ -17,7 +18,23 @@ class AutoSave extends StatefulWidget {
 }
 
 class _AutoSaveState extends State<AutoSave> {
+
   bool isSwitchedOn = true;
+  void displayCloseAutoSaveModal(){
+    showDialog(
+      barrierDismissible: false,
+      context: context, 
+      builder: (BuildContext context){
+        return SingleContentSingleButtonModal(
+          titleMessage: "Auto-save Paused", 
+          buttonText: "OK", 
+          contentMessage: "Your automatic savings has been paused",
+          isMobile: widget.isMobile,
+          spacing: widget.spacing,
+          screenWidth: widget.screenWidth
+        );
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -65,6 +82,7 @@ class _AutoSaveState extends State<AutoSave> {
                 setState(() {
                   isSwitchedOn = value;
                 });
+                displayCloseAutoSaveModal();
               },
             ),
           ):GestureDetector(
