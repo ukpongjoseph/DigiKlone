@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:second_flutter/a_List_providers/theme_provider.dart';
+import 'package:second_flutter/a_List_providers/digi_lock_provider.dart';
+import 'package:second_flutter/pages/createDigiLock/Digi_Lock_Plan_Details.dart';
 
 class CreateDigiLock extends StatefulWidget {
   const CreateDigiLock({super.key});
@@ -125,7 +126,7 @@ class _CreateDigiLockState extends State<CreateDigiLock> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = context.read<ThemeProvider>().getTheme();
+    // ThemeData theme = context.read<ThemeProvider>().getTheme();
     double width = MediaQuery.of(context).size.width;
     bool isMobile = width < 600;
     double spacing = isMobile ? 5 : 8;
@@ -140,94 +141,96 @@ class _CreateDigiLockState extends State<CreateDigiLock> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        padding: EdgeInsets.all(spacing * 2),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            LinearProgressIndicator(
-              value: 0.2,
-              color: Colors.pink,
-              backgroundColor: Colors.grey,
-            ),
-            Center(
-              child: Text(
-                "Step 1 of 5",
-                style: TextStyle(fontSize: isMobile ? 11 : 13),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(spacing * 2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LinearProgressIndicator(
+                value: 0.2,
+                color: Colors.pink,
+                backgroundColor: Colors.grey,
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: spacing * 5),
-              child: Text(
-                "Enter the amount of days you want to lock your funds",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: isMobile ? 12 : 14),
-              ),
-            ),
-            Text(
-              "Number of Days",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: isMobile ? 13 : 15,
-              ),
-            ),
-            TextFormField(
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly,
-              ],
-              controller: daysController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "cannot return an empty value";
-                } else if (int.parse(value) < 10 || int.parse(value) > 365) {
-                  return "Days must be between 10-265 days";
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                hint: Text(
-                  "Enter days(10-365)",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: isMobile ? 11 : 13,
-                  ),
+              Center(
+                child: Text(
+                  "Step 1 of 5",
+                  style: TextStyle(fontSize: isMobile ? 11 : 13),
                 ),
-                border: OutlineInputBorder(),
               ),
-            ),
-            SizedBox(height: 20),
-            (rateValue >= 10 && rateValue <= 365)
-                ? Text(
-                    "Selected Tenure",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                  )
-                : Container(),
-            SizedBox(height: 10),
-            (rateValue >= 10 && rateValue <= 30)
-                ? one
-                : (rateValue >= 31 && rateValue <= 60)
-                ? two
-                : (rateValue >= 61 && rateValue <= 90)
-                ? three
-                : (rateValue >= 91 && rateValue <= 180)
-                ? four
-                : (rateValue >= 181 && rateValue <= 365)
-                ? five
-                : Container(),
-            Text(
-              "Available Rates",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: isMobile ? 11 : 13,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: spacing * 5),
+                child: Text(
+                  "Enter the amount of days you want to lock your funds",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: isMobile ? 12 : 14),
+                ),
               ),
-            ),
-            SizedBox(height: spacing),
-            rateTile("10-30 days", "14%p.a", Colors.red),
-            rateTile("31-60 days", "14.5%p.a", Colors.orange),
-            rateTile("61-90 days", "15.5%p.a", Colors.purple),
-            rateTile("91-180 days", "17%p.a", Colors.green),
-            rateTile("181-365 days", "21%p.a", Colors.blue),
-          ],
+              Text(
+                "Number of Days",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: isMobile ? 13 : 15,
+                ),
+              ),
+              TextFormField(
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                controller: daysController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "cannot return an empty value";
+                  } else if (int.parse(value) < 10 || int.parse(value) > 365) {
+                    return "Days must be between 10-265 days";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hint: Text(
+                    "Enter days(10-365)",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: isMobile ? 11 : 13,
+                    ),
+                  ),
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 20),
+              (rateValue >= 10 && rateValue <= 365)
+                  ? Text(
+                      "Selected Tenure",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                    )
+                  : Container(),
+              SizedBox(height: 10),
+              (rateValue >= 10 && rateValue <= 30)
+                  ? one
+                  : (rateValue >= 31 && rateValue <= 60)
+                  ? two
+                  : (rateValue >= 61 && rateValue <= 90)
+                  ? three
+                  : (rateValue >= 91 && rateValue <= 180)
+                  ? four
+                  : (rateValue >= 181 && rateValue <= 365)
+                  ? five
+                  : Container(),
+              Text(
+                "Available Rates",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: isMobile ? 11 : 13,
+                ),
+              ),
+              SizedBox(height: spacing),
+              rateTile("10-30 days", "14%p.a", Colors.red),
+              rateTile("31-60 days", "14.5%p.a", Colors.orange),
+              rateTile("61-90 days", "15.5%p.a", Colors.purple),
+              rateTile("91-180 days", "17%p.a", Colors.green),
+              rateTile("181-365 days", "21%p.a", Colors.blue),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -241,7 +244,8 @@ class _CreateDigiLockState extends State<CreateDigiLock> {
             ),
           ),
           onPressed: () {
-            print(rateValue);
+            context.read<DigiLockProvider>().setDays(int.parse(daysController.text));
+           displayCard? Navigator.push(context, MaterialPageRoute(builder: (context)=>DigiLockPlanDetails())):null;
           },
           child: Text("Continue", style: TextStyle(color: Colors.white)),
         ),
