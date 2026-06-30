@@ -38,6 +38,7 @@ import 'package:second_flutter/pages/signup/lastname.dart';
 import 'package:second_flutter/pages/signup/password.dart';
 import 'package:second_flutter/a_List_providers/auth_login_provider.dart';
 import 'package:second_flutter/a_List_providers/auth_register.dart';
+import 'package:second_flutter/pages/splash.dart';
 import 'package:second_flutter/pages/support.dart';
 import 'package:second_flutter/pages/total_progress.dart';
 import 'package:second_flutter/pages/transferMoney/transfer_money.dart';
@@ -76,7 +77,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: Provider.of<ThemeProvider>(context).getTheme(),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      // home: MyHomePage(),
+      home: Splash(),
       // We are creating routes for different screen for the purpose of routing and Navigation between screens
       routes: {
         "/signIn": (context) => const SignIn(),
